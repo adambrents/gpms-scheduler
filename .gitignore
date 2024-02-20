@@ -62,3 +62,1309 @@ Thumbs.db
 /.idea/libraries
 # Java crash logs
 hs_err_pid*
+/lib/dependencies/Connector JDBC 8.3.0/src/build/java/documentation/ErrorMappingsDocGenerator.java
+/lib/dependencies/Connector JDBC 8.3.0/src/build/java/documentation/PropertiesDocGenerator.java
+/lib/dependencies/Connector JDBC 8.3.0/src/build/java/instrumentation/AddMethods.java
+/lib/dependencies/Connector JDBC 8.3.0/src/build/java/instrumentation/CommonChecks.java
+/lib/dependencies/Connector JDBC 8.3.0/src/build/java/instrumentation/TranslateExceptions.java
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/source/format
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/changelog
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/compat
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/control
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/copyright
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/install
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/links
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/rules
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/debian.in/watch
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/pom.xml
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/Product.wxs
+/lib/dependencies/Connector JDBC 8.3.0/src/build/misc/rpm.spec.in
+/lib/dependencies/Connector JDBC 8.3.0/src/demo/java/demo/x/devapi/DevApiSample.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/Mysqlx.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxCrud.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxCursor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxDatatypes.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxExpect.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxExpr.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxNotice.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxPrepare.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxResultset.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/MysqlxSql.java
+/lib/dependencies/Connector JDBC 8.3.0/src/generated/java/com/mysql/cj/x/protobuf/package-info.java
+/lib/dependencies/Connector JDBC 8.3.0/src/legacy/java/com/mysql/jdbc/Driver.java
+/lib/dependencies/Connector JDBC 8.3.0/src/legacy/java/com/mysql/jdbc/SocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/legacy/java/com/mysql/jdbc/SocketFactoryWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/callback/FidoAuthenticationCallback.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/callback/MysqlCallback.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/callback/MysqlCallbackHandler.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/callback/UsernameCallback.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/callback/WebAuthnAuthenticationCallback.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/ConnectionPropertiesTransform.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/ConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/ConnectionUrlParser.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/DatabaseUrlContainer.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/HostInfo.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/HostsListView.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/PropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/PropertyDefinitions.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/PropertyKey.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/PropertySet.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/conf/RuntimeProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/AssertionFailedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJCommunicationsException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJConnectionFeatureNotAvailableException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJOperationNotSupportedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJPacketTooBigException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/CJTimeoutException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/ClosedOnExpiredPasswordException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/ConnectionIsClosedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/DataConversionException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/DataReadException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/DataTruncationException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/DeadlockTimeoutRollbackMarker.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/ExceptionFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/ExceptionInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/ExceptionInterceptorChain.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/FeatureNotAvailableException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/InvalidConnectionAttributeException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/MysqlErrorNumbers.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/NumberOutOfRange.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/OperationCancelledException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/PasswordExpiredException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/PropertyNotModifiableException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/RSAException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/SSLParamsException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/StatementIsClosedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/StreamingNotifiable.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/UnableToConnectException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/UnsupportedConnectionStringException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/exceptions/WrongArgumentException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/interceptors/QueryInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/Jdk14Logger.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/Log.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/NullLogger.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/ProfilerEvent.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/ProfilerEventHandler.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/Slf4JLogger.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/log/StandardLogger.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/AuthenticationPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/AuthenticationProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ColumnDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/FullReadInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/InternalDate.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/InternalTime.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/InternalTimestamp.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/Message.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/MessageHeader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/MessageListener.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/MessageReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/MessageSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/NetworkResources.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/OutputStreamWatcher.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/PacketReceivedTimeHolder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/PacketSentTimeHolder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/Protocol.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ProtocolEntity.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ProtocolEntityFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ProtocolEntityReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/Resultset.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ResultsetRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ResultsetRows.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ResultsetRowsOwner.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ResultStreamer.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ServerCapabilities.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ServerSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ServerSessionStateController.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/SocketConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/SocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/SocketMetadata.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ValueDecoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/ValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/Warning.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/protocol/WatchableStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/result/Field.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/result/Row.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/result/RowList.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/result/ValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/Base64Decoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/DataTypeUtil.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/DnsSrv.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/EscapeTokenizer.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/LazyString.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/LogUtils.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/LRUCache.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/PerVmServerConfigCacheFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/SaslPrep.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/SearchMode.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/SequentialIdLease.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/StringInspector.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/StringUtils.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/TestUtils.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/TimeUtil.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/util/Util.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/BindValue.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/CacheAdapter.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/CacheAdapterFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/CancelQueryTask.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/CharsetMapping.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/CharsetSettings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/Constants.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/DataStoreMetadata.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/MessageBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/Messages.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/MysqlConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/MysqlType.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/PerConnectionLRUFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/PingTarget.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/PreparedQuery.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/Query.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/QueryAttributesBindings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/QueryBindings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/QueryInfo.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/QueryResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/QueryReturnType.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/ServerVersion.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/Session.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/TransactionEventHandler.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-api/java/com/mysql/cj/WarningListener.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/admin/ServerController.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/FailoverConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/FailoverDnsSrvConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/LoadBalanceConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/LoadBalanceDnsSrvConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/ReplicationConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/ReplicationDnsSrvConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/SingleConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/XDevApiConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/url/XDevApiDnsSrvConnectionUrl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/AbstractPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/AbstractRuntimeProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/BooleanProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/BooleanPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/DefaultPropertySet.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/EnumProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/EnumPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/IntegerProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/IntegerPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/LongProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/LongPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/MemorySizeProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/MemorySizePropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/StringProperty.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/conf/StringPropertyDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/log/BaseMetricsHolder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/log/LogFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/log/LoggingProfilerEventHandler.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/log/ProfilerEventImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/result/AbstractResultsetRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/AbstractProtocol.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/AbstractSocketConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/ExportControlled.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/NamedPipeSocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/ReadAheadInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/Security.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/SocksProxySocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/StandardSocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/WatchableOutputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/WatchableWriter.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/protocol/WriterWatcher.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/AbstractDateTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/AbstractNumericValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/BigDecimalValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/BinaryStreamValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/BooleanValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/BufferedRowList.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/ByteValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/DefaultColumnDefinition.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/DefaultValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/DoubleValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/DurationValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/FloatValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/IntegerValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/LocalDateTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/LocalDateValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/LocalTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/LongValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/OffsetDateTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/OffsetTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/ShortValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/SqlDateValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/SqlTimestampValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/SqlTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/StringValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/UtilCalendarValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/result/ZonedDateTimeValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/sasl/ScramSha1SaslClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/sasl/ScramSha256SaslClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/sasl/ScramShaSaslClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/sasl/ScramShaSaslClientFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/sasl/ScramShaSaslProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/AbstractQuery.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/CancelQueryTaskImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/ClientPreparedQuery.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/CoreSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/DataStoreMetadataImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/LicenseConfiguration.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/MysqlxSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NativeCharsetSettings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NativeQueryAttributesBindings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NativeQueryBindings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NativeQueryBindValue.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NativeSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/NoSubInterceptorWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/ServerPreparedQuery.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/ServerPreparedQueryTestcaseGenerator.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/core-impl/java/com/mysql/cj/SimpleQuery.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/doc/connector-j-overview.html
+/lib/dependencies/Connector JDBC 8.3.0/src/main/doc/mysqlx-overview.html
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/AuthenticationFidoClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/AuthenticationKerberosClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/AuthenticationLdapSaslClientPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/AuthenticationOciClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/AuthenticationWebAuthnClient.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/CachingSha2PasswordPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/MysqlClearPasswordPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/MysqlNativePasswordPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/MysqlOldPasswordPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/authentication/Sha256PasswordPlugin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/AbstractBufferRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/AbstractResultsetRows.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/BinaryBufferRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/ByteArrayRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/NativeResultset.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/OkPacket.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/ResultsetRowsCursor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/ResultsetRowsStatic.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/ResultsetRowsStreaming.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/result/TextBufferRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/AbstractRowFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/AbstractValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/BinaryResultsetReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/BinaryRowFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/BlobValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/BooleanValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ByteArrayValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ClobValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ColumnDefinitionFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ColumnDefinitionReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/CompressedInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/CompressedPacketSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/DebugBufferingPacketReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/DebugBufferingPacketSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/DurationValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/InputStreamValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/InstantValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/LocalDateTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/LocalDateValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/LocalTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/MergingColumnDefinitionFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/MultiPacketReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/MysqlBinaryValueDecoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/MysqlTextValueDecoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeAuthenticationProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeCapabilities.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeConstants.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeMessageBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativePacketHeader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativePacketPayload.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeProtocol.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeServerSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeServerSessionStateController.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeSocketConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeUtils.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NullValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NumberValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/OffsetDateTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/OffsetTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/PacketSplitter.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ReaderValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ResultsetFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ResultsetRowReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/SimplePacketReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/SimplePacketSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/SqlDateValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/SqlTimestampValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/SqlTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/StringValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TextResultsetReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TextRowFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TimeTrackingPacketReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TimeTrackingPacketSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TracingPacketReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/TracingPacketSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/UtilCalendarValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/UtilDateValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/a/ZonedDateTimeValueEncoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/CompressionAlgorithm.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/CompressionMode.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/CompressionSplittedInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/CompressionSplittedOutputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/CompressorStreamsFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ConfinedInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ContinuousInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ContinuousOutputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ErrorToFutureCompletionHandler.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/FetchDoneEntity.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/FetchDoneEntityFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/FetchDoneMoreResults.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/FetchDoneMoreResultsFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/FieldFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/MessageConstants.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/Notice.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/NoticeFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/Ok.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/OkBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/OkFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ResultMessageListener.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/ReusableOutputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/StatementExecuteOk.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/StatementExecuteOkBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/StatementExecuteOkFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/SyncFlushDeflaterOutputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/SyncMessageReader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/SyncMessageSender.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XAuthenticationProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XMessage.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XMessageBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XMessageHeader.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XpluginStatementCommand.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocol.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocolDecoder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocolError.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocolRow.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocolRowFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XProtocolRowInputStream.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XServerCapabilities.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/protocol-impl/java/com/mysql/cj/protocol/x/XServerSession.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/3-0-Compat.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/clusterBase.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/coldFusion.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/fullDebug.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/maxPerformance-8-0.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/configurations/solarisMaxPerformance.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/util/TimeZoneMapping.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/LocalizedErrorMessages.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/resources/com/mysql/cj/TlsSettings.properties
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ha/BalanceStrategy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ha/LoadBalancedConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ha/LoadBalanceExceptionChecker.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ha/ReplicationConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/interceptors/ConnectionLifecycleInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/result/CachedResultSetMetaData.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/result/ResultSetInternalMethods.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ClientInfoProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/JdbcConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/JdbcPreparedStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/JdbcPropertySet.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/JdbcStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/jdbc/ParameterBindings.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/AddResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/AddStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Client.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/ClientFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Collection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Column.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/DatabaseObject.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/DbDoc.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/DeleteStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/DocResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Expression.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/FetchResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/FilterParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/FindStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/InsertResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/InsertStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/JsonValue.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/ModifyStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/package-info.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/RemoveStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Result.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Row.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/RowResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Schema.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/SelectStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Session.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/SessionFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/SqlResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/SqlStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Statement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Table.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Type.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/UpdateStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/UpdateType.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/Warning.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-api/java/com/mysql/cj/xdevapi/XDevAPIError.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/admin/MiniAdmin.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/CommunicationsException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/ConnectionFeatureNotAvailableException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/MysqlDataTruncation.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/MySQLQueryInterruptedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/MySQLStatementCancelledException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/MySQLTimeoutException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/MySQLTransactionRollbackException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/NotUpdatable.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/OperationNotSupportedException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/PacketTooBigException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/SQLError.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/exceptions/SQLExceptionsMapping.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/BestResponseTimeBalanceStrategy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/FailoverConnectionProxy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/LoadBalancedAutoCommitInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/LoadBalancedConnectionProxy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/LoadBalancedMySQLConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/MultiHostConnectionProxy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/MultiHostMySQLConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/NdbLoadBalanceExceptionChecker.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/RandomBalanceStrategy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/ReplicationConnectionGroup.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/ReplicationConnectionGroupManager.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/ReplicationConnectionProxy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/ReplicationMySQLConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/SequentialBalanceStrategy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/ServerAffinityStrategy.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ha/StandardLoadBalanceExceptionChecker.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/integration/c3p0/MysqlConnectionTester.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/interceptors/ResultSetScannerInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/interceptors/ServerStatusDiffInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/interceptors/SessionAssociationInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/jmx/LoadBalanceConnectionGroupManager.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/jmx/LoadBalanceConnectionGroupManagerMBean.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/jmx/ReplicationGroupManager.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/jmx/ReplicationGroupManagerMBean.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/CachedResultSetMetaDataImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/ResultSetFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/ResultSetImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/ResultSetMetaData.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/result/UpdatableResultSet.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/util/BaseBugReport.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/AbandonedConnectionCleanupThread.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/Blob.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/BlobFromLocator.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/CallableStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/CallableStatementWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ClientInfoProviderSP.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ClientPreparedStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/Clob.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/CommentClientInfoProvider.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionGroup.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionGroupManager.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/DatabaseMetaData.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/DatabaseMetaDataUsingInfoSchema.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/Driver.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/EscapeProcessor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/EscapeProcessorResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/IterateBlock.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/JdbcPropertySetImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlConnectionPoolDataSource.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlDataSource.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlDataSourceFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlParameterMetadata.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlPooledConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlSavepoint.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlSQLXML.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlXAConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlXADataSource.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlXAException.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/MysqlXid.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/NClob.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/NonRegisteringDriver.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ParameterBindingsImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/PreparedStatementWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/ServerPreparedStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/StatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/StatementWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/SuspendableXAConnection.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/jdbc/WrapperBase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/AbstractDataResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/AbstractFilterParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/AddResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/AddResultImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/AddStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ClientImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/CollectionImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ColumnImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/CreateIndexParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DatabaseObjectDescription.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DbDocFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DbDocImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DbDocValueFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DeleteStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DocFilterParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DocResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/DocResultImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ExprParser.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ExprUnparser.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ExprUtil.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/FilterableStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/FindStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/InsertParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/InsertResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/InsertResultImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/InsertStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/JsonArray.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/JsonLiteral.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/JsonNumber.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/JsonParser.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/JsonString.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/ModifyStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/PreparableStatement.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/RemoveStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/RowFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/RowImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/RowResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/RowResultImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SchemaImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SelectStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SessionImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SqlMultiResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SqlResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SqlSingleResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SqlStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/SqlUpdateResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/StreamingDocResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/StreamingRowResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/StreamingSqlResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/TableFilterParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/TableImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/UpdateParams.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/UpdateResult.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/UpdateResultBuilder.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/UpdateSpec.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/UpdateStatementImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/main/user-impl/java/com/mysql/cj/xdevapi/WarningImpl.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-cert.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-cert-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-key.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-key-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-truststore
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/ca-truststore-ext
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/certs_howto.txt
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-cert.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-cert-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-key.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-key-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-keystore
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/client-keystore-ext
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/mykey.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/mykey.pub
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/server-cert.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/server-cert-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/server-key.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/config/ssl-test-certs/server-key-ext.pem
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/CompressedPacketSenderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/DebugBufferingPacketSenderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/MysqlBinaryValueDecoderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/MysqlTextValueDecoderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/PacketSenderTestBase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/SimplePacketReaderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/a/SimplePacketSenderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/x/CompressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/x/SyncMessageReaderTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/protocol/x/SyncMessageWriterTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/BigDecimalValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/BinaryStreamValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/BooleanValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/ByteValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/CommonAsserts.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/DoubleValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/FloatValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/IntegerValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/LocalDateTimeValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/LocalDateValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/LocalTimeValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/LongValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/ShortValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/SqlDateValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/SqlTimestampValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/SqlTimeValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/StringValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/result/ZeroDateTimeToNullValueFactoryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/util/StringInspectorTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/util/StringUtilsTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/util/TimeUtilTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/xdevapi/ExprParserTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/xdevapi/JsonDocTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/CharsetMappingWrapper.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/ConnectionUrlTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/MessagesTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/com/mysql/cj/ServerVersionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/perf/BasePerfTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/perf/LoadStorePerfTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/perf/RetrievalPerfTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/BlobRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/CachedRowsetTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/CallableStatementRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/CharsetRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/ConnectionRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/DataSourceRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/DateTimeRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/EscapeProcessorRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/ExceptionSubclassesTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/MetaDataRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/MicroPerformanceRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/NonLocalSocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/NumbersRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/PooledConnectionRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/ResultSetRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/StatementRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/StressRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/StringRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/SubqueriesRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/SyntaxRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/regression/UtilsRegressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/AuthenticationTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/BlobTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/CallableStatementTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/CharsetTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/ConnectionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/DataSourceTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/DateTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/DateTimeTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/EscapeProcessingTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/ExceptionsTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/MetadataTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/MiniAdminTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/MultiHostConnectionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/NumbersTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/QueryAttributesTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/ReadOnlyCallableStatementTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/ResultSetTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/SaslPrepTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/SecureConnectionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/SequentialIdLeaseTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/ServerControllerTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/SimpleTransformer.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/SplitDBdotNameTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/StatementsTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/TestLifecycleInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/TransactionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/TraversalTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/UpdatabilityTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/UtilsTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/simple/XATest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/AsyncQueryTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/BaseCollectionTestCase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/BaseTableTestCase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/BindTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CollectionAddTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CollectionFindTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CollectionModifyTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CollectionRemoveTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CollectionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/CompressionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/DevApiBaseTestCase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/Ipv6SupportTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/MetadataTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/package-info.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/ResultTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/RowLockingTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/SchemaTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/SecureSessionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/SessionFailoverTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/SessionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TableDeleteTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TableInsertTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TableSelectTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TableTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TableUpdateTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/devapi/TransactionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/InternalXBaseTestCase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/MysqlxSessionTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/package-info.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/XProtocolAsyncTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/XProtocolAuthTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/x/internal/XProtocolTest.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/BaseQueryInterceptor.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/BaseTestCase.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/BufferingLogger.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/InjectedSocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/JUnitSummary.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/MockJndiContextFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/TestUtils.java
+/lib/dependencies/Connector JDBC 8.3.0/src/test/java/testsuite/UnreliableSocketFactory.java
+/lib/dependencies/Connector JDBC 8.3.0/build.xml
+/lib/dependencies/Connector JDBC 8.3.0/CHANGES
+/lib/dependencies/Connector JDBC 8.3.0/INFO_BIN
+/lib/dependencies/Connector JDBC 8.3.0/INFO_SRC
+/lib/dependencies/Connector JDBC 8.3.0/LICENSE
+/lib/dependencies/Connector JDBC 8.3.0/README
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-console-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-console-l1-2-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-datetime-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-debug-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-errorhandling-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-file-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-file-l1-2-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-file-l2-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-handle-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-heap-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-interlocked-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-libraryloader-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-localization-l1-2-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-memory-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-namedpipe-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-processenvironment-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-processthreads-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-processthreads-l1-1-1.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-profile-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-rtlsupport-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-string-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-synch-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-synch-l1-2-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-sysinfo-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-timezone-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-core-util-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-conio-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-convert-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-environment-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-filesystem-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-heap-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-locale-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-math-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-multibyte-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-private-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-process-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-runtime-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-stdio-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-string-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-time-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/api-ms-win-crt-utility-l1-1-0.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/decora_sse.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/fxplugins.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/glass.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/glib-lite.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/gstreamer-lite.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/javafx_font.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/javafx_iio.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/jfxmedia.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/jfxwebkit.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/msvcp140.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/msvcp140_1.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/msvcp140_2.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/prism_common.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/prism_d3d.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/prism_sw.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/ucrtbase.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/vcruntime140.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/bin/vcruntime140_1.dll
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.base/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.base/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.base/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.controls/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.controls/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.controls/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.fxml/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.fxml/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.graphics/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.graphics/jpeg_fx.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.graphics/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.graphics/mesa3d.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/directshow.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/glib.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/gstreamer.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/libffi.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.media/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.swing/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.swing/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.swing/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/icu_web.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/libxml2.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/libxslt.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/LICENSE
+/lib/dependencies/sdk/javafx-sdk-21.0.2/legal/javafx.web/webkit.md
+/lib/dependencies/sdk/javafx-sdk-21.0.2/lib/javafx.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/server/classes.jsa
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/server/classes_nocoops.jsa
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/server/jvm.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-console-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-console-l1-2-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-datetime-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-debug-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-errorhandling-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-file-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-file-l1-2-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-file-l2-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-handle-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-heap-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-interlocked-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-libraryloader-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-localization-l1-2-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-memory-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-namedpipe-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-processenvironment-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-processthreads-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-processthreads-l1-1-1.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-profile-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-rtlsupport-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-string-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-synch-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-synch-l1-2-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-sysinfo-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-timezone-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-core-util-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-conio-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-convert-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-environment-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-filesystem-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-heap-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-locale-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-math-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-multibyte-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-private-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-process-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-runtime-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-stdio-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-string-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-time-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/api-ms-win-crt-utility-l1-1-0.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/attach.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/awt.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/dt_shmem.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/dt_socket.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/fontmanager.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/freetype.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/instrument.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/j2gss.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/j2pcsc.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/j2pkcs11.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jaas.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jabswitch.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jaccessinspector.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jaccesswalker.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jar.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jarsigner.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/java.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/java.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javaaccessbridge.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javac.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javadoc.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javajpeg.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javap.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/javaw.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jawt.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jcmd.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jconsole.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jdb.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jdeprscan.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jdeps.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jdwp.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jfr.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jhsdb.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jimage.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jimage.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jinfo.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jli.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jlink.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jmap.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jmod.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jpackage.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jpackage.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jps.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jrunscript.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jshell.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jsound.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jstack.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jstat.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jstatd.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jsvml.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/jwebserver.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/keytool.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/kinit.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/klist.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/ktab.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/lcms.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/le.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/management.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/management_agent.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/management_ext.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/mlib_image.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/msvcp140.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/net.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/nio.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/prefs.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/rmi.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/rmiregistry.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/saproc.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/serialver.exe
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/splashscreen.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/sspi_bridge.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/sunmscapi.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/ucrtbase.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/vcruntime140.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/vcruntime140_1.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/verify.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/w2k_lsa_auth.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/windowsaccessbridge-64.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/WinFallbackLookup.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/bin/zip.dll
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/management/jmxremote.access
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/management/jmxremote.password.template
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/management/management.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/limited/default_local.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/limited/default_US_export.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/limited/exempt_local.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/unlimited/default_local.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/unlimited/default_US_export.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/policy/README.txt
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/java.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/security/java.security
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/logging.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/net.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/conf/sound.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/win32/bridge/AccessBridgeCallbacks.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/win32/bridge/AccessBridgeCalls.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/win32/bridge/AccessBridgePackages.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/win32/jawt_md.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/win32/jni_md.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/classfile_constants.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/jawt.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/jdwpTransport.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/jni.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/jvmti.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/include/jvmticmlr.h
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.base.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.compiler.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.datatransfer.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.desktop.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.instrument.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.logging.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.management.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.management.rmi.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.naming.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.net.http.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.prefs.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.rmi.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.scripting.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.se.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.security.jgss.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.security.sasl.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.smartcardio.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.sql.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.sql.rowset.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.transaction.xa.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.xml.crypto.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/java.xml.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.accessibility.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.attach.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.charsets.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.compiler.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.crypto.cryptoki.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.crypto.ec.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.crypto.mscapi.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.dynalink.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.editpad.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.hotspot.agent.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.httpserver.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.incubator.foreign.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.incubator.vector.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.ed.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.jvmstat.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.le.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.opt.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.vm.ci.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.vm.compiler.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.internal.vm.compiler.management.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jartool.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.javadoc.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jcmd.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jconsole.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jdeps.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jdi.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jdwp.agent.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jfr.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jlink.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jpackage.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jshell.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jsobject.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.jstatd.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.localedata.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.management.agent.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.management.jfr.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.management.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.naming.dns.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.naming.rmi.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.net.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.nio.mapmode.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.random.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.sctp.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.security.auth.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.security.jgss.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.unsupported.desktop.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.unsupported.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.xml.dom.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/jmods/jdk.zipfs.jmod
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/aes.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/asm.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/c-libutl.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/cldr.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/icu.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/public_suffix.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/unicode.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/wepoll.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.base/zlib.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.compiler/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.compiler/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.compiler/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.datatransfer/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.datatransfer/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.datatransfer/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/colorimaging.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/freetype.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/giflib.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/harfbuzz.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/jpeg.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/lcms.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/libpng.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.desktop/mesa3d.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.instrument/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.instrument/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.instrument/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.logging/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.logging/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.logging/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management.rmi/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management.rmi/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.management.rmi/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.naming/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.naming/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.naming/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.net.http/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.net.http/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.net.http/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.prefs/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.prefs/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.prefs/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.rmi/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.rmi/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.rmi/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.scripting/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.scripting/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.scripting/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.se/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.se/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.se/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.jgss/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.jgss/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.jgss/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.sasl/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.sasl/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.security.sasl/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.smartcardio/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.smartcardio/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.smartcardio/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.sql.rowset/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.sql.rowset/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.sql.rowset/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.transaction.xa/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.transaction.xa/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.transaction.xa/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/bcel.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/dom.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/jcup.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/xalan.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml/xerces.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml.crypto/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml.crypto/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml.crypto/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/java.xml.crypto/santuario.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.accessibility/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.accessibility/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.accessibility/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.attach/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.attach/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.attach/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.charsets/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.charsets/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.charsets/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.compiler/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.compiler/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.compiler/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.cryptoki/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.cryptoki/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.cryptoki/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.cryptoki/pkcs11cryptotoken.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.cryptoki/pkcs11wrapper.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.ec/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.ec/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.ec/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.mscapi/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.mscapi/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.crypto.mscapi/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.dynalink/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.dynalink/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.dynalink/dynalink.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.dynalink/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.editpad/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.editpad/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.editpad/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.hotspot.agent/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.hotspot.agent/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.hotspot.agent/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.httpserver/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.httpserver/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.httpserver/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.foreign/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.foreign/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.foreign/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.vector/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.vector/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.incubator.vector/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.ed/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.ed/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.ed/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.jvmstat/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.jvmstat/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.jvmstat/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.le/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.le/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.le/jline.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.le/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.opt/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.opt/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.opt/jopt-simple.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.opt/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.ci/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.ci/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.ci/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler.management/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler.management/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.internal.vm.compiler.management/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jartool/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jartool/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jartool/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.javadoc/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.javadoc/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.javadoc/jquery.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.javadoc/jqueryUI.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.javadoc/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jcmd/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jcmd/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jcmd/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jconsole/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jconsole/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jconsole/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdeps/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdeps/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdeps/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdi/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdi/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdi/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdwp.agent/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdwp.agent/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jdwp.agent/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jfr/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jfr/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jfr/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jlink/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jlink/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jlink/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jpackage/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jpackage/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jpackage/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jshell/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jshell/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jshell/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jsobject/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jsobject/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jsobject/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jstatd/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jstatd/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.jstatd/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.localedata/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.localedata/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.localedata/cldr.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.localedata/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.localedata/thaidict.md
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.agent/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.agent/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.agent/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.jfr/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.jfr/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.management.jfr/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.dns/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.dns/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.dns/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.rmi/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.rmi/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.naming.rmi/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.net/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.net/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.net/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.nio.mapmode/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.nio.mapmode/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.nio.mapmode/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.random/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.random/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.random/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.sctp/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.sctp/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.sctp/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.auth/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.auth/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.auth/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.jgss/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.jgss/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.security.jgss/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported.desktop/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported.desktop/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.unsupported.desktop/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.xml.dom/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.xml.dom/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.xml.dom/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.zipfs/ADDITIONAL_LICENSE_INFO
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.zipfs/ASSEMBLY_EXCEPTION
+/lib/dependencies/sdk/openjdk-18.0.1.1/legal/jdk.zipfs/LICENSE
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/jfr/default.jfc
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/jfr/profile.jfc
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/security/blocked.certs
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/security/cacerts
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/security/default.policy
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/security/public_suffix_list.dat
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/classlist
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/ct.sym
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/fontconfig.bfc
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/fontconfig.properties.src
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/jawt.lib
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/jvm.cfg
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/jvm.lib
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/modules
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/psfont.properties.ja
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/psfontj2d.properties
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/tzdb.dat
+/lib/dependencies/sdk/openjdk-18.0.1.1/lib/tzmappings
+/lib/dependencies/sdk/openjdk-18.0.1.1/release
+/login_acitivity.txt
