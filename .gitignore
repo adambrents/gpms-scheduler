@@ -1,0 +1,64 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ignore Eclipse project files
+.classpath
+.project
+.settings/
+
+# ignore IntelliJ project files
+.idea/
+*.iml
+*.iws
+
+# ignore NetBeans project files
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ignore VS Code project files
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# ignore Maven wrapper files
+.mvn/wrapper/maven-wrapper.properties
+!/.mvn/wrapper/maven-wrapper.jar
+
+# ignore log files and databases
+*.log
+*.sql
+*.db
+
+# ignore compiled Java files
+*.class
+
+# ignore packaged JAR/WAR files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ignore dependency directories (uncomment if you wish to ignore)
+ lib/
+# dependency-reduced-pom.xml
+
+# ignore user-specific files
+*.swp
+*~
+/.idea/workspace.xml
+/.idea/tasks.xml
+/.idea/gradle.xml
+/.idea/assetWizardSettings.xml
+/.idea/dictionaries
+/.idea/libraries
+# Java crash logs
+hs_err_pid*

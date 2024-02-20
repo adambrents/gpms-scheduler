@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Projects\java\C868_Capstone_Adam_Brents\out\artifacts\C868___Capstone___Music_School_Scheduler_jar\C868 - Capstone - Music School Scheduler.jar</jar>
+  <outfile>C:\Projects\java\C868_Capstone_Adam_Brents\out\artifacts\C868___Capstone___Music_School_Scheduler_jar\musicschoolscheduler.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Projects\java\C868_Capstone_Adam_Brents\music.ico</icon>
+  <jre>
+    <path>C:\main.java.Program Files\Java\jre-1.8</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.8</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
