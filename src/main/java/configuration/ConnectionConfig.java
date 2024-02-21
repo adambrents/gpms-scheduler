@@ -1,12 +1,16 @@
 package configuration;
 
 import com.google.gson.Gson;
+import controller.LoginScreenController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ConnectionConfig {
+    private static final Logger _logger = LoggerFactory.getLogger(LoginScreenController.class);
     private static final String CONFIG_FILE_PATH = "configuration/config.json";
     private DbConnection dbConnection;
 
@@ -21,10 +25,10 @@ public class ConnectionConfig {
                         setConnectionAuth(config.dbConnection);
                     }
                 } else {
-                    System.err.println("Config file not found: " + CONFIG_FILE_PATH);
+                    _logger.error("Config file not found: " + CONFIG_FILE_PATH);
                 }
             } catch (IOException e) {
-                System.err.println("Error reading config file: " + e.getMessage());
+                _logger.error("Error reading config file: " + e.getMessage());
             }
         }
         return dbConnection;

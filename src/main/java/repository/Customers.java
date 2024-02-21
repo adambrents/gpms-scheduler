@@ -1,10 +1,13 @@
 package repository;
 
 import configuration.JDBC;
+import controller.LoginScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.utilities.JDBCConnectionHelper;
 import main.java.viewmodels.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Customers {
+
+    private static final Logger _logger = LoggerFactory.getLogger(LoginScreenController.class);
     private static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     private static ObservableList<String> allCountries = FXCollections.observableArrayList();
     private static int lastID = 0;
@@ -157,7 +162,7 @@ public class Customers {
             preparedStatement.executeUpdate();
         }
         catch (SQLException sqlException){
-            System.out.println(sqlException);
+            _logger.error("Adding customer failed!", sqlException);
         }
     }
 

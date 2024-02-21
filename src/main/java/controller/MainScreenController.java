@@ -11,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.java.viewmodels.Appointment;
 import main.java.viewmodels.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import repository.Appointments;
 import repository.Customers;
 
@@ -21,6 +23,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
+    private static final Logger _logger = LoggerFactory.getLogger(LoginScreenController.class);
     @FXML
     private Button addCustomer;
     @FXML
@@ -169,7 +172,7 @@ public class MainScreenController implements Initializable {
                         alert.setContentText("Issue deleting customer - see console for details");
                     }
                 }catch (Exception e){
-                    System.out.println(e.getMessage());
+                    _logger.error(e.getMessage());
                 }
             } else {
                 alert1.close();

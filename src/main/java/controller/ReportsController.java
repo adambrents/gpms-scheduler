@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import repository.Appointments;
 import repository.Contacts;
 import repository.Divisions;
@@ -30,6 +32,7 @@ import static java.time.Month.DECEMBER;
 
 public class ReportsController implements Initializable {
 
+    private static final Logger _logger = LoggerFactory.getLogger(LoginScreenController.class);
     @FXML
     private Label appointmentNumber;
     @FXML
@@ -272,7 +275,7 @@ public class ReportsController implements Initializable {
             }
             report.setItems(reportsList);
         }catch (Exception e){
-            System.out.println("Error: " + e);
+            _logger.error("Error: " + e);
         }
 
         monthsList.add("January");monthsList.add("February");monthsList.add("March");monthsList.add("April");monthsList.add("May");monthsList.add("June");monthsList.add("July");monthsList.add("August");monthsList.add("September");monthsList.add("October");monthsList.add("November");monthsList.add("December");

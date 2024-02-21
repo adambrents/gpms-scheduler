@@ -1367,4 +1367,4 @@ hs_err_pid*
 /lib/dependencies/sdk/openjdk-18.0.1.1/lib/tzdb.dat
 /lib/dependencies/sdk/openjdk-18.0.1.1/lib/tzmappings
 /lib/dependencies/sdk/openjdk-18.0.1.1/release
-/login_acitivity.txt
+/src/main/resources/logs/login_acitivity.txt
