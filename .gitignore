@@ -1368,3 +1368,4 @@ hs_err_pid*
 /lib/dependencies/sdk/openjdk-18.0.1.1/lib/tzmappings
 /lib/dependencies/sdk/openjdk-18.0.1.1/release
 /src/main/resources/logs/login_acitivity.txt
+/logs/musicscheduler.txt
