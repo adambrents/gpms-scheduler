@@ -1,9 +1,0 @@
-{
-  "dbConnection": {
-      "db": "client_schedule",
-      "serverName": "abrents.tplinkdns.com",
-      "serverPort": 3306,
-      "userName": "svc-musicschedulerapp",
-      "password": "V6M=VRwM#*O=63l,TO6P?zX5n&^6ly"
-    }
-}

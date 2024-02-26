@@ -1,4 +1,4 @@
-target/
+musicschoolscheduler/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 # ignore Eclipse project files
