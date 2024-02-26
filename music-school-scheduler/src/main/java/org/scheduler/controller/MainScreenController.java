@@ -2,25 +2,16 @@ package org.scheduler.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
-import org.scheduler.controller.lesson.AddLessonControllerController;
-import org.scheduler.controller.lesson.AllLessonController;
-import org.scheduler.controller.lesson.ModifyLessonControllerController;
-import org.scheduler.controller.report.ReportsController;
-import org.scheduler.controller.student.AddStudentController;
-import org.scheduler.controller.student.ModifyStudentController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.scheduler.repository.LessonsDTO;
 import org.scheduler.repository.StudentsDTO;
-import org.scheduler.viewmodels.Contact;
 import org.scheduler.viewmodels.Lesson;
 import org.scheduler.viewmodels.Student;
 import org.scheduler.viewmodels.User;
@@ -36,19 +27,19 @@ public class MainScreenController extends ControllerBase implements IController 
     @FXML
     private Button addCustomer;
     @FXML
-    private TableColumn<Contact, String> contactMonth;
+    private TableColumn<Student, String> studentMonth;
     @FXML
-    private TableColumn<Contact, String>  contactWeek;
+    private TableColumn<Student, String> studentWeek;
     @FXML
-    private TableColumn<Contact, String>  customerAddressColumn;
+    private TableColumn<Student, String> studentAddressColumn;
     @FXML
-    private TableColumn<Contact, String>  customerMonth;
+    private TableColumn<Student, String>  customerMonth;
     @FXML
-    private TableColumn<Contact, String>  customerNameColumn;
+    private TableColumn<Student, String> studentNameColumn;
     @FXML
-    private TableColumn<Contact, String>  customerWeek;
+    private TableColumn<Student, String>  customerWeek;
     @FXML
-    private TableView<Student>  customersTable;
+    private TableView<Student> studentTable;
     @FXML
     private Button deleteCustomer;
     @FXML
@@ -104,11 +95,11 @@ public class MainScreenController extends ControllerBase implements IController 
     @FXML
     private TableColumn<User, String> userWeek;
     @FXML
-    private TableColumn<Student, String> customerIdColumn;
+    private TableColumn<Student, String> studentIdColumn;
     @FXML
     private TableView<Lesson> weekTable;
-    private Parent scene;
     private Lesson selectedLesson = null;
+    private Student selectedStudent = null;
     private int userId;
     private final LessonsDTO lessonsDTO = new LessonsDTO();
     private final StudentsDTO studentsDTO = new StudentsDTO();
@@ -118,32 +109,21 @@ public class MainScreenController extends ControllerBase implements IController 
      * @throws IOException
      */
     public void onAddCustomer(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddStudentScreen.fxml"));
-        scene = loader.load();
-        AddStudentController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.ADD_STUDENT_SCRN, userId);
     }
     /**
      * When the modify customer button is clicked, load corresponding screen
      * @param actionEvent
      * @throws IOException
      */
-    public void onModifyCustomer(ActionEvent actionEvent) throws IOException {
-        Student selectedStudent = customersTable.getSelectionModel().getSelectedItem();
-        if (selectedStudent == null){
+    public void onModifyStudent(ActionEvent actionEvent) throws IOException {
+        _studentToBeModified = studentTable.getSelectionModel().getSelectedItem();
+
+        if (_studentToBeModified == null) {
             return;
         }
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyStudentsScreen.fxml"));
-        scene = loader.load();
-        ModifyStudentController controller = loader.getController();
-        controller.setCustomer(selectedStudent);
-        controller.setUserId(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MOD_STUDENT_SCRN, userId);
     }
     /**
      * When the delete customer button is clicked, validate request with user then proceed with deleting from db(and ui table)
@@ -151,7 +131,7 @@ public class MainScreenController extends ControllerBase implements IController 
      * @param actionEvent
      */
     public void onDeleteCustomer(ActionEvent actionEvent) {
-        Student selectedStudent = customersTable.getSelectionModel().getSelectedItem();
+        Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
         if(selectedStudent != null) {
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
@@ -160,14 +140,14 @@ public class MainScreenController extends ControllerBase implements IController 
             if (result.get() == ButtonType.OK) {
                 try {
                     if(lessonsDTO.checkForLessons(selectedStudent)){
-                        studentsDTO.deleteCustomer(selectedStudent);
-                        customersTable.setItems(studentsDTO.getAllCustomers());
+                        studentsDTO.deleteStudent(selectedStudent);
+                        studentTable.setItems(studentsDTO.getAllStudents());
                         return;
                     }
                     if(!lessonsDTO.checkForLessons(selectedStudent)){
                         lessonsDTO.deleteAppointment(selectedStudent.getId());
-                        studentsDTO.deleteCustomer(selectedStudent);
-                        customersTable.setItems(studentsDTO.getAllCustomers());
+                        studentsDTO.deleteStudent(selectedStudent);
+                        studentTable.setItems(studentsDTO.getAllStudents());
                     }
                     else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -198,13 +178,7 @@ public class MainScreenController extends ControllerBase implements IController 
      * @throws IOException
      */
     public void onAddAppointment(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddLessonsScreen.fxml"));
-        scene = loader.load();
-        AddLessonControllerController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.ADD_LESSON_SCRN, userId);
     }
     /**
      * When the modify appointment button is clicked, load corresponding screen
@@ -230,14 +204,9 @@ public class MainScreenController extends ControllerBase implements IController 
             alert.showAndWait();
             return;
         }
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyLessonsScreen.fxml"));
-        scene = loader.load();
-        ModifyLessonControllerController controller = loader.getController();
-        controller.setAppointment(selectedLesson);
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        _lessonToBeModified = selectedLesson;
+
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MOD_LESSON_SCRN, userId);
     }
     /**
      * when clicked, user is warned of deleting appointment, then appointment is deleted
@@ -252,7 +221,7 @@ public class MainScreenController extends ControllerBase implements IController 
             }
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
-            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getAppointmentID() + ", Type: " + selectedLesson.getType() + "?");
+            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
             Optional<ButtonType> result = alert1.showAndWait();
             if (result.get() == ButtonType.OK) {
                 lessonsDTO.deleteAppointment(selectedLesson);
@@ -268,7 +237,7 @@ public class MainScreenController extends ControllerBase implements IController 
             }
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
-            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getAppointmentID() + ", Type: " + selectedLesson.getType() + "?");
+            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
             Optional<ButtonType> result = alert1.showAndWait();
             if (result.get() == ButtonType.OK){
                 lessonsDTO.deleteAppointment(selectedLesson);
@@ -281,10 +250,9 @@ public class MainScreenController extends ControllerBase implements IController 
     }
     /**
      * sets userId
-     * @param user
      */
-    public void setUser(int user) {
-        userId = user;
+    private void setUserId() {
+        userId = _userId;
     }
     /**
      * Loads reports screen
@@ -292,13 +260,7 @@ public class MainScreenController extends ControllerBase implements IController 
      * @throws IOException
      */
     public void onReports(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ReportsScreen.fxml"));
-        scene = loader.load();
-        ReportsController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.REPORTS_SCRN, userId);
     }
     /**
      * loads allappointments screen
@@ -307,13 +269,7 @@ public class MainScreenController extends ControllerBase implements IController 
      * @throws IOException
      */
     public void onAllAppointments(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AllLessonsScreen.fxml"));
-        scene = loader.load();
-        AllLessonController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.ALL_LESSON_SCRN, userId);
     }
     /**
      * init method, sets values for customer and appointment ui tables from db
@@ -323,19 +279,19 @@ public class MainScreenController extends ControllerBase implements IController 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Get data for Student Table
-        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        studentAddressColumn.setCellValueFactory(new PropertyValueFactory<>("addressLine1"));
+        studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         //sets table with customer data
-        customersTable.setItems(studentsDTO.getAllCustomers());
+        studentTable.setItems(studentsDTO.getAllStudents());
 
         //Get data for Weekly LessonsDTO table
         idWeek.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleWeek.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionWeek.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationWeek.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactWeek.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        studentWeek.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeWeek.setCellValueFactory(new PropertyValueFactory<>("type"));
         startWeek.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endWeek.setCellValueFactory(new PropertyValueFactory<>("endTime"));
@@ -351,7 +307,7 @@ public class MainScreenController extends ControllerBase implements IController 
         titleMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationMonth.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactMonth.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        studentMonth.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
         startMonth.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endMonth.setCellValueFactory(new PropertyValueFactory<>("endTime"));
@@ -360,5 +316,6 @@ public class MainScreenController extends ControllerBase implements IController 
         userMonth.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //sets table with monthly appt data
         monthTable.setItems(lessonsDTO.getMonthlyLessons());
+        this.setUserId();
     }
 }

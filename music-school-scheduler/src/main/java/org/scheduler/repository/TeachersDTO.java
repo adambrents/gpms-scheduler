@@ -3,7 +3,6 @@ package org.scheduler.repository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.scheduler.repository.base.BaseDTO;
-import org.scheduler.repository.configuration.context.JDBCContext;
 import org.scheduler.viewmodels.User;
 
 import java.sql.ResultSet;
@@ -12,8 +11,6 @@ import java.sql.Statement;
 public class TeachersDTO extends BaseDTO {
 
     private static final ObservableList<User> allUsers = FXCollections.observableArrayList();
-
-    private static Statement statement;
 
     /**
      * Validates user credentials with the db and returns a numeric value for what credential element is incorrect/correct
@@ -24,8 +21,7 @@ public class TeachersDTO extends BaseDTO {
 
     public static int submit(User user){
         int valid = 0;
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users;";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
@@ -36,7 +32,6 @@ public class TeachersDTO extends BaseDTO {
                 );
                 allUsers.add(allUser);
             }
-            statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -71,8 +66,7 @@ public class TeachersDTO extends BaseDTO {
      */
     public static ObservableList<User> getAllUsers(){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users;";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
@@ -83,7 +77,6 @@ public class TeachersDTO extends BaseDTO {
                 );
                 allUsers.add(allUser);
             }
-            statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -98,8 +91,7 @@ public class TeachersDTO extends BaseDTO {
      */
     public static User getUserByName(String userName){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users WHERE User_Name='" + userName + "';";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
@@ -109,7 +101,6 @@ public class TeachersDTO extends BaseDTO {
                         resultSet.getString("Password")
                 );
             }
-            statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -123,8 +114,7 @@ public class TeachersDTO extends BaseDTO {
      */
     public static User getUserById(int userId){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users WHERE User_ID=" + userId + ";";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
@@ -134,7 +124,6 @@ public class TeachersDTO extends BaseDTO {
                         resultSet.getString("Password")
                 );
             }
-            statement.close();
         }catch (Exception e){
             e.printStackTrace();
         }

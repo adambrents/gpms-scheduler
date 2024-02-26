@@ -10,13 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
+import org.scheduler.repository.StudentsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.Contacts;
 import org.scheduler.repository.LessonsDTO;
-import org.scheduler.viewmodels.Contact;
 import org.scheduler.viewmodels.Lesson;
 import org.scheduler.viewmodels.Report;
 import org.scheduler.viewmodels.Student;
@@ -76,21 +76,16 @@ public class ReportsController extends ControllerBase implements IController {
     private final ObservableList<Report> reports = FXCollections.observableArrayList();
 
     private final LessonsDTO lessonsDTO = new LessonsDTO();
+    private final StudentsDTO studentsDTO = new StudentsDTO();
 
     /**
      * Reloads the screen
-     * @param event
+     * @param actionEvent
      * @throws IOException
      */
-    public void onReset(ActionEvent event) throws IOException {
+    public void onReset(ActionEvent actionEvent) throws IOException {
         appointmentNumber.setText("0");
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ReportsScreen.fxml"));
-        scene = loader.load();
-        ReportsController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, userId);
     }
 
     /**
@@ -109,7 +104,7 @@ public class ReportsController extends ControllerBase implements IController {
                 return;
             }
             String contact = contactBox.getValue();
-            lessons = lessonsDTO.getContactLessons(contact);
+            lessons = lessonsDTO.getStudentLessons(contact);
             totalAppointments.setVisible(false);
             appointmentNumber.setVisible(false);
         }
@@ -199,7 +194,7 @@ public class ReportsController extends ControllerBase implements IController {
     @Override
     public void onCancel(ActionEvent event) {
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
     /**
@@ -261,10 +256,10 @@ public class ReportsController extends ControllerBase implements IController {
         years.setItems(yearsList);
         types.setItems(lessonsDTO.getTypes());
         int index = 0;
-        ObservableList<Contact> contacts = Contacts.getAllContacts();
+        ObservableList<Student> students = studentsDTO.getAllStudents();
         ObservableList<String> contactNames = FXCollections.observableArrayList();
-        while (index < contacts.size()){
-            String contactName = contacts.get(index).getContactName();
+        while (index < students.size()){
+            String contactName = students.get(index).getFullName();
             contactNames.add(contactName);
             ++index;
         }

@@ -1,14 +1,11 @@
 package org.scheduler.controller.student;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.scheduler.controller.MainScreenController;
-import org.scheduler.controller.base.ControllerBase;
+import org.scheduler.constants.Constants;
+import org.scheduler.controller.base.StudentControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.IUpdate;
 import org.slf4j.Logger;
@@ -20,13 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ModifyStudentController extends ControllerBase implements IUpdate, IController {
+public class ModifyStudentController extends StudentControllerBase implements IUpdate, IController {
     private static final Logger _logger = LoggerFactory.getLogger(ModifyStudentController.class);
-    public TableColumn<Student, String> customerNameColumn;
-    public TableColumn<Student, String> customerAddressColumn;
-    public TableColumn<Student, String> customerPhoneColumn;
-    public TableView<Student> customersTable;
-    public Student selectedStudent;
     public TextField idTxt;
     public TextField nameTxt;
     public TextField addressTxt;
@@ -41,37 +33,6 @@ public class ModifyStudentController extends ControllerBase implements IUpdate, 
     private final StudentsDTO studentsDTO = new StudentsDTO();
 
     /**
-     * prepopulates dropdown values and populates customer table
-     * @param url
-     * @param resourceBundle
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Get data for Student Table
-        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-
-        //sets table with customer data
-        customersTable.setItems(studentsDTO.getAllCustomers());
-
-    }
-
-    /**
-     * @param selectedStudent
-     */
-    public void setCustomer(Student selectedStudent) {
-
-        this.selectedStudent = selectedStudent;
-        customerId = selectedStudent.getId();
-        idTxt.setText(Integer.toString(selectedStudent.getId()));
-        nameTxt.setText(selectedStudent.getName());
-        addressTxt.setText(selectedStudent.getAddress());
-        postalTxt.setText(selectedStudent.getPostalCode());
-        phoneTxt.setText(selectedStudent.getPhoneNumber());
-    }
-
-    /**
      * on cancel loads the main screen
      *
      * @param event
@@ -79,7 +40,7 @@ public class ModifyStudentController extends ControllerBase implements IUpdate, 
      */
     public void onCancel(ActionEvent event) {
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
     /**
@@ -107,17 +68,18 @@ public class ModifyStudentController extends ControllerBase implements IUpdate, 
             }
             else {
                 try {
-                    Student student = new Student(customerId,nameTxt.getText(),addressTxt.getText(),postalTxt.getText(),phoneTxt.getText());
-                    studentsDTO.updateCustomer(student);
-                    customersTable.setItems(studentsDTO.getAllCustomers());
+                    Student student = new Student(
+                            customerId,
+                            nameTxt.getText(),
+                            nameTxt.getText(),//TODO add lastname
+                            addressTxt.getText(),
+                            addressTxt.getText(),//TODO add address 2
+                            postalTxt.getText(),
+                            phoneTxt.getText());
+                    studentsDTO.updateStudent(student);
+                    studentsTable.setItems(studentsDTO.getAllStudents());
                     valid = false;
-                    Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
-                    scene = loader.load();
-                    MainScreenController controller = loader.getController();
-                    controller.setUser(userId);
-                    stage.setScene(new Scene(scene));
-                    stage.show();
+                    super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, userId);
                 } catch (Exception e) {
                     e.printStackTrace();
                     valid = false;
@@ -128,9 +90,36 @@ public class ModifyStudentController extends ControllerBase implements IUpdate, 
 
     /**
      * sets the userId
-     * @param userId
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    private void setUserId() {
+        this.userId = _userId;
+    }
+
+    /**
+     * sets the customer on load
+     */
+    private void setStudent() {
+        customerId = _studentToBeModified.getId();
+        idTxt.setText(Integer.toString(_studentToBeModified.getId()));
+        nameTxt.setText(_studentToBeModified.getFirstName());
+        addressTxt.setText(_studentToBeModified.getAddressLine1());
+        postalTxt.setText(_studentToBeModified.getPostalCode());
+        phoneTxt.setText(_studentToBeModified.getPhoneNumber());
+    }
+    @Override
+    public void setControllerProperties(Object data) {
+        super.setControllerProperties(data);
+        if (data instanceof Student) {
+            this._studentToBeModified = (Student) data;
+        }
+    }
+    /**
+     * prepopulates dropdown values and populates customer table
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        super.initialize(url, resourceBundle);
     }
 }

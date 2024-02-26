@@ -7,14 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.IUpdate;
-import org.scheduler.repository.Contacts;
 import org.scheduler.repository.LessonsDTO;
 import org.scheduler.repository.StudentsDTO;
 import org.scheduler.repository.UsersDTO;
-import org.scheduler.viewmodels.Contact;
 import org.scheduler.viewmodels.Lesson;
 import org.scheduler.viewmodels.Student;
 import org.scheduler.viewmodels.User;
@@ -66,6 +65,7 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
 
     private final LessonsDTO lessonsDTO = new LessonsDTO();
     private final StudentsDTO studentsDTO = new StudentsDTO();
+    private final UsersDTO usersDTO = new UsersDTO();
     /**
      * when a date is selected, start and end times are populated
      * @param event
@@ -166,41 +166,31 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
      */
     public void setAppointment(Lesson selectedLesson) {
         int i = 0;
-        while(i < studentsDTO.getAllCustomers().size()){
-            ObservableList<Student> students = studentsDTO.getAllCustomers();
-            String customerName = students.get(i).getName();
+        while(i < studentsDTO.getAllStudents().size()){
+            ObservableList<Student> students = studentsDTO.getAllStudents();
+            String customerName = students.get(i).getFirstName();
             customerNames.add(i,customerName);
             i++;
         }
         student.setItems(customerNames);
-        student.setValue(studentsDTO.getCustomerName(selectedLesson.getCustomerID()));
-        i = 0;
-        while(i < Contacts.getAllContacts().size()){
-            ObservableList<Contact> contacts = Contacts.getAllContacts();
-            String contactName = contacts.get(i).getContactName();
-            contactNames.add(i,contactName);
-            i++;
-        }
-        contact.setItems(contactNames);
-        contact.setValue(Contacts.getContactName(selectedLesson.getContactID()));
+        student.setValue(studentsDTO.getStudentNameFromId(selectedLesson.getStudentID()));
         i = 0;
         userNames.clear();
-        ObservableList<User> allUsers = UsersDTO.getAllUsers();
+        ObservableList<User> allUsers = usersDTO.GetAllUsers();
         while(i < allUsers.size()){
             String userName = allUsers.get(i).username();
             userNames.add(i,userName);
             i++;
         }
         employee.setItems(userNames);
-        employee.setValue(UsersDTO.getUserById(selectedLesson.getUserID()).username());
-        title.setText(selectedLesson.getTitle());
+        employee.setValue(usersDTO.getUserById(selectedLesson.getUserID()).username());
         description.setText(selectedLesson.getDescription());
         type.setText(selectedLesson.getType());
         startTime.setValue(selectedLesson.getStartTime());
         endTime.setValue(selectedLesson.getEndTime());
         date.setValue(selectedLesson.getStart().toLocalDate());
         location.setText(selectedLesson.getLocation());
-        appointmentId = selectedLesson.getAppointmentID();
+        appointmentId = selectedLesson.getLessonID();
         //checks to see if the selected date is before current date
         int index = 0;
         int validStartTimeCount = getAllowedLessonStartTimes(date.getValue()).size();
@@ -243,14 +233,14 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
      */
     public void onCancel(ActionEvent event){
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
     /**
      * Updating an appointment checks for appointment conflicts again, saves appointment to the db, and loads the main screen
      * @param actionEvent
      */
-    public void onUpdate(ActionEvent actionEvent) {
+    public void onUpdate(ActionEvent actionEvent) throws IOException {
         boolean error = false;
         String label = "";
         if((title.getText() == null) || (description.getText() == null) || (type.getText() == null) || (date.getValue() == null)
@@ -295,26 +285,21 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
             alert.showAndWait();
             return;
         }
-        if(employee.getValue() != null){
-            setUser(UsersDTO.getUserByName(employee.getValue()).userId());
-        }
         LocalDateTime startDateTime = LocalDateTime.of(date.getValue(), startTime.getValue());
         LocalDateTime endDateTime = LocalDateTime.of(date.getValue(), endTime.getValue());
         Lesson lesson = new Lesson(
                 appointmentId,
-                title.getText(),
                 description.getText(),
                 location.getText(),
                 type.getText(),
                 startDateTime,
                 endDateTime,
-                studentsDTO.getCustomerId(student.getValue()),
-                userId,
-                Contacts.getContactID(contact.getValue()),
-                contact.getValue());
+                userId);
             if (lessonsDTO.modifyAppointment(lesson)){
             errorText.setText("Successfully updated lesson :)");
         }
+
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersDTO.getUserByName(employee.getValue()).userId());
     }
     /**
      * method loads preset values into all applicable fields

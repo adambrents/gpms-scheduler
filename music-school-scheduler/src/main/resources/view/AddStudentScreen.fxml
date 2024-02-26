@@ -24,12 +24,12 @@
                     <Font name="System Bold" size="24.0"/>
                 </font>
             </Label>
-            <TableView fx:id="customersTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+            <TableView fx:id="studentsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
                        GridPane.rowIndex="1">
                 <columns>
-                    <TableColumn fx:id="customerNameColumn" prefWidth="104.19998776912689" text="Name"/>
-                    <TableColumn fx:id="customerAddressColumn" prefWidth="155.59998321533203" text="Address"/>
-                    <TableColumn fx:id="customerPhoneColumn" prefWidth="136.4000244140625" text="Phone Number"/>
+                    <TableColumn fx:id="studentNameColumn" prefWidth="104.19998776912689" text="Name"/>
+                    <TableColumn fx:id="studentAddressColumn" prefWidth="155.59998321533203" text="Address"/>
+                    <TableColumn fx:id="studentPhoneColumn" prefWidth="136.4000244140625" text="Phone Number"/>
                 </columns>
             </TableView>
             <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">

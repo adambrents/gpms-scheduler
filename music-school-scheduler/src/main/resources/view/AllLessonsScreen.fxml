@@ -14,7 +14,6 @@
             <TableView fx:id="allLessonsTable" prefHeight="438.0" prefWidth="697.0">
                 <columns>
                     <TableColumn fx:id="lessonId" prefWidth="36.200013160705566" text="ID" />
-                    <TableColumn fx:id="title" prefWidth="73.39995956420898" text="Title" />
                     <TableColumn fx:id="contactId" minWidth="0.0" prefWidth="67.60003662109375" text="Contact" />
                     <TableColumn fx:id="type" prefWidth="71.39996337890625" text="Type" />
                     <TableColumn fx:id="student" prefWidth="76.79998779296875" text="Customer_ID" />

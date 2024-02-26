@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.scheduler.configuration.model.AppConfig;
+import org.scheduler.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,15 +27,14 @@ public class Program extends Application{
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        String fxmlPath = "/view/LoginScreen.fxml";
 //        Image appIcon = new Image(getClass().getResourceAsStream("img/app-icon.png"));
 
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Parent root = FXMLLoader.load(getClass().getResource(Constants.FXML_ROUTES.LOGIN_SCREEN));
 
 //        primaryStage.getIcons().add(appIcon);
         Scene scene = new Scene(root);
 
-        NAVIGATION_HISTORY.push(scene, fxmlPath);
+        NAVIGATION_HISTORY.push(scene, Constants.FXML_ROUTES.LOGIN_SCREEN);
 
         primaryStage.setScene(scene);
 

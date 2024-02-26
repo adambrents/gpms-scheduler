@@ -2,17 +2,17 @@ package org.scheduler.repository;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.scheduler.repository.configuration.context.JDBCContext;
+import org.scheduler.constants.Constants;
+import org.scheduler.repository.base.BaseDTO;
 import org.scheduler.viewmodels.User;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UsersDTO {
+public class UsersDTO extends BaseDTO {
 
     private static final ObservableList<User> allUsers = FXCollections.observableArrayList();
-
-    private static Statement statement;
 
     /**
      * Validates user credentials with the db and returns a numeric value for what credential element is incorrect/correct
@@ -21,21 +21,20 @@ public class UsersDTO {
      * @return
      */
 
-    public static int submit(User user){
+    public int isLoginMatchUser(User user){
         int valid = 0;
-        try {
-            statement = JDBCContext.getStatement();
-            String sql = "SELECT * FROM client_schedule.users;";
+        String sql = String.format(
+                "SELECT * FROM %s.%s;",
+                _database,
+                Constants.DbTables.USERS
+        );
+
+        try(Statement statement = getStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                User allUser = new User(
-                    resultSet.getString("User_Name"),
-                    resultSet.getInt("User_ID"),
-                    resultSet.getString("Password")
-                );
-                allUsers.add(allUser);
+                allUsers.add(buildUserFromResultSet(resultSet));
             }
-            statement.close();
+            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -68,21 +67,20 @@ public class UsersDTO {
      * returns an array of all users
      * @return
      */
-    public static ObservableList<User> getAllUsers(){
+    public ObservableList<User> GetAllUsers(){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
-            String sql = "SELECT * FROM client_schedule.users;";
+        String sql = String.format(
+                "SELECT * FROM %s.%s;",
+                _database,
+                Constants.DbTables.USERS
+        );
+
+        try(Statement statement = getStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                User allUser = new User(
-                        resultSet.getString("User_Name"),
-                        resultSet.getInt("User_ID"),
-                        resultSet.getString("Password")
-                );
-                allUsers.add(allUser);
+                allUsers.add(buildUserFromResultSet(resultSet));
             }
-            statement.close();
+            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -95,20 +93,15 @@ public class UsersDTO {
      * @param userName
      * @return
      */
-    public static User getUserByName(String userName){
+    public User getUserByName(String userName){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users WHERE User_Name='" + userName + "';";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
-                return new User(
-                        resultSet.getString("User_Name"),
-                        resultSet.getInt("User_ID"),
-                        resultSet.getString("Password")
-                );
+                return buildUserFromResultSet(resultSet);
             }
-            statement.close();
+            
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -120,23 +113,25 @@ public class UsersDTO {
      * @param userId
      * @return
      */
-    public static User getUserById(int userId){
+    public User getUserById(int userId){
         allUsers.clear();
-        try {
-            statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = "SELECT * FROM client_schedule.users WHERE User_ID=" + userId + ";";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
-                return new User(
-                        resultSet.getString("User_Name"),
-                        resultSet.getInt("User_ID"),
-                        resultSet.getString("Password")
-                );
+                return buildUserFromResultSet(resultSet);
             }
-            statement.close();
+            
         }catch (Exception e){
             e.printStackTrace();
         }
         return null;
+    }
+    private User buildUserFromResultSet(ResultSet resultSet) throws SQLException {
+        return new User(
+                resultSet.getString("User_Name"),
+                resultSet.getInt("User_ID"),
+                resultSet.getString("Password")
+        );
     }
 }

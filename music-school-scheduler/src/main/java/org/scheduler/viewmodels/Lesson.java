@@ -5,45 +5,35 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Lesson {
-    private final int appointmentID;
-    private String title;
+    private final int lessonID;
     private final String description;
     private final String location;
     private String type;
     private LocalDateTime start;
     private LocalDateTime end;
-    private final int customerID;
+    private int studentID;
     private final int userID;
-    private final int contactID;
-    private final String contactName;
 
     /**
      * constructor for appointments
      *
-     * @param appointmentID
-     * @param title
+     * @param lessonID
      * @param description
      * @param location
      * @param type
      * @param start
      * @param end
-     * @param customerID
      * @param userID
-     * @param contactID
      */
-    public Lesson(int appointmentID, String title, String description, String location, String type, LocalDateTime start,
-                  LocalDateTime end, int customerID, int userID, int contactID, String contactName) {
-        this.appointmentID = appointmentID;
-        this.title = title;
+    public Lesson(int lessonID, String description, String location, String type, LocalDateTime start,
+                  LocalDateTime end, int userID) {
+        this.lessonID = lessonID;
         this.description = description;
         this.location = location;
         this.type = type;
         this.start = start;
         this.end = end;
-        this.customerID = customerID;
         this.userID = userID;
-        this.contactID = contactID;
-        this.contactName = contactName;
     }
 
     /**
@@ -51,28 +41,10 @@ public class Lesson {
      *
      * @return
      */
-    public int getAppointmentID() {
-        return appointmentID;
+    public int getLessonID() {
+        return lessonID;
     }
 
-    /**
-     * gets title
-     *
-     * @return
-     */
-    public String getTitle() {
-        return title;
-    }
-
-
-    /**
-     * sets title
-     * @param title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-
-    }
 
     /**
      * gets description
@@ -164,8 +136,8 @@ public class Lesson {
      * gets customerID
      * @return
      */
-    public int getCustomerID() {
-        return customerID;
+    public int getStudentID() {
+        return studentID;
 
     }
 
@@ -177,20 +149,7 @@ public class Lesson {
         return userID;
     }
 
-    /**
-     * get Contact Id
-     * @return
-     */
-    public int getContactID() {
-
-        return contactID;
-    }
-
-    /**
-     * gets contact name
-     * @return
-     */
-    public String getContactName() {
-        return contactName;
+    public void setStudentId(int customerID) {
+        this.studentID = customerID;
     }
 }

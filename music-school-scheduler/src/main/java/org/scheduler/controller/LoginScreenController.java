@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.repository.LessonsDTO;
@@ -37,6 +38,7 @@ public class LoginScreenController extends ControllerBase implements IController
     public TextField passwordField;
     public Button exit;
     private final LessonsDTO lessonsDTO = new LessonsDTO();
+    private final UsersDTO usersDTO = new UsersDTO();
 
     /**
      * Validates if user exists and if information was entered correctly. Loads main screen
@@ -58,23 +60,17 @@ public class LoginScreenController extends ControllerBase implements IController
         String pssword = passwordField.getText();
         User user = new User(usrnm, 0, pssword);
 
-        int valid = UsersDTO.submit(user);
+        int valid = usersDTO.isLoginMatchUser(user);
         if (valid == 0) {
             try{
                 _logger.debug("Current working directory" + System.getProperty("user.dir"));
                 _logger.info("Successful Login UserName: " + usernameField.getText());
-                Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
-                Parent scene = loader.load();
-                MainScreenController controller = loader.getController();
-                controller.setUser(user.userId());
-                stage.setScene(new Scene(scene));
-                stage.show();
+                super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, user.userId());
 
                 Lesson appt15Min = lessonsDTO.getLessonsNext15Minutes(LocalDateTime.now());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 if(appt15Min != null){
-                    alert.setContentText("You have the following lesson(s) in the next 15 minutes: \n\nLesson ID: " + appt15Min.getAppointmentID()
+                    alert.setContentText("You have the following lesson(s) in the next 15 minutes: \n\nLesson ID: " + appt15Min.getLessonID()
                             + "\nDate: " + appt15Min.getStart().toLocalDate() + "\nTime: " + appt15Min.getStart().toLocalTime());
                 }
                 else {

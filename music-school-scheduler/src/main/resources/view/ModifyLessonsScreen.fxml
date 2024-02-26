@@ -47,12 +47,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <children>
-                  <Label text="Title" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets right="10.0"/>
-                     </GridPane.margin>
-                  </Label>
-                  <TextField fx:id="title" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                   <Label text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets right="10.0"/>

@@ -7,29 +7,27 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.MainScreenController;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.ICreate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.Contacts;
 import org.scheduler.repository.LessonsDTO;
 import org.scheduler.repository.StudentsDTO;
 import org.scheduler.repository.UsersDTO;
-import org.scheduler.viewmodels.Contact;
 import org.scheduler.viewmodels.Lesson;
 import org.scheduler.viewmodels.Student;
 import org.scheduler.viewmodels.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.*;
 import java.util.ResourceBundle;
 
 public class AddLessonControllerController extends LessonControllerBase implements ICreate, IController {
     private static final Logger _logger = LoggerFactory.getLogger(MainScreenController.class);
-    @FXML
-    private ComboBox<String> contact;
     @FXML
     private ComboBox<String> employee;
     @FXML
@@ -47,14 +45,11 @@ public class AddLessonControllerController extends LessonControllerBase implemen
     @FXML
     private ComboBox<LocalTime> startTime;
     @FXML
-    private TextField title;
-    @FXML
     private TextField type;
     private int userId;
     boolean error;
     String label;
     private final ObservableList<String> customerNames = FXCollections.observableArrayList();
-    private final ObservableList<String> contactNames = FXCollections.observableArrayList();
     private final ObservableList<LocalTime> startTimes = FXCollections.observableArrayList();
     private final ObservableList<LocalTime> endTimes = FXCollections.observableArrayList();
 
@@ -62,6 +57,7 @@ public class AddLessonControllerController extends LessonControllerBase implemen
 
     private final LessonsDTO lessonsDTO = new LessonsDTO();
     private final StudentsDTO studentsDTO = new StudentsDTO();
+    private final UsersDTO usersDTO = new UsersDTO();
     /**
      * when a date is selected, start and end times are populated
      * @param event
@@ -162,18 +158,18 @@ public class AddLessonControllerController extends LessonControllerBase implemen
     @FXML
     public void onCancel(ActionEvent event) {
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
     /**
      * Adding an appointment checks for appointment conflicts again, saves appointment to the db, and loads the main screen
      */
-    public void onAdd(ActionEvent event) {
+    public void onAdd(ActionEvent actionEvent) throws IOException {
         error = false;
         label = "";
-        if((title.getText() == null) || (description.getText() == null) || (type.getText() == null) || (date.getValue() == null)
-                || (startTime.getValue() == null) ||  (endTime.getValue() == null) || (location.getText() == null) || (student.getValue() == null)
-        ||(contact.getValue() == null)){
+        if((description.getText() == null) || (type.getText() == null) || (date.getValue() == null)
+                || (startTime.getValue() == null) ||  (endTime.getValue() == null) || (location.getText() == null)
+                || (student.getValue() == null)){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
@@ -181,17 +177,13 @@ public class AddLessonControllerController extends LessonControllerBase implemen
             alert.showAndWait();
             return;
         }
-        if (title.getText().length() > 50 || description.getText().length() > 50 || type.getText().length() > 50 || location.getText().length() > 50) {
+        if (description.getText().length() > 50 || type.getText().length() > 50 || location.getText().length() > 50) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Text Box error");
             alert.setContentText("All text boxes must have less than 50 characters");
             alert.showAndWait();
             return;
-        }
-        if(title.getText().length() < 1){
-            error = true;
-            label = "Title";
         }
         if(description.getText().length() < 1){
             error = true;
@@ -213,37 +205,37 @@ public class AddLessonControllerController extends LessonControllerBase implemen
             alert.showAndWait();
             return;
         }
-        if(employee.getValue() != null){
-            setUser(UsersDTO.getUserByName(employee.getValue()).userId());
-        }
         LocalDateTime startDateTime = LocalDateTime.of(date.getValue(), startTime.getValue());
         LocalDateTime endDateTime = LocalDateTime.of(date.getValue(), endTime.getValue());
 
         Lesson lesson = new Lesson(
                 lessonsDTO.getId(),
-                title.getText(),
                 description.getText(),
                 location.getText(),
                 type.getText(),
                 startDateTime,
                 endDateTime,
-                studentsDTO.getCustomerId(student.getValue()),
-                userId,
-                Contacts.getContactID(contact.getValue()),
-                contact.getValue());
+                userId);
         if (lessonsDTO.addAppointment(lesson)){
             errorText.setText("Successfully added lesson :)");
-            title.clear();
             description.clear();
             location.clear();
             type.clear();
             startTime.valueProperty().set(null);
             endTime.valueProperty().set(null);
             student.valueProperty().set(null);
-            contact.valueProperty().set(null);
             employee.valueProperty().set(null);
             date.setValue(null);
         }
+        try {
+            wait(1000);
+        }
+        catch (InterruptedException e)
+        {
+            _logger.error("Error while waiting! Exception: e", e);
+        }
+
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersDTO.getUserByName(employee.getValue()).userId());
     }
 
     /**
@@ -257,27 +249,17 @@ public class AddLessonControllerController extends LessonControllerBase implemen
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int i = 0;
         customerNames.clear();
-        ObservableList<Student> students = studentsDTO.getAllCustomers();
+        ObservableList<Student> students = studentsDTO.getAllStudents();
         while(i < students.size()){
-            String customerName = students.get(i).getName();
+            String customerName = students.get(i).getFirstName();
             customerNames.add(i,customerName);
             i++;
         }
         student.setItems(customerNames);
 
         i = 0;
-        contactNames.clear();
-        ObservableList<Contact> contacts = Contacts.getAllContacts();
-        while(i < contacts.size()){
-            String contactName = contacts.get(i).getContactName();
-            contactNames.add(i,contactName);
-            i++;
-        }
-        contact.setItems(contactNames);
-
-        i = 0;
         userNames.clear();
-        ObservableList<User> allUsers = UsersDTO.getAllUsers();
+        ObservableList<User> allUsers = usersDTO.GetAllUsers();
         while(i < allUsers.size()){
             String userName = allUsers.get(i).username();
             userNames.add(i,userName);

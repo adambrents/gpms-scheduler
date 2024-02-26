@@ -43,7 +43,7 @@
                                              text="ID"/>
                                 <TableColumn fx:id="titleWeek" prefWidth="73.39995956420898"
                                              text="Title"/>
-                                <TableColumn fx:id="contactWeek" minWidth="0.0"
+                                <TableColumn fx:id="studentWeek" minWidth="0.0"
                                              prefWidth="67.60003662109375" text="Contact"/>
                                 <TableColumn fx:id="typeWeek" prefWidth="71.39996337890625"
                                              text="Type"/>
@@ -74,7 +74,7 @@
                                              text="ID"/>
                                 <TableColumn fx:id="titleMonth" prefWidth="73.39995956420898"
                                              text="Title"/>
-                                <TableColumn fx:id="contactMonth" minWidth="0.0"
+                                <TableColumn fx:id="studentMonth" minWidth="0.0"
                                              prefWidth="67.60003662109375" text="Contact"/>
                                 <TableColumn fx:id="typeMonth" prefWidth="71.39996337890625"
                                              text="Type"/>
@@ -107,7 +107,7 @@
         </Label>
         <AnchorPane prefHeight="58.0" prefWidth="409.0" GridPane.columnIndex="1">
             <Button fx:id="modifyCustomer" layoutX="173.0" layoutY="17.0" mnemonicParsing="false"
-                    onAction="#onModifyCustomer" text="Modify"/>
+                    onAction="#onModifyStudent" text="Modify"/>
             <Label layoutY="12.0" text="Students">
                 <font>
                     <Font name="System Bold" size="24.0"/>
@@ -119,11 +119,11 @@
                     onAction="#onDeleteCustomer" text="Delete"/>
         </AnchorPane>
         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <TableView fx:id="customersTable" prefHeight="360.0" prefWidth="382.0">
+            <TableView fx:id="studentTable" prefHeight="360.0" prefWidth="382.0">
                 <columns>
-                    <TableColumn fx:id="customerIdColumn" prefWidth="27.0" text="ID"/>
-                    <TableColumn fx:id="customerNameColumn" prefWidth="85.0" text="Name"/>
-                    <TableColumn fx:id="customerAddressColumn" prefWidth="111.0" text="Address"/>
+                    <TableColumn fx:id="studentIdColumn" prefWidth="27.0" text="ID"/>
+                    <TableColumn fx:id="studentNameColumn" prefWidth="85.0" text="Name"/>
+                    <TableColumn fx:id="studentAddressColumn" prefWidth="111.0" text="Address"/>
                 </columns>
             </TableView>
         </StackPane>

@@ -1,19 +1,18 @@
 package org.scheduler.repository;
 
-import org.scheduler.repository.configuration.model.JDBC;
+import org.scheduler.constants.Constants;
+import org.scheduler.repository.base.BaseDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.configuration.context.JDBCContext;
 import org.scheduler.viewmodels.Student;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StudentsDTO {
+public class StudentsDTO extends BaseDTO {
 
     private final Logger _logger = LoggerFactory.getLogger(StudentsDTO.class);
     private final ObservableList<Student> allStudents = FXCollections.observableArrayList();
@@ -21,64 +20,49 @@ public class StudentsDTO {
     private int lastID = 0;
 
     /**
-     * gets a list of all countries in db
-     *
+     * gets a list of all students in the db
      * @return
      */
-    public ObservableList<String> getAllCountries() {
-        try{
-            allCountries.clear();
-            Statement statement = JDBCContext.getStatement();
-            String query = "SELECT Country "
-                         + "FROM client_schedule.countries;";
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
-                allCountries.add(resultSet.getString("Country"));
-            }
-            return allCountries;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * gets a list of all customers in the db
-     * @return
-     */
-    public ObservableList<Student> getAllCustomers() {
-        try{
+    public ObservableList<Student> getAllStudents() {
+        try(Statement statement = getStatement()){
             allStudents.clear();
-            Statement statement = JDBC.getConnection().createStatement();
-            String query = "SELECT Countries.Country, "
-                         + "first_level_divisions.Division, "
-                         + "customers.Customer_ID, "
-                         + "customers.Customer_Name, "
-                         + "customers.Address, "
-                         + "customers.Postal_Code, "
-                         + "customers.Phone, "
-                         + "customers.Division_ID "
-                         + "FROM client_schedule.customers "
-                         + "INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID "
-                         + "INNER JOIN Countries ON first_level_divisions.Country_ID = Countries.Country_ID "
-                         + "WHERE Customer_Name IS NOT NULL;";
+            String query = String.format(
+                       "SELECT students.%s, "
+                            + "students.%s, "
+                            + "students.%s, "
+                            + "students.%s, "
+                            + "students.%s, "
+                            + "students.%s, "
+                            + "students.%s "
+                            + "FROM %s.%s "
+                            + "WHERE students.%s IS NOT NULL;",
+                    "Student_ID",
+                    "Student_First_Name",
+                    "Student_Last_Name",
+                    "Address_Line_1",
+                    "Address_Line_2",
+                    "Postal_Code",
+                    "Phone",
+                    _database,
+                    Constants.DbTables.STUDENTS,
+                    "Student_First_Name"
+            );
+
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()){
                 Student student = new Student(
-                        resultSet.getInt("Customer_ID"),
-                        resultSet.getString("Customer_Name"),
-                        resultSet.getString("Address"),
+                        resultSet.getInt("Student_ID"),
+                        resultSet.getString("Student_First_Name"),
+                        resultSet.getString("Student_Last_Name"),
+                        resultSet.getString("Address_Line_1"),
+                        resultSet.getString("Address_Line_2"),
                         resultSet.getString("Postal_Code"),
                         resultSet.getString("Phone"));
-                if (student.getName() == ""){
-                    //do nothing
-                }
-                else {
-                    allStudents.add(student);
-                }
+
+                allStudents.add(student);
             }
-            statement.close();
+            
             return allStudents;
 
         } catch (SQLException e) {
@@ -92,32 +76,48 @@ public class StudentsDTO {
      *
      * @param student
      */
-    public void updateCustomer(Student student) {
-        try {
-            PreparedStatement statement = JDBC.getConnection().prepareStatement(
-                    "UPDATE client_schedule.customers "
-                      + "SET Customer_Name = '" + student.getName()
-                      + "', Address = '" + student.getAddress()
-                      + "', Phone = '" + student.getPhoneNumber()
-                      + "', Postal_Code = '" + student.getPostalCode()
-                      + "' WHERE customers.Customer_ID = " + student.getId() + " AND Customer_Name IS NOT NULL;");
-            statement.executeUpdate();
-            statement.close();
+    public void updateStudent(Student student) {
+        try(Statement statement = getStatement()) {
+            String query = String.format(
+                    "UPDATE %s.%s "
+                    + "SET Student_First_Name = '%s', "
+                    + "Student_Last_Name = '%s', "
+                    + "Address_Line_1 = '%s', "
+                    + "Address_Line_2 = '%s', "
+                    + "Phone = '%s', "
+                    + "Postal_Code = '%s' "
+                    + "WHERE %s.Student_ID = %d AND Student_First_Name IS NOT NULL;",
+                    _database,
+                    Constants.DbTables.STUDENTS,
+                    student.getFirstName(),
+                    student.getLastName(),
+                    student.getAddressLine1(),
+                    student.getAddressLine2(),
+                    student.getPhoneNumber(),
+                    student.getPostalCode(),
+                    Constants.DbTables.STUDENTS,
+                    student.getId()
+            );
+            statement.executeQuery(query);
+            
         } catch (Exception e) {
             _logger.error("Student update failed! Exception: " + e);
         }
     }
 
     /**
-     * gets a new customer id when adding new customers via UI
+     * gets a new customer id when adding new students via UI
      *
      * @return
      */
-    public int getId() {
-        try {
-            Statement statement = JDBC.getConnection().createStatement();
-            String query = "SELECT MAX(Customer_ID) "
-                         + "FROM client_schedule.customers;";
+    public int getLastStudentId() {
+        try(Statement statement = getStatement()) {
+            String query = String.format(
+                    "SELECT MAX(Student_ID) "
+                            + "FROM %s.%s;",
+                    _database,
+                    Constants.DbTables.STUDENTS
+            );
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 if (resultSet.getInt(1) > lastID) {
@@ -127,7 +127,7 @@ public class StudentsDTO {
                 }
             }
             lastID++;
-            statement.close();
+            
 
             return lastID;
         } catch (SQLException sqlException) {
@@ -140,20 +140,31 @@ public class StudentsDTO {
      *
      * @param student
      */
-    public void addCustomer(Student student) {
-        try {
-            PreparedStatement preparedStatement = JDBC.getConnection().prepareStatement(
-                    "INSERT INTO customers " +
-                        "VALUES(" + student.getId() +
-                            ", '" + student.getName() +
-                           "', '" + student.getAddress() +
-                           "', '" + student.getPostalCode() +
-                           "', '" + student.getPhoneNumber() +
-                           "', "  + "NULL, "
-                                  + "NULL, "
-                                  + "NULL, "
-                                  + "NULL);");
-            preparedStatement.executeUpdate();
+    public void addStudent(Student student) {
+        try(Statement statement = getStatement()) {
+            String query = String.format(
+                    "INSERT INTO %s.%s (" +
+                            "Student_ID, " +
+                            "Student_First_Name, " +
+                            "Student_Last_Name, " +
+                            "Address_Line_1, " +
+                            "Address_Line_2, " +
+                            "Postal_Code, " +
+                            "Phone) " +
+                    "VALUES(%s, '%s', '%s', '%s', '%s');",
+                    _database,
+                    Constants.DbTables.STUDENTS,
+                    student.getId(),
+                    student.getFirstName(),
+                    student.getLastName(),
+                    student.getAddressLine1(),
+                    student.getAddressLine2(),
+                    student.getPostalCode(),
+                    student.getPhoneNumber()
+            );
+
+            statement.executeQuery(query);
+            
         }
         catch (SQLException sqlException){
             _logger.error("Adding student failed!", sqlException);
@@ -166,17 +177,22 @@ public class StudentsDTO {
      * @param customerID
      * @return
      */
-    public String getCustomerName(int customerID){
-        try{
-            Statement statement = JDBC.getConnection().createStatement();
-            String query = "SELECT Customer_Name "
-                         + "FROM client_schedule.customers "
-                         + "WHERE Customer_ID = " + customerID + " AND Customer_Name IS NOT NULL;";
+    public String getStudentNameFromId(int customerID){
+        try(Statement statement = getStatement()){
+            String query = String.format(
+                    "SELECT Student_First_Name + ' ' + Student_Last_Name "
+                            + "FROM %s.%s "
+                            + "WHERE Student_ID = %s;",
+                    _database,
+                    Constants.DbTables.STUDENTS,
+                    customerID
+            );
+
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 return resultSet.getString(1);
             }
-            statement.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -190,19 +206,26 @@ public class StudentsDTO {
      * @param customerName
      * @return
      */
-    public int getCustomerId(String customerName){
-        try{
-            Statement statement = JDBC.getConnection().createStatement();
-            String query = "SELECT Customer_ID FROM client_schedule.customers WHERE Customer_Name ='" + customerName + "' AND Customer_Name IS NOT NULL;";
+    public List<Integer> getStudentIdsFromName(String customerName){
+        List<Integer> studentIds = new ArrayList<>();
+        String query = String.format(
+                "SELECT Student_ID FROM %s.%s WHERE Student_First_Name = '%s' AND Student_First_Name IS NOT NULL;",
+                _database,
+                Constants.DbTables.STUDENTS,
+                customerName
+        );
+        try(Statement statement = getStatement()){
+
+
             ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
-                return resultSet.getInt(1);
+            while (resultSet.next()) {
+                studentIds.add(resultSet.getInt("Student_ID"));
             }
-            statement.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return studentIds;
     }
 
     /**
@@ -210,12 +233,16 @@ public class StudentsDTO {
      *
      * @param selectedStudent
      */
-    public void deleteCustomer(Student selectedStudent){
-        try{PreparedStatement statement = JDBC.getConnection().prepareStatement(
-                "DELETE FROM client_schedule.customers "
-                  + "WHERE Customer_ID = " + selectedStudent.getId() + ";");
-            statement.executeUpdate();
-            statement.close();
+    public void deleteStudent(Student selectedStudent){
+        String query = String.format(
+                "DELETE FROM %s.%s WHERE Student_ID = %s;",
+                _database,
+                Constants.DbTables.STUDENTS,
+                selectedStudent.getId()
+        );
+        try(Statement statement = getStatement()){
+            statement.executeQuery(query);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

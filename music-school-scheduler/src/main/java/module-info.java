@@ -14,6 +14,12 @@ module music.school.scheduler {
 
     opens org.scheduler.program to javafx.fxml;
     opens org.scheduler.controller to javafx.fxml;
+    opens org.scheduler.controller.student to javafx.fxml;
+    opens org.scheduler.controller.report to javafx.fxml;
+    opens org.scheduler.controller.lesson to javafx.fxml;
+    opens org.scheduler.controller.base to javafx.fxml;
+
+    opens org.scheduler.viewmodels to javafx.base;
     opens org.scheduler.configuration.model to com.google.gson;
     opens org.scheduler.repository.configuration.model to com.google.gson;
     exports org.scheduler.program;

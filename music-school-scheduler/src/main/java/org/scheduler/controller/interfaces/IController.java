@@ -4,4 +4,5 @@ import javafx.event.ActionEvent;
 
 public interface IController {
     void onCancel(ActionEvent event);
+
 }

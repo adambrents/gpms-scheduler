@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="musicschoolscheduler [clean,javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+  <configuration default="false" name="music-school-scheduler [clean,javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings">
@@ -31,12 +31,10 @@
           </option>
           <option name="pomFileName" />
           <option name="profilesMap">
-            <map>
-              <entry key="javafx-run" value="true" />
-            </map>
+            <map />
           </option>
           <option name="resolveToWorkspace" value="false" />
-          <option name="workingDirPath" value="$PROJECT_DIR$" />
+          <option name="workingDirPath" value="$PROJECT_DIR$/music-school-scheduler" />
         </MavenRunnerParameters>
       </option>
     </MavenSettings>

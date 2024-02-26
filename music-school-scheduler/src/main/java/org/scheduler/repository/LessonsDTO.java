@@ -1,26 +1,26 @@
 package org.scheduler.repository;
 
 import org.scheduler.constants.Constants;
+import org.scheduler.repository.base.BaseDTO;
 import org.scheduler.repository.configuration.model.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.scheduler.repository.configuration.context.JDBCContext;
 import org.scheduler.viewmodels.Lesson;
 import org.scheduler.viewmodels.Student;
 
 import java.sql.*;
 import java.time.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class LessonsDTO {
+public class LessonsDTO extends BaseDTO {
 
     private final ObservableList<LocalDateTime> _allStartTimes = FXCollections.observableArrayList();
     private final ObservableList<Lesson> _allLessons = FXCollections.observableArrayList();
     private final ObservableList<Lesson> _studentLessons = FXCollections.observableArrayList();
     private final ObservableList<String> _allTypes = FXCollections.observableArrayList();
     private final ObservableList<String> _studentLessonExists = FXCollections.observableArrayList();
-    private Statement _statement;
-    private final String DB = Constants.CONNECTION_CONFIG.getDbConnection().getDb();
+    private final StudentsDTO studentsDTO = new StudentsDTO();
 
     /**
      * query returns a list of all lessons in database
@@ -29,29 +29,17 @@ public class LessonsDTO {
      */
     public ObservableList<Lesson> getAllLessons() {
 
-        try {
+        try(Statement statement = getStatement()) {
             _allLessons.clear();
-            _statement = JDBCContext.getStatement();
             String query = String.format(
                     "SELECT a.* "
                     + "FROM %s.%s AS a "
-                    + "INNER JOIN %s.%s AS cust ON cust.Student_ID = a.Student_ID", DB, Constants.DbTables.LESSONS, DB, Constants.DbTables.STUDENTS);
-            ResultSet resultSet = _statement.executeQuery(query);
+                    + "INNER JOIN %s.%s AS student ON student.Student_ID = a.Student_ID", _database, Constants.DbTables.LESSONS, _database, Constants.DbTables.STUDENTS);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                Lesson lesson = new Lesson(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getTimestamp(6).toLocalDateTime(),
-                        resultSet.getTimestamp(7).toLocalDateTime(),
-                        resultSet.getInt(12),
-                        resultSet.getInt(13),
-                        resultSet.getInt(14),
-                        Contacts.getContactName(resultSet.getInt("Student_ID")));
-                _allLessons.add(lesson);
+                _allLessons.add(buildLessonFromResultSet(resultSet));
             }
-            _statement.close();
+            
             return _allLessons;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,24 +57,53 @@ public class LessonsDTO {
 
             try {
                 String sql = String.format(
-                        "INSERT INTO %s.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) " +
-                                "VALUES(?,?,?,?,?,?,NOW(),'User',NOW(),'User',?,?,?)",
-                        DB, Constants.DbTables.LESSONS,
-                        "Title", "Description", "Location", "Type", "Start", "End", "Create_Date",
-                        "Created_By", "Last_Update", "Last_Updated_By", "Student_ID", "User_ID", "Contact_ID"
+                        "INSERT INTO %s.%s (" +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s, " +
+                                "%s) " +
+                        "VALUES(" +
+                                "?," +
+                                "?," +
+                                "?," +
+                                "?," +
+                                "?," +
+                                "NOW()," +
+                                "'User'," +
+                                "NOW()," +
+                                "'User'," +
+                                "?," +
+                                "?)",
+                        _database, Constants.DbTables.LESSONS,
+                        "Description",
+                        "Location",
+                        "Type",
+                        "Start",
+                        "End",
+                        "Create_Date",
+                        "Created_By",
+                        "Last_Update",
+                        "Last_Updated_By",
+                        "Student_ID",
+                        "User_ID"
                 );
                 
                 PreparedStatement preparedStatement = JDBC.getConnection().prepareStatement(sql);
                 int x = 1;
-                preparedStatement.setString(x++, lesson.getTitle());
                 preparedStatement.setString(x++, lesson.getDescription());
                 preparedStatement.setString(x++, lesson.getLocation());
                 preparedStatement.setString(x++, lesson.getType());
                 preparedStatement.setTimestamp(x++, Timestamp.valueOf(lesson.getStart()));
                 preparedStatement.setTimestamp(x++, Timestamp.valueOf(lesson.getEnd()));
-                preparedStatement.setInt(x++, lesson.getCustomerID());
+                preparedStatement.setInt(x++, lesson.getStudentID());
                 preparedStatement.setInt(x++, lesson.getUserID());
-                preparedStatement.setInt(x++, lesson.getContactID());
 
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
@@ -106,21 +123,20 @@ public class LessonsDTO {
     public boolean modifyAppointment(Lesson lesson) {
         try {
             String sql = String.format(
-                    "UPDATE %s.%s SET Create_Date=NOW(),Created_By='User',Last_Update=NOW(),Last_Updated_By='User', Title = ?,Description = ?,Location = ?,Type = ?,Start = ?,END = ?,Student_ID = ?,User_ID = ?,Contact_ID = ? WHERE Lesson_ID = ?;",
-                    DB, Constants.DbTables.LESSONS
+                    "UPDATE %s.%s SET Create_Date=NOW(),Created_By='User',Last_Update=NOW(),Last_Updated_By='User', Description = ?," +
+                            "Location = ?,Type = ?,Start = ?,END = ?,Student_ID = ?,User_ID = ? WHERE Lesson_ID = ?;",
+                    _database, Constants.DbTables.LESSONS
             );
             PreparedStatement statement = JDBC.getConnection().prepareStatement(sql);
             int x = 1;
-            statement.setString(x++, lesson.getTitle());
             statement.setString(x++, lesson.getDescription());
             statement.setString(x++, lesson.getLocation());
             statement.setString(x++, lesson.getType());
             statement.setTimestamp(x++, Timestamp.valueOf(lesson.getStart()));
             statement.setTimestamp(x++, Timestamp.valueOf(lesson.getEnd()));
-            statement.setInt(x++, lesson.getCustomerID());
+            statement.setInt(x++, lesson.getStudentID());
             statement.setInt(x++, lesson.getUserID());
-            statement.setInt(x++, lesson.getContactID());
-            statement.setInt(x++, lesson.getAppointmentID());
+            statement.setInt(x++, lesson.getLessonID());
 
             statement.executeUpdate();
             statement.close();
@@ -137,14 +153,13 @@ public class LessonsDTO {
      * @return
      */
     public int getId() {
-        try {
+        try(Statement statement = getStatement()){
             int lastID = 0;
-            _statement = JDBCContext.getStatement();
             String query = String.format(
                     "SELECT MAX(Lesson_ID) FROM %s.%s;",
-                    DB, Constants.DbTables.LESSONS
+                    _database, Constants.DbTables.LESSONS
             );
-            ResultSet resultSet = _statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 if (resultSet.getInt(1) > lastID) {
                     lastID = resultSet.getInt(1);
@@ -169,10 +184,10 @@ public class LessonsDTO {
         try {
             String query = String.format(
                     "DELETE FROM %s.%s WHERE Lesson_ID = ?;",
-                    DB, Constants.DbTables.LESSONS
+                    _database, Constants.DbTables.LESSONS
             );
             PreparedStatement statement = JDBC.getConnection().prepareStatement(query);
-            statement.setInt(1, lesson.getAppointmentID());
+            statement.setInt(1, lesson.getLessonID());
             statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
@@ -189,7 +204,7 @@ public class LessonsDTO {
         try {
             String query = String.format(
                     "DELETE FROM %s.%s WHERE %s = ?;",
-                    DB, Constants.DbTables.LESSONS, Constants.DbTables.STUDENTS + "_ID"
+                    _database, Constants.DbTables.LESSONS, Constants.DbTables.STUDENTS + "_ID"
             );
 
             PreparedStatement statement = JDBC.getConnection().prepareStatement(query);
@@ -251,13 +266,12 @@ public class LessonsDTO {
      */
     public ObservableList<String> getTypes() {
         _allTypes.clear();
-        try {
-            _statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String query = String.format(
                     "SELECT DISTINCT Type FROM %s.%s;",
-                    DB, Constants.DbTables.LESSONS
+                    _database, Constants.DbTables.LESSONS
             );
-            ResultSet resultSet = _statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 _allTypes.add(resultSet.getString(1));
             }
@@ -277,13 +291,12 @@ public class LessonsDTO {
      */
     public int getMonthTypeAsInt(LocalDateTime localDateTime, String type) {
         int returnNumber = 0;
-        try {
-            _statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String query = String.format(
                     "SELECT * FROM %s.%s;",
-                    DB, Constants.DbTables.LESSONS
+                    _database, Constants.DbTables.LESSONS
             );
-            ResultSet resultSet = _statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 LocalDateTime YearAndMonth = resultSet.getTimestamp("Start").toLocalDateTime();
                 String appointmentType = resultSet.getString("Type");
@@ -306,42 +319,31 @@ public class LessonsDTO {
      * @param contact
      * @return
      */
-    public ObservableList<Lesson> getContactLessons(String contact) {
-        int _studentId = Contacts.getContactID(contact);
-        try {
-            _studentLessons.clear();
-            _statement = JDBCContext.getStatement();
+    public ObservableList<Lesson> getStudentLessons(String contact) {
+        List<Integer> studentIds = studentsDTO.getStudentIdsFromName(contact);
+        for (Integer studentId:studentIds) {
             String query = String.format(
                     "SELECT a.* "
                             + "FROM %s.%s AS a "
-                            + "INNER JOIN %s.%s AS cust ON cust.%s = a.%s "
-                            + "WHERE cust.%s=%s AND Title IS NOT NULL;",
-                    DB, Constants.DbTables.LESSONS,
-                    DB, Constants.DbTables.STUDENTS,
+                            + "INNER JOIN %s.%s AS student ON student.%s = a.%s "
+                            + "WHERE student.%s=%s AND Title IS NOT NULL;",
+                    _database, Constants.DbTables.LESSONS,
+                    _database, Constants.DbTables.STUDENTS,
                     Constants.DbTables.STUDENTS + "_ID", Constants.DbTables.STUDENTS + "_ID",
-                    Constants.DbTables.STUDENTS + "_ID", _studentId
-            );
-            ResultSet resultSet = _statement.executeQuery(query);
-            while (resultSet.next()) {
-                Lesson lesson = new Lesson(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getTimestamp(6).toLocalDateTime(),
-                        resultSet.getTimestamp(7).toLocalDateTime(),
-                        resultSet.getInt(12),
-                        resultSet.getInt(13),
-                        resultSet.getInt(14),
-                        Contacts.getContactName(resultSet.getInt("Student_ID")));
-                _studentLessons.add(lesson);
+                    Constants.DbTables.STUDENTS + "_ID", studentId);
+            try(Statement statement = getStatement()) {
+                _studentLessons.clear();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    _studentLessons.add(buildLessonFromResultSet(resultSet));
+                }
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
             }
-            _statement.close();
-            return _studentLessons;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
+        return _studentLessons;
     }
 
     /**
@@ -353,13 +355,12 @@ public class LessonsDTO {
     public boolean checkForLessons(Student selectedStudent) {
         int customerID = selectedStudent.getId();
         _studentLessonExists.clear();
-        try {
-            _statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String query = String.format(
                     "SELECT * FROM %s.%s WHERE Student_ID=%d AND Title IS NOT NULL;",
-                    DB, Constants.DbTables.LESSONS, customerID
+                    _database, Constants.DbTables.LESSONS, customerID
             );
-            ResultSet resultSet = _statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 _studentLessonExists.add(resultSet.getString(2));
             }
@@ -383,7 +384,7 @@ public class LessonsDTO {
         try {
             String sql = String.format(
                     "SELECT * FROM %s.%s AS a WHERE Start>=? AND Start<=? ORDER BY Start ASC LIMIT 1;",
-                    DB, Constants.DbTables.LESSONS
+                    _database, Constants.DbTables.LESSONS
             );
             preparedStatement = JDBC.getConnection().prepareStatement(sql);
 
@@ -396,17 +397,8 @@ public class LessonsDTO {
                 return null;
             }
 
-            return new Lesson(resultSet.getInt(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getTimestamp(6).toLocalDateTime(),
-                    resultSet.getTimestamp(7).toLocalDateTime(),
-                    resultSet.getInt(12),
-                    resultSet.getInt(13),
-                    resultSet.getInt(14),
-                    Contacts.getContactName(resultSet.getInt("Student_ID")));
+
+            return buildLessonFromResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -432,28 +424,15 @@ public class LessonsDTO {
     public ObservableList<Lesson> getAllTakenLessonTimesByDate(LocalDate localDate) {
         ObservableList<Lesson> allTakenStartTimes = FXCollections.observableArrayList();
         _allStartTimes.clear();
-        try {
-            _statement = JDBCContext.getStatement();
+        try(Statement statement = getStatement()) {
             String sql = String.format(
                     "SELECT * FROM %s.%s WHERE DAYOFMONTH(Start) = DAYOFMONTH('%s');",
-                    DB, Constants.DbTables.LESSONS, localDate
+                    _database, Constants.DbTables.LESSONS, localDate
             );
-            ResultSet resultSet = _statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                Lesson lesson = new Lesson(
-                        resultSet.getInt("Lesson_ID"),
-                        resultSet.getString("Title"),
-                        resultSet.getString("Description"),
-                        resultSet.getString("Location"),
-                        resultSet.getString("Type"),
-                        resultSet.getTimestamp("Start").toLocalDateTime(),
-                        resultSet.getTimestamp("End").toLocalDateTime(),
-                        resultSet.getInt("Student_ID"),
-                        resultSet.getInt("User_ID"),
-                        resultSet.getInt("Contact_ID"),
-                        Contacts.getContactName(resultSet.getInt("Student_ID")));
-                allTakenStartTimes.add(lesson);
+                allTakenStartTimes.add(buildLessonFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -461,6 +440,18 @@ public class LessonsDTO {
         }
 
         return allTakenStartTimes;
+    }
+    private Lesson buildLessonFromResultSet(ResultSet resultSet) throws SQLException {
 
+        Lesson lesson = new Lesson(
+                resultSet.getInt("Lesson_ID"),
+                resultSet.getString("Description"),
+                resultSet.getString("Location"),
+                resultSet.getString("Type"),
+                resultSet.getTimestamp("Start").toLocalDateTime(),
+                resultSet.getTimestamp("End").toLocalDateTime(),
+                resultSet.getInt("User_ID"));
+        lesson.setStudentId(resultSet.getInt("Student_ID"));
+        return lesson;
     }
 }

@@ -7,28 +7,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.MainScreenController;
-import org.scheduler.controller.base.ControllerBase;
+import org.scheduler.controller.base.StudentControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.ICreate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.StudentsDTO;
 import org.scheduler.viewmodels.Student;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddStudentController extends ControllerBase implements ICreate, IController {
+public class AddStudentController extends StudentControllerBase implements ICreate, IController {
     private static final Logger _logger = LoggerFactory.getLogger(AddStudentController.class);
 
-    public TableView<Student> customersTable;
-
-    public TableColumn<Student, String> customerNameColumn;
-
-    public TableColumn<Student, String> customerAddressColumn;
-    public TableColumn<Student, String> customerPhoneColumn;
     public TextField idTxt;
     public TextField nameTxt;
     public TextField addressTxt;
@@ -37,7 +31,6 @@ public class AddStudentController extends ControllerBase implements ICreate, ICo
 
     public Label errorText;
     private int userId;
-    private final StudentsDTO studentsDTO = new StudentsDTO();
 
     public void setUser(int user) {
         userId = user;
@@ -51,17 +44,11 @@ public class AddStudentController extends ControllerBase implements ICreate, ICo
      */
     public void onCancel(ActionEvent event) {
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
-    public void onExit(ActionEvent event) throws IOException{
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
-        Parent scene = loader.load();
-        MainScreenController controller = loader.getController();
-        controller.setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+    public void onExit(ActionEvent actionEvent) throws IOException{
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, userId);
     }
     /**
      * validates if required fields have values and adds customer to database
@@ -89,14 +76,16 @@ public class AddStudentController extends ControllerBase implements ICreate, ICo
             else{
                 try {
                     Student student = new Student(
-                            studentsDTO.getId(),
+                            studentsDTO.getLastStudentId(),
                             nameTxt.getText(),
+                            nameTxt.getText(),
+                            addressTxt.getText(),
                             addressTxt.getText(),
                             postalTxt.getText(),
                             phoneTxt.getText());
-                    studentsDTO.addCustomer(student);
+                    studentsDTO.addStudent(student);
                     errorText.setText("Successfully added Student");
-                    customersTable.setItems(studentsDTO.getAllCustomers());
+                    studentsTable.setItems(studentsDTO.getAllStudents());
                     onExit(event);
                 }
                 catch (Exception e) {
@@ -114,13 +103,6 @@ public class AddStudentController extends ControllerBase implements ICreate, ICo
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        //Get data for Student Table
-        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-
-        //sets table with customer data
-        customersTable.setItems(studentsDTO.getAllCustomers());
-
+        super.initialize(url, resourceBundle);
     }
 }

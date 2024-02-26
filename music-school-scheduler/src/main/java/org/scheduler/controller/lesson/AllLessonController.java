@@ -2,12 +2,11 @@ package org.scheduler.controller.lesson;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.repository.LessonsDTO;
@@ -80,18 +79,12 @@ public class AllLessonController extends LessonControllerBase implements IContro
 
     /**
      * Loads the add appointment screen
-     * @param event
+     * @param actionEvent
      * @throws IOException
      */
     @FXML
-    void onAdd(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddLessonsScreen.fxml"));
-        scene = loader.load();
-        AddLessonControllerController controller = loader.getController();
-        setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+    void onAdd(ActionEvent actionEvent) throws IOException {
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.ADD_LESSON_SCRN, userId);
     }
 
     /**
@@ -106,7 +99,7 @@ public class AllLessonController extends LessonControllerBase implements IContro
         }
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setHeaderText("Delete");
-        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getAppointmentID() + ", Type: " + selectedLesson.getType() + "?");
+        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
         Optional<ButtonType> result = alert1.showAndWait();
         if (result.get() == ButtonType.OK) {
             lessonsDTO.deleteAppointment(selectedLesson);
@@ -127,7 +120,7 @@ public class AllLessonController extends LessonControllerBase implements IContro
     @Override
     public void onCancel(ActionEvent event) {
         _primaryStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        goBack();
+        super.goBack();
     }
 
     /**
@@ -150,13 +143,7 @@ public class AllLessonController extends LessonControllerBase implements IContro
             alert.showAndWait();
             return;
         }
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ModifyLessonsScreen.fxml"));
-        scene = loader.load();
-        ModifyLessonControllerController controller = loader.getController();
-        controller.setAppointment(selectedLesson);
-        setUser(userId);
-        stage.setScene(new Scene(scene));
-        stage.show();
+
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MOD_LESSON_SCRN, userId);
     }
 }
