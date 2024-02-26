@@ -63,4 +63,4 @@ hs_err_pid*
 **/libs/**
 
 /src/main/resources/logs/login_acitivity.txt
-/logs/musicscheduler.txt
+**/logs/**
