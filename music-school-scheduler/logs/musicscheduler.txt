@@ -1,4 +1,0 @@
-2024-02-25 16:06:40 [JavaFX Application Thread] INFO  o.s.c.ConfigurationReaderHelper - Reading config file!
-2024-02-25 16:06:45 [JavaFX Application Thread] DEBUG o.s.controller.LoginScreenController - Class Path: C:\Users\adamb\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\adamb\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2.jar;C:\Users\adamb\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2.jar;C:\Users\adamb\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2.jar;C:\Users\adamb\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2.jar
-2024-02-25 16:06:45 [JavaFX Application Thread] DEBUG o.s.controller.LoginScreenController - Current working directoryC:\Projects\java\C868_Capstone_Adam_Brents\music-school-scheduler
-2024-02-25 16:06:45 [JavaFX Application Thread] INFO  o.s.controller.LoginScreenController - Successful Login UserName: test
