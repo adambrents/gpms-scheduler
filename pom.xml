@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.musicschool</groupId>
+    <artifactId>scheduler</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <description>Logistics application for GPSMP</description>
+    <organization>
+        <name>Great Performers School of Music and Piano</name>
+    </organization>
+    <inceptionYear>2024</inceptionYear>
+
+    <modules>
+        <module>music-school-scheduler</module>
+    </modules>
+</project>
