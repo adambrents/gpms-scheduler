@@ -16,8 +16,8 @@
                     <TableColumn fx:id="lessonId" prefWidth="36.200013160705566" text="ID" />
                     <TableColumn fx:id="contactId" minWidth="0.0" prefWidth="67.60003662109375" text="Contact" />
                     <TableColumn fx:id="type" prefWidth="71.39996337890625" text="Type" />
-                    <TableColumn fx:id="student" prefWidth="76.79998779296875" text="Customer_ID" />
-                    <TableColumn fx:id="user" prefWidth="57.5999755859375" text="User_ID" />
+                    <TableColumn fx:id="studentDTO" prefWidth="76.79998779296875" text="Customer_ID" />
+                    <TableColumn fx:id="userDTO" prefWidth="57.5999755859375" text="User_ID" />
                     <TableColumn fx:id="start" prefWidth="90.60009765625" text="Start" />
                     <TableColumn fx:id="end" prefWidth="81.0" text="End" />
                     <TableColumn fx:id="location" prefWidth="176.2000732421875" text="Location" />

@@ -4,22 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
-import org.scheduler.repository.StudentsDTO;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.repository.StudentsRepository;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.ReportDTO;
+import org.scheduler.dto.StudentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.Report;
-import org.scheduler.viewmodels.Student;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,25 +38,25 @@ public class ReportsController extends ControllerBase implements IController {
     @FXML
     private ComboBox<String> contactBox;
     @FXML
-    private TableColumn<Student, String> customerID;
+    private TableColumn<StudentDTO, String> customerID;
     @FXML
-    private TableColumn<Student, String> description;
+    private TableColumn<StudentDTO, String> description;
     @FXML
-    private TableColumn<Student, String> endTime;
+    private TableColumn<StudentDTO, String> endTime;
     @FXML
-    private TableColumn<Student, String> id;
+    private TableColumn<StudentDTO, String> id;
     @FXML
     private ComboBox<String> months;
     @FXML
-    private TableColumn<Lesson, String> startDate;
+    private TableColumn<LessonDTO, String> startDate;
     @FXML
-    private TableColumn<Lesson, String> startTime;
+    private TableColumn<LessonDTO, String> startTime;
     @FXML
-    private TableView<Lesson> table;
+    private TableView<LessonDTO> table;
     @FXML
-    private TableColumn<Lesson, String> title;
+    private TableColumn<LessonDTO, String> title;
     @FXML
-    private TableColumn<Lesson, String> type;
+    private TableColumn<LessonDTO, String> type;
     @FXML
     private ComboBox<String> types;
     @FXML
@@ -71,12 +69,12 @@ public class ReportsController extends ControllerBase implements IController {
     private Parent scene;
     private final ObservableList<String> monthsList = FXCollections.observableArrayList();
     private final ObservableList<String> yearsList = FXCollections.observableArrayList();
-    private ObservableList<Lesson> lessons = FXCollections.observableArrayList();
+    private ObservableList<LessonDTO> lessonDTOS = FXCollections.observableArrayList();
     private final ObservableList<String> reportsList = FXCollections.observableArrayList();
-    private final ObservableList<Report> reports = FXCollections.observableArrayList();
+    private final ObservableList<ReportDTO> reportDTOS = FXCollections.observableArrayList();
 
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
-    private final StudentsDTO studentsDTO = new StudentsDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
+    private final StudentsRepository studentsRepository = new StudentsRepository();
 
     /**
      * Reloads the screen
@@ -93,7 +91,7 @@ public class ReportsController extends ControllerBase implements IController {
      * @param actionEvent
      */
     public void onSearch(ActionEvent actionEvent) {
-        if (report.getValue().equalsIgnoreCase(reports.get(0).getReportName())) {
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(0).getReportName())) {
             if((types.getValue() == null) || (years.getValue() == null) || (months.getValue() == null) || (report.getValue() == null)
                     || (contactBox.getValue() == null)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -104,16 +102,16 @@ public class ReportsController extends ControllerBase implements IController {
                 return;
             }
             String contact = contactBox.getValue();
-            lessons = lessonsDTO.getStudentLessons(contact);
+            lessonDTOS = lessonsRepository.getStudentLessonsByName(contact);
             totalAppointments.setVisible(false);
             appointmentNumber.setVisible(false);
         }
 
-        if (report.getValue().equalsIgnoreCase(reports.get(1).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(1).getReportName())){
             totalAppointments.setVisible(true);
             appointmentNumber.setVisible(true);
         }
-        if (report.getValue().equalsIgnoreCase(reports.get(2).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(2).getReportName())){
             table.setDisable(false);
             if((types.getValue() == null) || (years.getValue() == null) || (months.getValue() == null) || (report.getValue() == null)
                     || (contactBox.getValue() == null)){
@@ -153,11 +151,11 @@ public class ReportsController extends ControllerBase implements IController {
         }
 
         LocalDateTime localDateTime = LocalDateTime.of(yearNumber,i,1,1,1);
-        int x = lessonsDTO.getMonthTypeAsInt(localDateTime,apptType);
+        int x = lessonsRepository.getMonthTypeAsInt(localDateTime,apptType);
         String y = String.valueOf(x);
         appointmentNumber.setText(y);
 
-        if (report.getValue().equalsIgnoreCase(reports.get(0).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(0).getReportName())){
             id.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
             title.setCellValueFactory(new PropertyValueFactory<>("title"));
             description.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -167,9 +165,9 @@ public class ReportsController extends ControllerBase implements IController {
             customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
 
-            table.setItems(lessons);
+            table.setItems(lessonDTOS);
         }//TODO possible implementation - add additional if statements for each report and how table is manipulated accordingly
-        else if (report.getValue().equalsIgnoreCase(reports.get(2).getReportName())) {
+        else if (report.getValue().equalsIgnoreCase(reportDTOS.get(2).getReportName())) {
             id.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
             title.setCellValueFactory(new PropertyValueFactory<>("title"));
             description.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -178,7 +176,7 @@ public class ReportsController extends ControllerBase implements IController {
             endTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
             customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
-            table.setItems(lessons);
+            table.setItems(lessonDTOS);
         }
         else {
             //do nothing in case of else
@@ -203,19 +201,19 @@ public class ReportsController extends ControllerBase implements IController {
      */
     @FXML
     public void onChooseReport(ActionEvent event) {
-        if (report.getValue().equalsIgnoreCase(reports.get(0).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(0).getReportName())){
             contactBox.setDisable(false);
             totalAppointments.setVisible(false);
             appointmentNumber.setVisible(false);
             table.setDisable(false);
         }
-        if (report.getValue().equalsIgnoreCase(reports.get(1).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(1).getReportName())){
             contactBox.setDisable(true);
             totalAppointments.setVisible(true);
             appointmentNumber.setVisible(true);
             table.setDisable(true);
         }
-        if (report.getValue().equalsIgnoreCase(reports.get(2).getReportName())){
+        if (report.getValue().equalsIgnoreCase(reportDTOS.get(2).getReportName())){
             contactBox.setDisable(false);
             totalAppointments.setVisible(false);
             appointmentNumber.setVisible(false);
@@ -233,16 +231,16 @@ public class ReportsController extends ControllerBase implements IController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         monthsList.clear();
         yearsList.clear();
-        try {//TODO Add reports to db and make this a getter call for all reports available
-            Report addReport = new Report("Lesson Schedule", 1);
-            reports.add(addReport);
-            addReport = new Report("Total Student LessonsDTO by Type", 2);
-            reports.add(addReport);
-            addReport = new Report("Lesson Schedule by Division", 3);
-            reports.add(addReport);
+        try {//TODO Add reportDTOS to db and make this a getter call for all reportDTOS available
+            ReportDTO addReportDTO = new ReportDTO("LessonDTO Schedule", 1);
+            reportDTOS.add(addReportDTO);
+            addReportDTO = new ReportDTO("Total StudentDTO LessonsRepository by Type", 2);
+            reportDTOS.add(addReportDTO);
+            addReportDTO = new ReportDTO("LessonDTO Schedule by Division", 3);
+            reportDTOS.add(addReportDTO);
             int index = 0;
-            while (index < reports.size()){
-                reportsList.add(reports.get(index).getReportName());
+            while (index < reportDTOS.size()){
+                reportsList.add(reportDTOS.get(index).getReportName());
                 index++;
             }
             report.setItems(reportsList);
@@ -254,12 +252,12 @@ public class ReportsController extends ControllerBase implements IController {
         yearsList.add("2022");yearsList.add("2023");yearsList.add("2024");
         months.setItems(monthsList);
         years.setItems(yearsList);
-        types.setItems(lessonsDTO.getTypes());
+        types.setItems(lessonsRepository.getTypes());
         int index = 0;
-        ObservableList<Student> students = studentsDTO.getAllStudents();
+        ObservableList<StudentDTO> studentDTOS = studentsRepository.getAllItems();
         ObservableList<String> contactNames = FXCollections.observableArrayList();
-        while (index < students.size()){
-            String contactName = students.get(index).getFullName();
+        while (index < studentDTOS.size()){
+            String contactName = studentDTOS.get(index).getFullName();
             contactNames.add(contactName);
             ++index;
         }

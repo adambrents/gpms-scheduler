@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.viewmodels.Lesson;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.dto.LessonDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,35 +24,35 @@ import java.util.ResourceBundle;
 public class AllLessonController extends LessonControllerBase implements IController {
     private static final Logger _logger = LoggerFactory.getLogger(AllLessonController.class);
     @FXML
-    private TableView<Lesson> allLessonsTable;
+    private TableView<LessonDTO> allLessonsTable;
     @FXML
-    private TableColumn<Lesson, String> contactId;
+    private TableColumn<LessonDTO, String> contactId;
     @FXML
-    private TableColumn<Lesson, String> student;
+    private TableColumn<LessonDTO, String> student;
     @FXML
-    private TableColumn<Lesson, String> description;
+    private TableColumn<LessonDTO, String> description;
     @FXML
-    private TableColumn<Lesson, Date> end;
+    private TableColumn<LessonDTO, Date> end;
     @FXML
-    private TableColumn<Lesson, String> lessonId;
+    private TableColumn<LessonDTO, String> lessonId;
     @FXML
-    private TableColumn<Lesson, String> location;
+    private TableColumn<LessonDTO, String> location;
     @FXML
-    private TableColumn<Lesson, Date> start;
+    private TableColumn<LessonDTO, Date> start;
     @FXML
-    private TableColumn<Lesson, Date> startDate;
+    private TableColumn<LessonDTO, Date> startDate;
     @FXML
-    private TableColumn<Lesson, String> title;
+    private TableColumn<LessonDTO, String> title;
     @FXML
-    private TableColumn<Lesson, String> type;
+    private TableColumn<LessonDTO, String> type;
     @FXML
-    private TableColumn<Lesson, String> user;
+    private TableColumn<LessonDTO, String> user;
     private int userId;
 
     private Parent scene;
 
-    private Lesson selectedLesson = null;
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
+    private LessonDTO selectedLessonDTO = null;
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
 
 
     /**
@@ -74,7 +74,7 @@ public class AllLessonController extends LessonControllerBase implements IContro
         student.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         user.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
-        allLessonsTable.setItems(lessonsDTO.getAllLessons());
+        allLessonsTable.setItems(lessonsRepository.getAllItems());
     }
 
     /**
@@ -93,17 +93,17 @@ public class AllLessonController extends LessonControllerBase implements IContro
      */
     @FXML
     void onDelete(ActionEvent event) {
-        selectedLesson = (allLessonsTable.getSelectionModel().getSelectedItem());
-        if (selectedLesson == null) {
+        selectedLessonDTO = (allLessonsTable.getSelectionModel().getSelectedItem());
+        if (selectedLessonDTO == null) {
             return;
         }
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setHeaderText("Delete");
-        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
+        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getLessonID() + ", Type: " + selectedLessonDTO.getType() + "?");
         Optional<ButtonType> result = alert1.showAndWait();
         if (result.get() == ButtonType.OK) {
-            lessonsDTO.deleteAppointment(selectedLesson);
-            allLessonsTable.setItems(lessonsDTO.getAllLessons());
+            lessonsRepository.deleteItem(selectedLessonDTO);
+            allLessonsTable.setItems(lessonsRepository.getAllItems());
         }
         else {
             alert1.close();
@@ -133,9 +133,9 @@ public class AllLessonController extends LessonControllerBase implements IContro
             return;
         }
         else {
-            selectedLesson = (allLessonsTable.getSelectionModel().getSelectedItem());
+            selectedLessonDTO = (allLessonsTable.getSelectionModel().getSelectedItem());
         }
-        if (selectedLesson.getStart().isBefore(LocalDateTime.now())){
+        if (selectedLessonDTO.getStart().isBefore(LocalDateTime.now())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");

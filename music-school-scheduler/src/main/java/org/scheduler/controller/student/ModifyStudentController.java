@@ -10,8 +10,8 @@ import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.IUpdate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.StudentsDTO;
-import org.scheduler.viewmodels.Student;
+import org.scheduler.repository.StudentsRepository;
+import org.scheduler.dto.StudentDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +30,7 @@ public class ModifyStudentController extends StudentControllerBase implements IU
     private Parent scene;
     private int customerId;
     private int userId;
-    private final StudentsDTO studentsDTO = new StudentsDTO();
+    private final StudentsRepository studentsRepository = new StudentsRepository();
 
     /**
      * on cancel loads the main screen
@@ -68,7 +68,7 @@ public class ModifyStudentController extends StudentControllerBase implements IU
             }
             else {
                 try {
-                    Student student = new Student(
+                    StudentDTO studentDTO = new StudentDTO(
                             customerId,
                             nameTxt.getText(),
                             nameTxt.getText(),//TODO add lastname
@@ -76,8 +76,8 @@ public class ModifyStudentController extends StudentControllerBase implements IU
                             addressTxt.getText(),//TODO add address 2
                             postalTxt.getText(),
                             phoneTxt.getText());
-                    studentsDTO.updateStudent(student);
-                    studentsTable.setItems(studentsDTO.getAllStudents());
+                    studentsRepository.updateItem(studentDTO);
+                    studentsTable.setItems(studentsRepository.getAllItems());
                     valid = false;
                     super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, userId);
                 } catch (Exception e) {
@@ -99,18 +99,18 @@ public class ModifyStudentController extends StudentControllerBase implements IU
      * sets the customer on load
      */
     private void setStudent() {
-        customerId = _studentToBeModified.getId();
-        idTxt.setText(Integer.toString(_studentToBeModified.getId()));
-        nameTxt.setText(_studentToBeModified.getFirstName());
-        addressTxt.setText(_studentToBeModified.getAddressLine1());
-        postalTxt.setText(_studentToBeModified.getPostalCode());
-        phoneTxt.setText(_studentToBeModified.getPhoneNumber());
+        customerId = _studentDTOToBeModified.getId();
+        idTxt.setText(Integer.toString(_studentDTOToBeModified.getId()));
+        nameTxt.setText(_studentDTOToBeModified.getFirstName());
+        addressTxt.setText(_studentDTOToBeModified.getAddressLine1());
+        postalTxt.setText(_studentDTOToBeModified.getPostalCode());
+        phoneTxt.setText(_studentDTOToBeModified.getPhoneNumber());
     }
     @Override
     public void setControllerProperties(Object data) {
         super.setControllerProperties(data);
-        if (data instanceof Student) {
-            this._studentToBeModified = (Student) data;
+        if (data instanceof StudentDTO) {
+            this._studentDTOToBeModified = (StudentDTO) data;
         }
     }
     /**

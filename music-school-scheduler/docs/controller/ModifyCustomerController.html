@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class ModifyCustomerController" class="title">Class ModifyCustomerController</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">main.java.controller.student.ModifyStudentController</div>
+<div class="inheritance">main.java.controller.studentDTO.ModifyStudentController</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -154,7 +154,7 @@ implements javafx.fxml.Initializable</span></div>
 <div class="col-second even-row-color"><code><a href="#postalTxt" class="member-name-link">postalTxt</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#selectedStudent" class="member-name-link">selectedStudent</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#selectedStudentDTO" class="member-name-link">selectedStudentDTO</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -187,7 +187,7 @@ implements javafx.fxml.Initializable</span></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize(java.net.URL,java.util.ResourceBundle)" class="member-name-link">initialize</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URL.html" title="class or interface in java.net" class="external-link">URL</a>&nbsp;url,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ResourceBundle.html" title="class or interface in java.util" class="external-link">ResourceBundle</a>&nbsp;resourceBundle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">prepopulates dropdown values and populates student table</div>
+<div class="block">prepopulates dropdown values and populates studentDTO table</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCancel(javafx.event.ActionEvent)" class="member-name-link">onCancel</a><wbr>(javafx.event.ActionEvent&nbsp;actionEvent)</code></div>
@@ -202,10 +202,10 @@ implements javafx.fxml.Initializable</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onUpdate(javafx.event.ActionEvent)" class="member-name-link">onUpdate</a><wbr>(javafx.event.ActionEvent&nbsp;actionEvent)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">validates if required fields have values and updates student in the main.java.repository</div>
+<div class="block">validates if required fields have values and updates studentDTO in the main.java.repository</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomer(model.Customer)" class="member-name-link">setCustomer</a><wbr>(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudent)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomer(model.Customer)" class="member-name-link">setCustomer</a><wbr>(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudentDTO)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUserId(int)" class="member-name-link">setUserId</a><wbr>(int&nbsp;userId)</code></div>
@@ -254,9 +254,9 @@ implements javafx.fxml.Initializable</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="selectedStudent">
-<h3>selectedStudent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></span>&nbsp;<span class="element-name">selectedStudent</span></div>
+<section class="detail" id="selectedStudentDTO">
+<h3>selectedStudentDTO</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></span>&nbsp;<span class="element-name">selectedStudentDTO</span></div>
 </section>
 </li>
 <li>
@@ -340,7 +340,7 @@ implements javafx.fxml.Initializable</span></div>
 <h3>initialize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URL.html" title="class or interface in java.net" class="external-link">URL</a>&nbsp;url,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ResourceBundle.html" title="class or interface in java.util" class="external-link">ResourceBundle</a>&nbsp;resourceBundle)</span></div>
-<div class="block">prepopulates dropdown values and populates student table</div>
+<div class="block">prepopulates dropdown values and populates studentDTO table</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>initialize</code>&nbsp;in interface&nbsp;<code>javafx.fxml.Initializable</code></dd>
@@ -353,10 +353,10 @@ implements javafx.fxml.Initializable</span></div>
 <li>
 <section class="detail" id="setCustomer(model.Customer)">
 <h3>setCustomer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCustomer</span><wbr><span class="parameters">(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudent)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCustomer</span><wbr><span class="parameters">(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudentDTO)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>selectedStudent</code> - </dd>
+<dd><code>selectedStudentDTO</code> - </dd>
 </dl>
 </section>
 </li>
@@ -390,7 +390,7 @@ implements javafx.fxml.Initializable</span></div>
 <h3>onUpdate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onUpdate</span><wbr><span class="parameters">(javafx.event.ActionEvent&nbsp;actionEvent)</span>
               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">validates if required fields have values and updates student in the main.java.repository</div>
+<div class="block">validates if required fields have values and updates studentDTO in the main.java.repository</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>actionEvent</code> - </dd>

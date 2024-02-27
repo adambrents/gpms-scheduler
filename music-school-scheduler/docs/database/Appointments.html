@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Appointments" class="title">Class Appointments</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">main.java.org.scheduler.repository.LessonsDTO</div>
+<div class="inheritance">main.java.org.scheduler.repository.LessonsRepository</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -125,29 +125,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addAppointment(model.Appointment)" class="member-name-link">addAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addAppointment(model.Appointment)" class="member-name-link">addAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">query adds input appointments to the main.java.repository</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkForAppointments(model.Customer)" class="member-name-link">checkForAppointments</a><wbr>(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudent)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkForAppointments(model.Customer)" class="member-name-link">checkForAppointments</a><wbr>(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudentDTO)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">checks to see if a student has any appointments scheduled</div>
+<div class="block">checks to see if a studentDTO has any appointments scheduled</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#deleteAppointment(int)" class="member-name-link">deleteAppointment</a><wbr>(int&nbsp;customerId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">soft deletes all appointments related to a given student</div>
+<div class="block">soft deletes all appointments related to a given studentDTO</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#deleteAppointment(model.Appointment)" class="member-name-link">deleteAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#deleteAppointment(model.Appointment)" class="member-name-link">deleteAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">soft deletes an lesson from the db - sets all values to NULL except a few</div>
+<div class="block">soft deletes an lessonDTO from the db - sets all values to NULL except a few</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#get15MinAppt(java.time.LocalDateTime)" class="member-name-link">get15MinAppt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;now)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">gets the soonest lesson in the next 15 minutes</div>
+<div class="block">gets the soonest lessonDTO in the next 15 minutes</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static javafx.collections.ObservableList&lt;<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getAllAppointments()" class="member-name-link">getAllAppointments</a>()</code></div>
@@ -157,7 +157,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static javafx.collections.ObservableList&lt;<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getAllTakenAppointmentsByDate(java.time.LocalDate)" class="member-name-link">getAllTakenAppointmentsByDate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;localDate)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the user's system</div>
+<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the userDTO's system</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static javafx.collections.ObservableList&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getAllValidEndTimes(java.time.LocalDate,java.time.LocalTime)" class="member-name-link">getAllValidEndTimes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;userPickedDate,
@@ -189,7 +189,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getId()" class="member-name-link">getId</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">query returns the latest lesson ID in order to generate an ID in the UI and insert it later</div>
+<div class="block">query returns the latest lessonDTO ID in order to generate an ID in the UI and insert it later</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static javafx.collections.ObservableList&lt;<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getMonthlyAppointments()" class="member-name-link">getMonthlyAppointments</a>()</code></div>
@@ -200,7 +200,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getMonthTypeNumber(java.time.LocalDateTime,java.lang.String)" class="member-name-link">getMonthTypeNumber</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;localDateTime,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">gets a count of all appointments within a given month and lesson type</div>
+<div class="block">gets a count of all appointments within a given month and lessonDTO type</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static javafx.collections.ObservableList&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getTypes()" class="member-name-link">getTypes</a>()</code></div>
@@ -213,7 +213,7 @@ loadScripts(document, 'script');</script>
 <div class="block">gets all appointments in the upcoming week</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modifyAppointment(model.Appointment)" class="member-name-link">modifyAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modifyAppointment(model.Appointment)" class="member-name-link">modifyAppointment</a><wbr>(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">query updates appointments in the main.java.repository</div>
 </div>
@@ -261,11 +261,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addAppointment(model.Appointment)">
 <h3>addAppointment</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</span></div>
 <div class="block">query adds input appointments to the main.java.repository</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>lesson</code> - </dd>
+<dd><code>lessonDTO</code> - </dd>
 <dt>Returns:</dt>
 </dl>
 </section>
@@ -273,11 +273,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="modifyAppointment(model.Appointment)">
 <h3>modifyAppointment</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">modifyAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">modifyAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</span></div>
 <div class="block">query updates appointments in the main.java.repository</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>lesson</code> - </dd>
+<dd><code>lessonDTO</code> - </dd>
 <dt>Returns:</dt>
 </dl>
 </section>
@@ -286,7 +286,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getId()">
 <h3>getId</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getId</span>()</div>
-<div class="block">query returns the latest lesson ID in order to generate an ID in the UI and insert it later</div>
+<div class="block">query returns the latest lessonDTO ID in order to generate an ID in the UI and insert it later</div>
 <dl class="notes">
 <dt>Returns:</dt>
 </dl>
@@ -295,11 +295,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="deleteAppointment(model.Appointment)">
 <h3>deleteAppointment</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deleteAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lesson)</span></div>
-<div class="block">soft deletes an lesson from the db - sets all values to NULL except a few</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deleteAppointment</span><wbr><span class="parameters">(<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&nbsp;lessonDTO)</span></div>
+<div class="block">soft deletes an lessonDTO from the db - sets all values to NULL except a few</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>lesson</code> - </dd>
+<dd><code>lessonDTO</code> - </dd>
 <dt>Returns:</dt>
 </dl>
 </section>
@@ -308,7 +308,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="deleteAppointment(int)">
 <h3>deleteAppointment</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">deleteAppointment</span><wbr><span class="parameters">(int&nbsp;customerId)</span></div>
-<div class="block">soft deletes all appointments related to a given student</div>
+<div class="block">soft deletes all appointments related to a given studentDTO</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>customerId</code> - </dd>
@@ -353,7 +353,7 @@ loadScripts(document, 'script');</script>
 <h3>getMonthTypeNumber</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getMonthTypeNumber</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;localDateTime,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type)</span></div>
-<div class="block">gets a count of all appointments within a given month and lesson type</div>
+<div class="block">gets a count of all appointments within a given month and lessonDTO type</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>localDateTime</code> - </dd>
@@ -377,11 +377,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="checkForAppointments(model.Customer)">
 <h3>checkForAppointments</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkForAppointments</span><wbr><span class="parameters">(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudent)</span></div>
-<div class="block">checks to see if a student has any appointments scheduled</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkForAppointments</span><wbr><span class="parameters">(<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a>&nbsp;selectedStudentDTO)</span></div>
+<div class="block">checks to see if a studentDTO has any appointments scheduled</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>selectedStudent</code> - </dd>
+<dd><code>selectedStudentDTO</code> - </dd>
 <dt>Returns:</dt>
 </dl>
 </section>
@@ -416,7 +416,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get15MinAppt(java.time.LocalDateTime)">
 <h3>get15MinAppt</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></span>&nbsp;<span class="element-name">get15MinAppt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;now)</span></div>
-<div class="block">gets the soonest lesson in the next 15 minutes</div>
+<div class="block">gets the soonest lessonDTO in the next 15 minutes</div>
 <dl class="notes">
 <dt>Returns:</dt>
 </dl>
@@ -426,7 +426,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAllTakenAppointmentsByDate(java.time.LocalDate)">
 <h3>getAllTakenAppointmentsByDate</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">javafx.collections.ObservableList&lt;<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a>&gt;</span>&nbsp;<span class="element-name">getAllTakenAppointmentsByDate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;localDate)</span></div>
-<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the user's system</div>
+<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the userDTO's system</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>localDate</code> - </dd>

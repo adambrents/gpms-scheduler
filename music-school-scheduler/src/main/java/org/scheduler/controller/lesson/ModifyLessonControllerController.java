@@ -11,12 +11,12 @@ import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.IUpdate;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.repository.StudentsDTO;
-import org.scheduler.repository.UsersDTO;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.Student;
-import org.scheduler.viewmodels.User;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.repository.StudentsRepository;
+import org.scheduler.repository.UsersRepository;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.StudentDTO;
+import org.scheduler.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,9 +63,9 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
 
     private final ObservableList<String> userNames = FXCollections.observableArrayList();
 
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
-    private final StudentsDTO studentsDTO = new StudentsDTO();
-    private final UsersDTO usersDTO = new UsersDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
+    private final StudentsRepository studentsRepository = new StudentsRepository();
+    private final UsersRepository usersRepository = new UsersRepository();
     /**
      * when a date is selected, start and end times are populated
      * @param event
@@ -162,35 +162,35 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
      * loads all appointment information into the modify appointment screen to be changed and reviewed
      *
      * Lambda function - ensures the dates available do not conflict with local business days based on the user's region
-     * @param selectedLesson
+     * @param selectedLessonDTO
      */
-    public void setAppointment(Lesson selectedLesson) {
+    public void setAppointment(LessonDTO selectedLessonDTO) {
         int i = 0;
-        while(i < studentsDTO.getAllStudents().size()){
-            ObservableList<Student> students = studentsDTO.getAllStudents();
-            String customerName = students.get(i).getFirstName();
+        while(i < studentsRepository.getAllItems().size()){
+            ObservableList<StudentDTO> studentDTOS = studentsRepository.getAllItems();
+            String customerName = studentDTOS.get(i).getFirstName();
             customerNames.add(i,customerName);
             i++;
         }
         student.setItems(customerNames);
-        student.setValue(studentsDTO.getStudentNameFromId(selectedLesson.getStudentID()));
+        student.setValue(studentsRepository.getStudentNameFromId(selectedLessonDTO.getStudentID()));
         i = 0;
         userNames.clear();
-        ObservableList<User> allUsers = usersDTO.GetAllUsers();
-        while(i < allUsers.size()){
-            String userName = allUsers.get(i).username();
+        ObservableList<UserDTO> allUserDTOS = usersRepository.getAllItems();
+        while(i < allUserDTOS.size()){
+            String userName = allUserDTOS.get(i).username();
             userNames.add(i,userName);
             i++;
         }
         employee.setItems(userNames);
-        employee.setValue(usersDTO.getUserById(selectedLesson.getUserID()).username());
-        description.setText(selectedLesson.getDescription());
-        type.setText(selectedLesson.getType());
-        startTime.setValue(selectedLesson.getStartTime());
-        endTime.setValue(selectedLesson.getEndTime());
-        date.setValue(selectedLesson.getStart().toLocalDate());
-        location.setText(selectedLesson.getLocation());
-        appointmentId = selectedLesson.getLessonID();
+        employee.setValue(usersRepository.getUserById(selectedLessonDTO.getUserID()).username());
+        description.setText(selectedLessonDTO.getDescription());
+        type.setText(selectedLessonDTO.getType());
+        startTime.setValue(selectedLessonDTO.getStartTime());
+        endTime.setValue(selectedLessonDTO.getEndTime());
+        date.setValue(selectedLessonDTO.getStart().toLocalDate());
+        location.setText(selectedLessonDTO.getLocation());
+        appointmentId = selectedLessonDTO.getLessonID();
         //checks to see if the selected date is before current date
         int index = 0;
         int validStartTimeCount = getAllowedLessonStartTimes(date.getValue()).size();
@@ -287,7 +287,7 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
         }
         LocalDateTime startDateTime = LocalDateTime.of(date.getValue(), startTime.getValue());
         LocalDateTime endDateTime = LocalDateTime.of(date.getValue(), endTime.getValue());
-        Lesson lesson = new Lesson(
+        LessonDTO lessonDTO = new LessonDTO(
                 appointmentId,
                 description.getText(),
                 location.getText(),
@@ -295,11 +295,9 @@ public class ModifyLessonControllerController extends LessonControllerBase imple
                 startDateTime,
                 endDateTime,
                 userId);
-            if (lessonsDTO.modifyAppointment(lesson)){
-            errorText.setText("Successfully updated lesson :)");
-        }
-
-        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersDTO.getUserByName(employee.getValue()).userId());
+        lessonsRepository.updateItem(lessonDTO);
+        errorText.setText("Successfully updated lessonDTO :)");
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).userId());
     }
     /**
      * method loads preset values into all applicable fields

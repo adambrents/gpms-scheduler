@@ -1,6 +1,6 @@
 
 # Project C868 Adam_Brents 
-- This project is an app to schedule and maintain lessons between teachers and students
+- This project is an app to schedule and maintain lessons between teachers and studentDTOS
 - 3rd report from A.3.f of requirements is a Customer Schedule by Division option in reports dropdown
 
 ## Authors

@@ -12,14 +12,14 @@ import org.scheduler.controller.MainScreenController;
 import org.scheduler.controller.base.LessonControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.ICreate;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.repository.StudentsDTO;
-import org.scheduler.repository.UsersDTO;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.Student;
-import org.scheduler.viewmodels.User;
+import org.scheduler.repository.StudentsRepository;
+import org.scheduler.repository.UsersRepository;
+import org.scheduler.dto.StudentDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,9 +55,9 @@ public class AddLessonControllerController extends LessonControllerBase implemen
 
     private final ObservableList<String> userNames = FXCollections.observableArrayList();
 
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
-    private final StudentsDTO studentsDTO = new StudentsDTO();
-    private final UsersDTO usersDTO = new UsersDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
+    private final StudentsRepository studentsRepository = new StudentsRepository();
+    private final UsersRepository usersRepository = new UsersRepository();
     /**
      * when a date is selected, start and end times are populated
      * @param event
@@ -208,25 +208,24 @@ public class AddLessonControllerController extends LessonControllerBase implemen
         LocalDateTime startDateTime = LocalDateTime.of(date.getValue(), startTime.getValue());
         LocalDateTime endDateTime = LocalDateTime.of(date.getValue(), endTime.getValue());
 
-        Lesson lesson = new Lesson(
-                lessonsDTO.getId(),
+        LessonDTO lessonDTO = new LessonDTO(
+                lessonsRepository.getId(),
                 description.getText(),
                 location.getText(),
                 type.getText(),
                 startDateTime,
                 endDateTime,
                 userId);
-        if (lessonsDTO.addAppointment(lesson)){
-            errorText.setText("Successfully added lesson :)");
-            description.clear();
-            location.clear();
-            type.clear();
-            startTime.valueProperty().set(null);
-            endTime.valueProperty().set(null);
-            student.valueProperty().set(null);
-            employee.valueProperty().set(null);
-            date.setValue(null);
-        }
+        lessonsRepository.insertItem(lessonDTO);
+        errorText.setText("Successfully added lessonDTO :)");
+        description.clear();
+        location.clear();
+        type.clear();
+        startTime.valueProperty().set(null);
+        endTime.valueProperty().set(null);
+        student.valueProperty().set(null);
+        employee.valueProperty().set(null);
+        date.setValue(null);
         try {
             wait(1000);
         }
@@ -235,7 +234,7 @@ public class AddLessonControllerController extends LessonControllerBase implemen
             _logger.error("Error while waiting! Exception: e", e);
         }
 
-        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersDTO.getUserByName(employee.getValue()).userId());
+        super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).userId());
     }
 
     /**
@@ -249,9 +248,9 @@ public class AddLessonControllerController extends LessonControllerBase implemen
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int i = 0;
         customerNames.clear();
-        ObservableList<Student> students = studentsDTO.getAllStudents();
-        while(i < students.size()){
-            String customerName = students.get(i).getFirstName();
+        ObservableList<StudentDTO> studentDTOS = studentsRepository.getAllItems();
+        while(i < studentDTOS.size()){
+            String customerName = studentDTOS.get(i).getFirstName();
             customerNames.add(i,customerName);
             i++;
         }
@@ -259,9 +258,9 @@ public class AddLessonControllerController extends LessonControllerBase implemen
 
         i = 0;
         userNames.clear();
-        ObservableList<User> allUsers = usersDTO.GetAllUsers();
-        while(i < allUsers.size()){
-            String userName = allUsers.get(i).username();
+        ObservableList<UserDTO> allUserDTOS = usersRepository.getAllItems();
+        while(i < allUserDTOS.size()){
+            String userName = allUserDTOS.get(i).username();
             userNames.add(i,userName);
             i++;
         }

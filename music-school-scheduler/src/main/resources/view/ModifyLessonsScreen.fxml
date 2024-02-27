@@ -83,7 +83,7 @@
                      </GridPane.margin>
                   </Label>
                   <TextField fx:id="location" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                  <ComboBox fx:id="student" prefHeight="25.0" prefWidth="404.0" GridPane.columnIndex="1"/>
+                  <ComboBox fx:id="studentDTO" prefHeight="25.0" prefWidth="404.0" GridPane.columnIndex="1"/>
                   <ComboBox fx:id="contact" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="3"/>
                   <Label alignment="CENTER_RIGHT" text="Customer" GridPane.halignment="RIGHT">
                      <GridPane.margin>

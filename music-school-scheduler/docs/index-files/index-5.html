@@ -55,13 +55,13 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="../database/Appointments.html#get15MinAppt(java.time.LocalDateTime)" class="member-name-link">get15MinAppt(LocalDateTime)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Appointments.html" title="class in main.java.repository">Appointments</a></dt>
 <dd>
-<div class="block">gets the soonest lesson in the next 15 minutes</div>
+<div class="block">gets the soonest lessonDTO in the next 15 minutes</div>
 </dd>
 <dt><a href="../view/ScreenHelper.html#getAddApptScrn()" class="member-name-link">getAddApptScrn()</a> - Method in class main.java.view.<a href="../view/ScreenHelper.html" title="class in main.java.view">ScreenHelper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="../view/ScreenHelper.html#getAddCustScrn()" class="member-name-link">getAddCustScrn()</a> - Method in class main.java.view.<a href="../view/ScreenHelper.html" title="class in main.java.view">ScreenHelper</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="../model/Customer.html#getAddress()" class="member-name-link">getAddress()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getAddress()" class="member-name-link">getAddress()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="../database/Customers.html#getAllCustomers()" class="member-name-link">getAllCustomers()</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Customers.html" title="class in main.java.repository">Customers</a></dt>
 <dd>
-<div class="block">gets a list of all students in the db</div>
+<div class="block">gets a list of all studentDTOS in the db</div>
 </dd>
 <dt><a href="../database/Divisions.html#getAllDivisionNames()" class="member-name-link">getAllDivisionNames()</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Divisions.html" title="class in main.java.repository">Divisions</a></dt>
 <dd>
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="../database/Appointments.html#getAllTakenAppointmentsByDate(java.time.LocalDate)" class="member-name-link">getAllTakenAppointmentsByDate(LocalDate)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Appointments.html" title="class in main.java.repository">Appointments</a></dt>
 <dd>
-<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the user's system</div>
+<div class="block">gets all taken start times from the db by date and converts those times from UTC to times on the userDTO's system</div>
 </dd>
 <dt><a href="../database/Users.html#getAllUsers()" class="member-name-link">getAllUsers()</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Users.html" title="class in main.java.repository">Users</a></dt>
 <dd>
@@ -103,7 +103,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">accepts dates and returns a list of valid start times</div>
 </dd>
-<dt><a href="../model/Appointment.html#getAppointmentID()" class="member-name-link">getAppointmentID()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getAppointmentID()" class="member-name-link">getAppointmentID()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets appt id</div>
 </dd>
@@ -127,11 +127,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">gets all appointments related to a given contact</div>
 </dd>
-<dt><a href="../model/Contact.html#getContactEmail()" class="member-name-link">getContactEmail()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
+<dt><a href="../model/Contact.html#getContactEmail()" class="member-name-link">getContactEmail()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="../model/Contact.html#getContactId()" class="member-name-link">getContactId()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
+<dt><a href="../model/Contact.html#getContactId()" class="member-name-link">getContactId()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="../model/Appointment.html#getContactID()" class="member-name-link">getContactID()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getContactID()" class="member-name-link">getContactID()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">get Contact Id</div>
 </dd>
@@ -139,47 +139,47 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">gets a list of all contact ids based on contact names</div>
 </dd>
-<dt><a href="../model/Appointment.html#getContactName()" class="member-name-link">getContactName()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getContactName()" class="member-name-link">getContactName()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets contact name</div>
 </dd>
-<dt><a href="../model/Contact.html#getContactName()" class="member-name-link">getContactName()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
+<dt><a href="../model/Contact.html#getContactName()" class="member-name-link">getContactName()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Contact.html" title="class in main.java.viewmodels">Contact</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="../database/Contacts.html#getContactName(int)" class="member-name-link">getContactName(int)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Contacts.html" title="class in main.java.repository">Contacts</a></dt>
 <dd>
 <div class="block">gets a list of all contact names based on contact ids</div>
 </dd>
-<dt><a href="../model/Customer.html#getCountry()" class="member-name-link">getCountry()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getCountry()" class="member-name-link">getCountry()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
-<dt><a href="../model/Division.html#getCountryID()" class="member-name-link">getCountryID()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Division.html" title="class in main.java.viewmodels">Division</a></dt>
+<dt><a href="../model/Division.html#getCountryID()" class="member-name-link">getCountryID()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Division.html" title="class in main.java.viewmodels">Division</a></dt>
 <dd>
 <div class="block">getter/setter for division</div>
 </dd>
 <dt><a href="../database/Customers.html#getCustomerId(java.lang.String)" class="member-name-link">getCustomerId(String)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Customers.html" title="class in main.java.repository">Customers</a></dt>
 <dd>
-<div class="block">gets a student ID based on student name</div>
+<div class="block">gets a studentDTO ID based on studentDTO name</div>
 </dd>
-<dt><a href="../model/Appointment.html#getCustomerID()" class="member-name-link">getCustomerID()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getCustomerID()" class="member-name-link">getCustomerID()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets customerID</div>
 </dd>
 <dt><a href="../database/Customers.html#getCustomerName(int)" class="member-name-link">getCustomerName(int)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Customers.html" title="class in main.java.repository">Customers</a></dt>
 <dd>
-<div class="block">gets a student name based on student ID</div>
+<div class="block">gets a studentDTO name based on studentDTO ID</div>
 </dd>
-<dt><a href="../model/Appointment.html#getDate()" class="member-name-link">getDate()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getDate()" class="member-name-link">getDate()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="../model/Appointment.html#getDescription()" class="member-name-link">getDescription()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getDescription()" class="member-name-link">getDescription()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets description</div>
 </dd>
-<dt><a href="../model/Appointment.html#getDivision()" class="member-name-link">getDivision()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getDivision()" class="member-name-link">getDivision()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets division</div>
 </dd>
-<dt><a href="../model/Customer.html#getDivision()" class="member-name-link">getDivision()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getDivision()" class="member-name-link">getDivision()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
@@ -187,7 +187,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">returns a list of appointments for a given division and contact</div>
 </dd>
-<dt><a href="../model/Customer.html#getDivisionId()" class="member-name-link">getDivisionId()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getDivisionId()" class="member-name-link">getDivisionId()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
@@ -199,25 +199,25 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">gets all appointments and the division they are related to</div>
 </dd>
-<dt><a href="../model/Appointment.html#getEnd()" class="member-name-link">getEnd()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getEnd()" class="member-name-link">getEnd()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets end</div>
 </dd>
-<dt><a href="../model/Appointment.html#getEndTime()" class="member-name-link">getEndTime()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getEndTime()" class="member-name-link">getEndTime()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="../database/Appointments.html#getId()" class="member-name-link">getId()</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Appointments.html" title="class in main.java.repository">Appointments</a></dt>
 <dd>
-<div class="block">query returns the latest lesson ID in order to generate an ID in the UI and insert it later</div>
+<div class="block">query returns the latest lessonDTO ID in order to generate an ID in the UI and insert it later</div>
 </dd>
 <dt><a href="../database/Customers.html#getId()" class="member-name-link">getId()</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Customers.html" title="class in main.java.repository">Customers</a></dt>
 <dd>
-<div class="block">gets a new student id when adding new students via UI</div>
+<div class="block">gets a new studentDTO id when adding new studentDTOS via UI</div>
 </dd>
-<dt><a href="../model/Customer.html#getId()" class="member-name-link">getId()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getId()" class="member-name-link">getId()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
-<dt><a href="../model/Appointment.html#getLocation()" class="member-name-link">getLocation()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getLocation()" class="member-name-link">getLocation()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets location</div>
 </dd>
@@ -235,43 +235,43 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="../database/Appointments.html#getMonthTypeNumber(java.time.LocalDateTime,java.lang.String)" class="member-name-link">getMonthTypeNumber(LocalDateTime, String)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Appointments.html" title="class in main.java.repository">Appointments</a></dt>
 <dd>
-<div class="block">gets a count of all appointments within a given month and lesson type</div>
+<div class="block">gets a count of all appointments within a given month and lessonDTO type</div>
 </dd>
-<dt><a href="../model/Customer.html#getName()" class="member-name-link">getName()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getName()" class="member-name-link">getName()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
-<dt><a href="../model/Division.html#getName()" class="member-name-link">getName()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Division.html" title="class in main.java.viewmodels">Division</a></dt>
+<dt><a href="../model/Division.html#getName()" class="member-name-link">getName()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Division.html" title="class in main.java.viewmodels">Division</a></dt>
 <dd>
 <div class="block">getter/setter for division</div>
 </dd>
-<dt><a href="../model/User.html#getPassword()" class="member-name-link">getPassword()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
+<dt><a href="../model/User.html#getPassword()" class="member-name-link">getPassword()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
 <dd>
 <div class="block">getter/setter for User</div>
 </dd>
-<dt><a href="../model/Customer.html#getPhoneNumber()" class="member-name-link">getPhoneNumber()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getPhoneNumber()" class="member-name-link">getPhoneNumber()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
-<dt><a href="../model/Customer.html#getPostalCode()" class="member-name-link">getPostalCode()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
+<dt><a href="../model/Customer.html#getPostalCode()" class="member-name-link">getPostalCode()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Customer.html" title="class in main.java.viewmodels">Customer</a></dt>
 <dd>
 <div class="block">getter/setter for Customer</div>
 </dd>
-<dt><a href="../model/Report.html#getReportId()" class="member-name-link">getReportId()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Report.html" title="class in main.java.viewmodels">Report</a></dt>
+<dt><a href="../model/Report.html#getReportId()" class="member-name-link">getReportId()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Report.html" title="class in main.java.viewmodels">Report</a></dt>
 <dd>
 <div class="block">getter/setter for Report</div>
 </dd>
-<dt><a href="../model/Report.html#getReportName()" class="member-name-link">getReportName()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Report.html" title="class in main.java.viewmodels">Report</a></dt>
+<dt><a href="../model/Report.html#getReportName()" class="member-name-link">getReportName()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Report.html" title="class in main.java.viewmodels">Report</a></dt>
 <dd>
 <div class="block">getter/setter for Report</div>
 </dd>
 <dt><a href="../view/ScreenHelper.html#getReportsScrn()" class="member-name-link">getReportsScrn()</a> - Method in class main.java.view.<a href="../view/ScreenHelper.html" title="class in main.java.view">ScreenHelper</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="../model/Appointment.html#getStart()" class="member-name-link">getStart()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getStart()" class="member-name-link">getStart()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets start</div>
 </dd>
-<dt><a href="../model/Appointment.html#getStartTime()" class="member-name-link">getStartTime()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getStartTime()" class="member-name-link">getStartTime()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="../utilities/JDBCConnectionHelper.html#getStatement()" class="member-name-link">getStatement()</a> - Static method in class main.java.org.scheduler.utilities.<a href="../utilities/JDBCConnectionHelper.html" title="class in main.java.utilities">JDBCConnectionHelper</a></dt>
 <dd>
@@ -281,11 +281,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">gets the current time in UTC from the main.java.repository</div>
 </dd>
-<dt><a href="../model/Appointment.html#getTitle()" class="member-name-link">getTitle()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getTitle()" class="member-name-link">getTitle()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets title</div>
 </dd>
-<dt><a href="../model/Appointment.html#getType()" class="member-name-link">getType()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getType()" class="member-name-link">getType()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
 <div class="block">gets type</div>
 </dd>
@@ -303,21 +303,21 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="../database/Users.html#getUserById(int)" class="member-name-link">getUserById(int)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Users.html" title="class in main.java.repository">Users</a></dt>
 <dd>
-<div class="block">returns a user object in response to a userid</div>
+<div class="block">returns a userDTO object in response to a userid</div>
 </dd>
 <dt><a href="../database/Users.html#getUserByName(java.lang.String)" class="member-name-link">getUserByName(String)</a> - Static method in class main.java.org.scheduler.repository.<a href="../database/Users.html" title="class in main.java.repository">Users</a></dt>
 <dd>
-<div class="block">returns a user object in response to a username</div>
+<div class="block">returns a userDTO object in response to a username</div>
 </dd>
-<dt><a href="../model/User.html#getUserId()" class="member-name-link">getUserId()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
+<dt><a href="../model/User.html#getUserId()" class="member-name-link">getUserId()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
 <dd>
 <div class="block">getter/setter for User</div>
 </dd>
-<dt><a href="../model/Appointment.html#getUserID()" class="member-name-link">getUserID()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
+<dt><a href="../model/Appointment.html#getUserID()" class="member-name-link">getUserID()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/Appointment.html" title="class in main.java.viewmodels">Appointment</a></dt>
 <dd>
-<div class="block">gets user ID</div>
+<div class="block">gets userDTO ID</div>
 </dd>
-<dt><a href="../model/User.html#getUsername()" class="member-name-link">getUsername()</a> - Method in class main.java.org.scheduler.viewmodels.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
+<dt><a href="../model/User.html#getUsername()" class="member-name-link">getUsername()</a> - Method in class main.java.org.scheduler.dto.<a href="../model/User.html" title="class in main.java.viewmodels">User</a></dt>
 <dd>
 <div class="block">getter/setter for User</div>
 </dd>

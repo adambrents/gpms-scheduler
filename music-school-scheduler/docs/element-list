@@ -1,6 +1,6 @@
 main.java.controller
 main.java.org.scheduler.repository
 main
-main.java.org.scheduler.viewmodels
+main.java.org.scheduler.dto
 main.java.org.scheduler.utilities
 main.java.view

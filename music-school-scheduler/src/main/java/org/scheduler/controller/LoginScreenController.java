@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.repository.UsersDTO;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.User;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.repository.UsersRepository;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +37,8 @@ public class LoginScreenController extends ControllerBase implements IController
     public TextField usernameField;
     public TextField passwordField;
     public Button exit;
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
-    private final UsersDTO usersDTO = new UsersDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
+    private final UsersRepository usersRepository = new UsersRepository();
 
     /**
      * Validates if user exists and if information was entered correctly. Loads main screen
@@ -58,19 +58,19 @@ public class LoginScreenController extends ControllerBase implements IController
 
         String usrnm = usernameField.getText();
         String pssword = passwordField.getText();
-        User user = new User(usrnm, 0, pssword);
+        UserDTO userDTO = new UserDTO(usrnm, 0, pssword);
 
-        int valid = usersDTO.isLoginMatchUser(user);
+        int valid = usersRepository.isLoginMatchUser(userDTO);
         if (valid == 0) {
             try{
-                _logger.debug("Current working directory" + System.getProperty("user.dir"));
+                _logger.debug("Current working directory" + System.getProperty("userDTO.dir"));
                 _logger.info("Successful Login UserName: " + usernameField.getText());
-                super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, user.userId());
+                super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MAIN_SCREEN, userDTO.userId());
 
-                Lesson appt15Min = lessonsDTO.getLessonsNext15Minutes(LocalDateTime.now());
+                LessonDTO appt15Min = lessonsRepository.getLessonsNext15Minutes(LocalDateTime.now());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 if(appt15Min != null){
-                    alert.setContentText("You have the following lesson(s) in the next 15 minutes: \n\nLesson ID: " + appt15Min.getLessonID()
+                    alert.setContentText("You have the following lesson(s) in the next 15 minutes: \n\nLessonDTO ID: " + appt15Min.getLessonID()
                             + "\nDate: " + appt15Min.getStart().toLocalDate() + "\nTime: " + appt15Min.getStart().toLocalTime());
                 }
                 else {
@@ -83,7 +83,7 @@ public class LoginScreenController extends ControllerBase implements IController
                 alert.setHeaderText("Error");
                 alert.setContentText("Error: See console for more details");
                 e.printStackTrace();
-                //Lambda expression to handle user response. Reloads login page on OK
+                //Lambda expression to handle userDTO response. Reloads login page on OK
                 alert.showAndWait().ifPresent((response -> {
                     if (response == ButtonType.OK) {
                         _logger.info("Alerting!");

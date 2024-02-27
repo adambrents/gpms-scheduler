@@ -10,12 +10,6 @@ public class Constants {
     public static final ConnectionConfig CONNECTION_CONFIG = new ConnectionConfig();
     public static final NavigationHistory NAVIGATION_HISTORY = new NavigationHistory();
 
-    public class DbTables{
-        public static final String STUDENTS = "students";
-        public static final String USERS = "users";
-        public static final String TEACHERS = "teachers";
-        public static final String LESSONS = "lessons";
-    }
     public class FXML_ROUTES {
         public static final String ADD_LESSON_SCRN = "/view/AddLessonsScreen.fxml";
         public static final String MOD_LESSON_SCRN = "/view/ModifyLessonsScreen.fxml";

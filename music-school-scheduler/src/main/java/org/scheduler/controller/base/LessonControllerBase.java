@@ -2,9 +2,9 @@ package org.scheduler.controller.base;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.scheduler.repository.LessonsDTO;
+import org.scheduler.repository.LessonsRepository;
 import org.scheduler.utilities.TimeHelper;
-import org.scheduler.viewmodels.Lesson;
+import org.scheduler.dto.LessonDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ public abstract class LessonControllerBase extends ControllerBase {
 
     private ObservableList<LocalDateTime> _validStartTimes = FXCollections.observableArrayList();
     private ObservableList<LocalDateTime> _validEndTimes = FXCollections.observableArrayList();
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
 
     /**
      * accepts dates and returns a list of valid start times
@@ -25,8 +25,8 @@ public abstract class LessonControllerBase extends ControllerBase {
         _validStartTimes.clear();
         ObservableList<LocalDateTime> possibleApptTimes = TimeHelper.getAvailableStartTimes(userPickedDate);
         _validStartTimes = possibleApptTimes;
-        ObservableList<Lesson> allTakenStartTimes = lessonsDTO.getAllTakenLessonTimesByDate(userPickedDate);
-        ObservableList<Lesson> allTakenEndTimes = lessonsDTO.getAllTakenLessonTimesByDate(userPickedDate);
+        ObservableList<LessonDTO> allTakenStartTimes = lessonsRepository.getAllTakenLessonTimesByDate(userPickedDate);
+        ObservableList<LessonDTO> allTakenEndTimes = lessonsRepository.getAllTakenLessonTimesByDate(userPickedDate);
 
         int allTakenStartTimesCount = allTakenStartTimes.size() - 1;
         int x = 0;
@@ -64,8 +64,8 @@ public abstract class LessonControllerBase extends ControllerBase {
         LocalDateTime possibleEndDateTime = userPickedDateTime.plusMinutes(30);
 
         _validEndTimes = TimeHelper.getAvailableEndTimes(possibleEndDateTime, userPickedStartTime);
-        ObservableList<Lesson> allTakenStartTimes = lessonsDTO.getAllTakenLessonTimesByDate(userPickedDateTime.toLocalDate());
-        ObservableList<Lesson> allTakenEndTimes = lessonsDTO.getAllTakenLessonTimesByDate(userPickedDateTime.toLocalDate());
+        ObservableList<LessonDTO> allTakenStartTimes = lessonsRepository.getAllTakenLessonTimesByDate(userPickedDateTime.toLocalDate());
+        ObservableList<LessonDTO> allTakenEndTimes = lessonsRepository.getAllTakenLessonTimesByDate(userPickedDateTime.toLocalDate());
         int allTakenEndTimesCount = allTakenEndTimes.size() - 1;
         int x = 0;
         while (x <= allTakenEndTimesCount){

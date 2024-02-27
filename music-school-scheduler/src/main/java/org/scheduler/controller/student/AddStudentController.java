@@ -1,20 +1,15 @@
 package org.scheduler.controller.student;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.scheduler.constants.Constants;
-import org.scheduler.controller.MainScreenController;
 import org.scheduler.controller.base.StudentControllerBase;
 import org.scheduler.controller.interfaces.IController;
 import org.scheduler.controller.interfaces.ICreate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.viewmodels.Student;
+import org.scheduler.dto.StudentDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,17 +70,17 @@ public class AddStudentController extends StudentControllerBase implements ICrea
             }
             else{
                 try {
-                    Student student = new Student(
-                            studentsDTO.getLastStudentId(),
+                    StudentDTO studentDTO = new StudentDTO(
+                            studentsRepository.getLastStudentId(),
                             nameTxt.getText(),
                             nameTxt.getText(),
                             addressTxt.getText(),
                             addressTxt.getText(),
                             postalTxt.getText(),
                             phoneTxt.getText());
-                    studentsDTO.addStudent(student);
-                    errorText.setText("Successfully added Student");
-                    studentsTable.setItems(studentsDTO.getAllStudents());
+                    studentsRepository.insertItem(studentDTO);
+                    errorText.setText("Successfully added StudentDTO");
+                    studentsTable.setItems(studentsRepository.getAllItems());
                     onExit(event);
                 }
                 catch (Exception e) {

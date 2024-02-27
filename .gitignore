@@ -49,7 +49,7 @@ Thumbs.db
 
 # dependency-reduced-pom.xml
 
-# ignore user-specific files
+# ignore userDTO-specific files
 *.swp
 *~
 /.idea/workspace.xml

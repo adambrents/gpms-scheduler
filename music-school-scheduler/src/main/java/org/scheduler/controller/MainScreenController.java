@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 import org.scheduler.constants.Constants;
 import org.scheduler.controller.base.ControllerBase;
 import org.scheduler.controller.interfaces.IController;
+import org.scheduler.repository.LessonsRepository;
+import org.scheduler.repository.StudentsRepository;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.StudentDTO;
+import org.scheduler.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.scheduler.repository.LessonsDTO;
-import org.scheduler.repository.StudentsDTO;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.Student;
-import org.scheduler.viewmodels.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,43 +27,43 @@ public class MainScreenController extends ControllerBase implements IController 
     @FXML
     private Button addCustomer;
     @FXML
-    private TableColumn<Student, String> studentMonth;
+    private TableColumn<StudentDTO, String> studentMonth;
     @FXML
-    private TableColumn<Student, String> studentWeek;
+    private TableColumn<StudentDTO, String> studentWeek;
     @FXML
-    private TableColumn<Student, String> studentAddressColumn;
+    private TableColumn<StudentDTO, String> studentAddressColumn;
     @FXML
-    private TableColumn<Student, String>  customerMonth;
+    private TableColumn<StudentDTO, String>  customerMonth;
     @FXML
-    private TableColumn<Student, String> studentNameColumn;
+    private TableColumn<StudentDTO, String> studentNameColumn;
     @FXML
-    private TableColumn<Student, String>  customerWeek;
+    private TableColumn<StudentDTO, String>  customerWeek;
     @FXML
-    private TableView<Student> studentTable;
+    private TableView<StudentDTO> studentTable;
     @FXML
     private Button deleteCustomer;
     @FXML
-    private TableColumn<Lesson, String> descriptionMonth;
+    private TableColumn<LessonDTO, String> descriptionMonth;
     @FXML
-    private TableColumn<Lesson, String> descriptionWeek;
+    private TableColumn<LessonDTO, String> descriptionWeek;
     @FXML
-    private TableColumn<Lesson, String> endMonth;
+    private TableColumn<LessonDTO, String> endMonth;
     @FXML
-    private TableColumn<Lesson, String> endWeek;
+    private TableColumn<LessonDTO, String> endWeek;
     @FXML
     private Button exit;
     @FXML
-    private TableColumn<Lesson, String> idMonth;
+    private TableColumn<LessonDTO, String> idMonth;
     @FXML
-    private TableColumn<Lesson, String> idWeek;
+    private TableColumn<LessonDTO, String> idWeek;
     @FXML
-    private TableColumn<Lesson, String> locationMonth;
+    private TableColumn<LessonDTO, String> locationMonth;
     @FXML
-    private TableColumn<Lesson, String> locationWeek;
+    private TableColumn<LessonDTO, String> locationWeek;
     @FXML
     private Button modifyCustomer;
     @FXML
-    private TableView<Lesson> monthTable;
+    private TableView<LessonDTO> monthTable;
     @FXML
     private Button onAddAppointment;
     @FXML
@@ -71,38 +71,38 @@ public class MainScreenController extends ControllerBase implements IController 
     @FXML
     private Button onModifyAppointment;
     @FXML
-    private TableColumn<Lesson, String> startDate;
+    private TableColumn<LessonDTO, String> startDate;
     @FXML
-    private TableColumn<Lesson, String> startDate1;
+    private TableColumn<LessonDTO, String> startDate1;
     @FXML
-    private TableColumn<Lesson, String> startMonth;
+    private TableColumn<LessonDTO, String> startMonth;
     @FXML
-    private TableColumn<Lesson, String> startWeek;
+    private TableColumn<LessonDTO, String> startWeek;
     @FXML
     private Tab thisMonthTab;
     @FXML
     private Tab thisWeekTab;
     @FXML
-    private TableColumn<Lesson, String> titleMonth;
+    private TableColumn<LessonDTO, String> titleMonth;
     @FXML
-    private TableColumn<Lesson, String> titleWeek;
+    private TableColumn<LessonDTO, String> titleWeek;
     @FXML
-    private TableColumn<Lesson, String> typeMonth;
+    private TableColumn<LessonDTO, String> typeMonth;
     @FXML
-    private TableColumn<Lesson, String> typeWeek;
+    private TableColumn<LessonDTO, String> typeWeek;
     @FXML
-    private TableColumn<User, String> userMonth;
+    private TableColumn<UserDTO, String> userMonth;
     @FXML
-    private TableColumn<User, String> userWeek;
+    private TableColumn<UserDTO, String> userWeek;
     @FXML
-    private TableColumn<Student, String> studentIdColumn;
+    private TableColumn<StudentDTO, String> studentIdColumn;
     @FXML
-    private TableView<Lesson> weekTable;
-    private Lesson selectedLesson = null;
-    private Student selectedStudent = null;
+    private TableView<LessonDTO> weekTable;
+    private LessonDTO selectedLessonDTO = null;
+    private StudentDTO selectedStudentDTO = null;
     private int userId;
-    private final LessonsDTO lessonsDTO = new LessonsDTO();
-    private final StudentsDTO studentsDTO = new StudentsDTO();
+    private final LessonsRepository lessonsRepository = new LessonsRepository();
+    private final StudentsRepository studentsRepository = new StudentsRepository();
     /**
      * When the add customer button is clicked, load corresponding screen
      * @param actionEvent
@@ -117,9 +117,9 @@ public class MainScreenController extends ControllerBase implements IController 
      * @throws IOException
      */
     public void onModifyStudent(ActionEvent actionEvent) throws IOException {
-        _studentToBeModified = studentTable.getSelectionModel().getSelectedItem();
+        _studentDTOToBeModified = studentTable.getSelectionModel().getSelectedItem();
 
-        if (_studentToBeModified == null) {
+        if (_studentDTOToBeModified == null) {
             return;
         }
 
@@ -131,23 +131,23 @@ public class MainScreenController extends ControllerBase implements IController 
      * @param actionEvent
      */
     public void onDeleteCustomer(ActionEvent actionEvent) {
-        Student selectedStudent = studentTable.getSelectionModel().getSelectedItem();
-        if(selectedStudent != null) {
+        StudentDTO selectedStudentDTO = studentTable.getSelectionModel().getSelectedItem();
+        if(selectedStudentDTO != null) {
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
             alert1.setContentText("Do you want to delete this customer and all associated appointments?");
             Optional<ButtonType> result = alert1.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
-                    if(lessonsDTO.checkForLessons(selectedStudent)){
-                        studentsDTO.deleteStudent(selectedStudent);
-                        studentTable.setItems(studentsDTO.getAllStudents());
+                    if(lessonsRepository.isStudentHaveLessons(selectedStudentDTO)){
+                        studentsRepository.deleteItem(selectedStudentDTO);
+                        studentTable.setItems(studentsRepository.getAllItems());
                         return;
                     }
-                    if(!lessonsDTO.checkForLessons(selectedStudent)){
-                        lessonsDTO.deleteAppointment(selectedStudent.getId());
-                        studentsDTO.deleteStudent(selectedStudent);
-                        studentTable.setItems(studentsDTO.getAllStudents());
+                    if(!lessonsRepository.isStudentHaveLessons(selectedStudentDTO)){
+                        lessonsRepository.deleteAllLessonsForStudent(selectedStudentDTO.getId());
+                        studentsRepository.deleteItem(selectedStudentDTO);
+                        studentTable.setItems(studentsRepository.getAllItems());
                     }
                     else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -188,15 +188,15 @@ public class MainScreenController extends ControllerBase implements IController 
      */
     public void onModifyAppointment(ActionEvent actionEvent) throws IOException {
         if (thisWeekTab.isSelected()) {
-            selectedLesson = weekTable.getSelectionModel().getSelectedItem();
+            selectedLessonDTO = weekTable.getSelectionModel().getSelectedItem();
         }
         else if(thisMonthTab.isSelected()) {
-            selectedLesson = monthTable.getSelectionModel().getSelectedItem();
+            selectedLessonDTO = monthTable.getSelectionModel().getSelectedItem();
         }
-        if (selectedLesson == null) {
+        if (selectedLessonDTO == null) {
             return;
         }
-        if (selectedLesson.getStart().isBefore(LocalDateTime.now())){
+        if (selectedLessonDTO.getStart().isBefore(LocalDateTime.now())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
@@ -204,7 +204,7 @@ public class MainScreenController extends ControllerBase implements IController 
             alert.showAndWait();
             return;
         }
-        _lessonToBeModified = selectedLesson;
+        _lessonDTOToBeModified = selectedLessonDTO;
 
         super.loadNewScreen(actionEvent, Constants.FXML_ROUTES.MOD_LESSON_SCRN, userId);
     }
@@ -215,33 +215,33 @@ public class MainScreenController extends ControllerBase implements IController 
      */
     public void onDeleteAppointment(ActionEvent actionEvent) {
         if (thisWeekTab.isSelected()) {
-            selectedLesson = weekTable.getSelectionModel().getSelectedItem();
-            if (selectedLesson == null) {
+            selectedLessonDTO = weekTable.getSelectionModel().getSelectedItem();
+            if (selectedLessonDTO == null) {
                 return;
             }
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
-            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
+            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getLessonID() + ", Type: " + selectedLessonDTO.getType() + "?");
             Optional<ButtonType> result = alert1.showAndWait();
             if (result.get() == ButtonType.OK) {
-                lessonsDTO.deleteAppointment(selectedLesson);
-                weekTable.setItems(lessonsDTO.getWeeklyLessons());
+                lessonsRepository.deleteItem(selectedLessonDTO);
+                weekTable.setItems(lessonsRepository.getWeeklyLessons());
             }
             else {
                 alert1.close();
             }
         } else if (thisMonthTab.isSelected()) {
-            selectedLesson = monthTable.getSelectionModel().getSelectedItem();
-            if (selectedLesson == null) {
+            selectedLessonDTO = monthTable.getSelectionModel().getSelectedItem();
+            if (selectedLessonDTO == null) {
                 return;
             }
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
             alert1.setHeaderText("Delete");
-            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLesson.getLessonID() + ", Type: " + selectedLesson.getType() + "?");
+            alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getLessonID() + ", Type: " + selectedLessonDTO.getType() + "?");
             Optional<ButtonType> result = alert1.showAndWait();
             if (result.get() == ButtonType.OK){
-                lessonsDTO.deleteAppointment(selectedLesson);
-                monthTable.setItems(lessonsDTO.getMonthlyLessons());
+                lessonsRepository.deleteItem(selectedLessonDTO);
+                monthTable.setItems(lessonsRepository.getMonthlyLessons());
             }
             else {
                 alert1.close();
@@ -278,15 +278,15 @@ public class MainScreenController extends ControllerBase implements IController 
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Get data for Student Table
+        //Get data for StudentDTO Table
         studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         studentAddressColumn.setCellValueFactory(new PropertyValueFactory<>("addressLine1"));
         studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         //sets table with customer data
-        studentTable.setItems(studentsDTO.getAllStudents());
+        studentTable.setItems(studentsRepository.getAllItems());
 
-        //Get data for Weekly LessonsDTO table
+        //Get data for Weekly LessonsRepository table
         idWeek.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleWeek.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionWeek.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -300,9 +300,9 @@ public class MainScreenController extends ControllerBase implements IController 
         userWeek.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         //sets table with weekly appt data
-        weekTable.setItems(lessonsDTO.getWeeklyLessons());
+        weekTable.setItems(lessonsRepository.getWeeklyLessons());
 
-        //Get data for Monthly LessonsDTO table
+        //Get data for Monthly LessonsRepository table
         idMonth.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -315,7 +315,7 @@ public class MainScreenController extends ControllerBase implements IController 
         customerMonth.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         userMonth.setCellValueFactory(new PropertyValueFactory<>("userID"));
         //sets table with monthly appt data
-        monthTable.setItems(lessonsDTO.getMonthlyLessons());
+        monthTable.setItems(lessonsRepository.getMonthlyLessons());
         this.setUserId();
     }
 }

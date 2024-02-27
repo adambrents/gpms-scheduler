@@ -1,22 +1,22 @@
-package org.scheduler.viewmodels;
+package org.scheduler.dto;
 
-public class Report {
+public class ReportDTO {
 
     private final String reportName;
     private int reportId;
 
     /**
-     * constructor for Report
+     * constructor for ReportDTO
      * @param reportName
      * @param reportId
      */
-    public Report(String reportName, int reportId) {
+    public ReportDTO(String reportName, int reportId) {
         this.reportName = reportName;
         this.reportId = reportId;
     }
 
     /**
-     * getter/setter for Report
+     * getter/setter for ReportDTO
      * @return
      */
     public String getReportName() {
@@ -25,7 +25,7 @@ public class Report {
 
     //
 //    /**
-//     * getter/setter for Report
+//     * getter/setter for ReportDTO
 //     * @return
 // 
 ////     */
@@ -35,7 +35,7 @@ public class Report {
 //// 
 //
 //    /**
-//     * getter/setter for Report
+//     * getter/setter for ReportDTO
 // 
 //     * @param reportId
 //     */

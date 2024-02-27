@@ -7,10 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.scheduler.constants.Constants;
-import org.scheduler.viewmodels.Lesson;
-import org.scheduler.viewmodels.Student;
-import org.scheduler.viewmodels.User;
+import org.scheduler.dto.LessonDTO;
+import org.scheduler.dto.StudentDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,8 +20,8 @@ public abstract class ControllerBase implements Initializable {
 
     public Stage _primaryStage;
     public int _userId;
-    public Student _studentToBeModified;
-    public Lesson _lessonToBeModified;
+    public StudentDTO _studentDTOToBeModified;
+    public LessonDTO _lessonDTOToBeModified;
     public void goBack() {
         if (_primaryStage != null && NAVIGATION_HISTORY.getHistory().size() > 0) {
             _primaryStage.setScene(NAVIGATION_HISTORY.pop().getScene());

@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Users" class="title">Class Users</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">main.java.org.scheduler.repository.UsersDTO</div>
+<div class="inheritance">main.java.org.scheduler.repository.UsersRepository</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -132,17 +132,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../model/User.html" title="class in main.java.viewmodels">User</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getUserById(int)" class="member-name-link">getUserById</a><wbr>(int&nbsp;userId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">returns a user object in response to a userid</div>
+<div class="block">returns a userDTO object in response to a userid</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../model/User.html" title="class in main.java.viewmodels">User</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getUserByName(java.lang.String)" class="member-name-link">getUserByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">returns a user object in response to a username</div>
+<div class="block">returns a userDTO object in response to a username</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#submit(model.User)" class="member-name-link">submit</a><wbr>(<a href="../model/User.html" title="class in main.java.viewmodels">User</a>&nbsp;user)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#submit(model.User)" class="member-name-link">submit</a><wbr>(<a href="../model/User.html" title="class in main.java.viewmodels">User</a>&nbsp;userDTO)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Validates user credentials with the db and returns a numeric value for what credential element is incorrect/correct</div>
+<div class="block">Validates userDTO credentials with the db and returns a numeric value for what credential element is incorrect/correct</div>
 </div>
 </div>
 </div>
@@ -178,11 +178,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="submit(model.User)">
 <h3>submit</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">submit</span><wbr><span class="parameters">(<a href="../model/User.html" title="class in main.java.viewmodels">User</a>&nbsp;user)</span></div>
-<div class="block">Validates user credentials with the db and returns a numeric value for what credential element is incorrect/correct</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">submit</span><wbr><span class="parameters">(<a href="../model/User.html" title="class in main.java.viewmodels">User</a>&nbsp;userDTO)</span></div>
+<div class="block">Validates userDTO credentials with the db and returns a numeric value for what credential element is incorrect/correct</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>user</code> - </dd>
+<dd><code>userDTO</code> - </dd>
 <dt>Returns:</dt>
 </dl>
 </section>
@@ -201,7 +201,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getUserByName(java.lang.String)">
 <h3>getUserByName</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../model/User.html" title="class in main.java.viewmodels">User</a></span>&nbsp;<span class="element-name">getUserByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userName)</span></div>
-<div class="block">returns a user object in response to a username</div>
+<div class="block">returns a userDTO object in response to a username</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>userName</code> - </dd>
@@ -213,7 +213,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getUserById(int)">
 <h3>getUserById</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../model/User.html" title="class in main.java.viewmodels">User</a></span>&nbsp;<span class="element-name">getUserById</span><wbr><span class="parameters">(int&nbsp;userId)</span></div>
-<div class="block">returns a user object in response to a userid</div>
+<div class="block">returns a userDTO object in response to a userid</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>userId</code> - </dd>

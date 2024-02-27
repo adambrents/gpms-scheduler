@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class AddAppointmentController" class="title">Class AddAppointmentController</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">main.java.controller.lesson.AddLessonControllerController</div>
+<div class="inheritance">main.java.controller.lessonDTO.AddLessonControllerController</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -138,7 +138,7 @@ implements javafx.fxml.Initializable</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAdd(javafx.event.ActionEvent)" class="member-name-link">onAdd</a><wbr>(javafx.event.ActionEvent&nbsp;actionEvent)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adding an lesson checks for lesson conflicts again, saves lesson to the db, and loads the main screen</div>
+<div class="block">Adding an lessonDTO checks for lessonDTO conflicts again, saves lessonDTO to the db, and loads the main screen</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#setUserId(int)" class="member-name-link">setUserId</a><wbr>(int&nbsp;userId)</code></div>
@@ -184,7 +184,7 @@ implements javafx.fxml.Initializable</span></div>
 <section class="detail" id="onAdd(javafx.event.ActionEvent)">
 <h3>onAdd</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onAdd</span><wbr><span class="parameters">(javafx.event.ActionEvent&nbsp;actionEvent)</span></div>
-<div class="block">Adding an lesson checks for lesson conflicts again, saves lesson to the db, and loads the main screen</div>
+<div class="block">Adding an lessonDTO checks for lessonDTO conflicts again, saves lessonDTO to the db, and loads the main screen</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>actionEvent</code> - </dd>
@@ -197,8 +197,8 @@ implements javafx.fxml.Initializable</span></div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URL.html" title="class or interface in java.net" class="external-link">URL</a>&nbsp;url,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/ResourceBundle.html" title="class or interface in java.util" class="external-link">ResourceBundle</a>&nbsp;resourceBundle)</span></div>
 <div class="block">method loads preset values into all applicable fields and uses a lambda function to ensure dates don't conflict with the local business days of.
- Justification: I need to ensure the available dates in the date picker are within the M-F business days of the business and user
- the user's region</div>
+ Justification: I need to ensure the available dates in the date picker are within the M-F business days of the business and userDTO
+ the userDTO's region</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>initialize</code>&nbsp;in interface&nbsp;<code>javafx.fxml.Initializable</code></dd>
