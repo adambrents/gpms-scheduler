@@ -12,17 +12,18 @@ module music.school.scheduler {
     requires java.naming;
     requires mysql.connector.j;
 
-    opens org.scheduler.program to javafx.fxml;
-    opens org.scheduler.controller to javafx.fxml;
-    opens org.scheduler.controller.student to javafx.fxml;
-    opens org.scheduler.controller.report to javafx.fxml;
-    opens org.scheduler.controller.lesson to javafx.fxml;
-    opens org.scheduler.controller.base to javafx.fxml;
+    opens org.scheduler.app.program to javafx.fxml;
+    opens org.scheduler.app.controller to javafx.fxml;
+    opens org.scheduler.app.controller.student to javafx.fxml;
+    opens org.scheduler.app.controller.report to javafx.fxml;
+    opens org.scheduler.app.controller.lesson to javafx.fxml;
+    opens org.scheduler.app.controller.base to javafx.fxml;
 
-    opens org.scheduler.dto to javafx.base;
-    opens org.scheduler.configuration.model to com.google.gson;
-    opens org.scheduler.repository.configuration.model to com.google.gson;
-    exports org.scheduler.program;
-    opens org.scheduler.repository.interfaces to javafx.base;
-    opens org.scheduler.dto.interfaces to javafx.base;
+    opens org.scheduler.data.dto to javafx.base;
+    opens org.scheduler.app.configuration.model to com.google.gson;
+    opens org.scheduler.data.configuration to com.google.gson;
+    exports org.scheduler.app.program;
+    opens org.scheduler.data.repository.interfaces to javafx.base;
+    opens org.scheduler.data.dto.interfaces to javafx.base;
+    opens org.scheduler.data.dto.properties to javafx.base;
 }

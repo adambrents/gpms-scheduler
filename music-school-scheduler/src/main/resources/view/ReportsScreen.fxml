@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="600" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.scheduler.controller.report.ReportsController">
+            fx:controller="org.scheduler.app.controller.report.ReportsController">
     <Label fx:id="appointmentNumber" layoutX="737.0" layoutY="75.0" text="0"/>
     <Label fx:id="totalAppointments" layoutX="615.0" layoutY="74.0" text="Total Appointments"/>
     <ComboBox fx:id="months" layoutX="71.0" layoutY="207.0" prefHeight="25.0" prefWidth="81.0"/>
@@ -42,7 +42,7 @@
         </children>
     </StackPane>
     <ComboBox fx:id="contactBox" layoutX="27.0" layoutY="396.0" prefWidth="150.0" promptText="Choose a contact"/>
-    <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" onAction="#onCancel" text="Back"/>
+    <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" onAction="#onGoBack" text="Back"/>
     <Label layoutX="12.0" layoutY="356.0" text="Divisions"/>
     <ComboBox fx:id="divisions" layoutX="71.0" layoutY="352.0" prefHeight="25.0" prefWidth="81.0"/>
     <Label layoutX="634.0" layoutY="569.0"/>

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.scheduler.controller.lesson.ModifyLessonControllerController">
+            fx:controller="org.scheduler.app.controller.lesson.ModifyLessonController">
    <Label fx:id="errorText" layoutX="458.0" layoutY="48.0"/>
    <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0"
          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -112,7 +112,7 @@
                               <Insets right="50.0"/>
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onCancel" text="Cancel"/>
+                        <Button mnemonicParsing="false" onAction="#onGoBack" text="Cancel"/>
                      </children>
                   </HBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"

@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <main-class>org.scheduler.program.Program</main-class>
+        <main-class>org.scheduler.app.program.Program</main-class>
         <app.name>LessonScheduler</app.name>
         <app.version>1.0.0</app.version>
         <maven.compiler.release>17</maven.compiler.release>
@@ -132,7 +132,7 @@
                 <configuration>
                     <jlinkImageName>music-school-scheduler</jlinkImageName>
                     <launcher>launcher</launcher>
-                    <mainClass>music.school.scheduler/org.scheduler.program.Program</mainClass>
+                    <mainClass>music.school.scheduler/org.scheduler.app.program.Program</mainClass>
                 </configuration>
             </plugin>
             <plugin>

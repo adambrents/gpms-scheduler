@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400" prefWidth="496.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.scheduler.controller.LoginScreenController">
+            fx:controller="org.scheduler.app.controller.LoginScreenController">
     <GridPane prefHeight="400.0" prefWidth="600.0">
       <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.4" minWidth="10.0" prefWidth="105.2"/>
@@ -95,7 +95,7 @@
                   <Label fx:id="passwordError" GridPane.rowIndex="1"/>
               </children>
           </GridPane>
-          <Button fx:id="exit" mnemonicParsing="false" onAction="#onCancel" text="Exit" GridPane.columnIndex="1"
+          <Button fx:id="exit" mnemonicParsing="false" onAction="#onGoBack" text="Exit" GridPane.columnIndex="1"
                   GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
         </children>
     </GridPane>

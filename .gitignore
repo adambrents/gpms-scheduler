@@ -30,11 +30,6 @@ Thumbs.db
 .mvn/wrapper/maven-wrapper.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
-# ignore log files and databases
-*.log
-*.sql
-*.db
-
 # ignore compiled Java files
 *.class
 

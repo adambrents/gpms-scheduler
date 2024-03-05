@@ -18,7 +18,7 @@ v1.0
 IntelliJ Community 2023.1
 ## IDE Run Instructions
 1. Ensure maven has downloaded all needed dependencies to ./lib/dependencies for the application
-2. Run configuration "org.scheduler.program.Program" in IntelliJ
+2. Run configuration "org.scheduler.app.program.Program" in IntelliJ
 
 ## Build Instructions
 1. Using the maven utility in Intellij, run the package utility
