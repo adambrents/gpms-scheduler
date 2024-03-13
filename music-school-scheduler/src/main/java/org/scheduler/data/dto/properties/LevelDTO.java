@@ -1,15 +1,18 @@
 package org.scheduler.data.dto.properties;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.interfaces.IRepository;
+import org.scheduler.data.repository.properties.LevelRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class LevelDTO implements ISqlConvertable<LevelDTO> {
-    private int id;
-    private String name;
+public final class LevelDTO extends DTOBase<LevelDTO> implements ISqlConvertible<LevelDTO> {
 
     public LevelDTO(int Id, String name) {
         this.id = Id;
@@ -20,26 +23,43 @@ public final class LevelDTO implements ISqlConvertable<LevelDTO> {
         
     }
 
-    @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.LEVELS);
+    public LevelDTO(String name) {
+        this.name = name;
     }
 
     @Override
-    public String toSqlInsertQuery(LevelDTO item) {
-        return String.format("INSERT INTO %s (Level_Id, Name) VALUES (%d, '%s')",
-                DB_TABLES.LEVELS, item.levelId(), item.name());
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.LEVELS;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
     }
 
     @Override
-    public String toSqlUpdateQuery(LevelDTO item) {
-        return String.format("UPDATE %s SET Name = '%s' WHERE Level_Id = %d",
-                DB_TABLES.LEVELS, item.name(), item.levelId());
+    public PreparedStatement toSqlInsertQuery(LevelDTO item, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.LEVELS + " (Level_Id, Name) VALUES (?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.getId());
+        statement.setString(2, item.getName());
+        return statement;
     }
-
     @Override
-    public String toSqlDeleteQuery(LevelDTO item) {
-        return String.format("DELETE FROM %s WHERE Level_Id = %d", DB_TABLES.LEVELS, item.levelId());
+    public PreparedStatement toSqlUpdateQuery(LevelDTO item, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.LEVELS + " SET Name = ? WHERE Level_Id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, item.getName());
+        statement.setInt(2, item.getId());
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlDeleteQuery(LevelDTO item, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.LEVELS + " WHERE Level_Id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.getId());
+        return statement;
+    }
+    @Override
+    public IRepository getRepository() {
+        return new LevelRepository();
     }
 
     @Override
@@ -51,15 +71,6 @@ public final class LevelDTO implements ISqlConvertable<LevelDTO> {
             return null;
         }
     }
-
-    public int levelId() {
-        return id;
-    }
-
-    public String name() {
-        return name;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

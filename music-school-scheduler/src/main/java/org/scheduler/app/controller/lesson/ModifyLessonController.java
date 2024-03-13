@@ -11,6 +11,7 @@ import org.scheduler.app.controller.base.LessonControllerBase;
 import org.scheduler.app.controller.interfaces.IController;
 import org.scheduler.app.controller.interfaces.IUpdate;
 import org.scheduler.app.models.errors.PossibleError;
+import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.repository.LessonsRepository;
 import org.scheduler.data.repository.StudentsRepository;
 import org.scheduler.data.repository.UsersRepository;
@@ -183,25 +184,21 @@ public class ModifyLessonController extends LessonControllerBase implements IUpd
         i = 0;
         userNames.clear();
         ObservableList<UserDTO> allUserDTOS = null;
-        try {
-            allUserDTOS = usersRepository.getAllItems();
-        } catch (SQLException | InstantiationException | IllegalAccessException throwables) {
-            throw new RuntimeException(throwables);
-        }
+        allUserDTOS = usersRepository.getAllItems();
         while(i < allUserDTOS.size()){
-            String userName = allUserDTOS.get(i).username();
+            String userName = allUserDTOS.get(i).getName();
             userNames.add(i,userName);
             i++;
         }
         employee.setItems(userNames);
-        employee.setValue(usersRepository.getUserById(selectedLessonDTO.getUserID()).username());
+        employee.setValue(usersRepository.getUserById(selectedLessonDTO.getUserID()).getName());
         description.setText(selectedLessonDTO.getDescription());
         type.setText(selectedLessonDTO.getType());
         startTime.setValue(selectedLessonDTO.getStartTime());
         endTime.setValue(selectedLessonDTO.getEndTime());
         date.setValue(selectedLessonDTO.getStart().toLocalDate());
         location.setText(selectedLessonDTO.getLocation());
-        appointmentId = selectedLessonDTO.getLessonID();
+        appointmentId = selectedLessonDTO.getId();
         //checks to see if the selected date is before current date
         int index = 0;
         int validStartTimeCount = getAllowedLessonStartTimes(date.getValue()).size();
@@ -249,6 +246,11 @@ public class ModifyLessonController extends LessonControllerBase implements IUpd
         catch (IOException e){
             _logger.error("Could not load resource!", e);
         }
+    }
+
+    @Override
+    public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
+
     }
 
     /**
@@ -310,12 +312,12 @@ public class ModifyLessonController extends LessonControllerBase implements IUpd
                     type.getText(),
                     startDateTime,
                     endDateTime,
-                    userId));
+                    userId), JDBC.getConnection());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         errorText.setText("Successfully updated lessonDTO :)");
-        super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).userId());
+        super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).getId());
     }
     /**
      * method loads preset values into all applicable fields

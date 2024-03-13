@@ -2,11 +2,12 @@ package org.scheduler.data.repository.interfaces;
 
 import javafx.collections.ObservableList;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface IRepository<T> {
     ObservableList<T> getAllItems() throws SQLException, InstantiationException, IllegalAccessException;
-    void updateItem(T item) throws SQLException;
-    int insertItem(T item) throws SQLException;
-    void deleteItem(T item) throws SQLException;
+    void updateItem(T item, Connection connection) throws SQLException;
+    void insertItem(T item, Connection connection) throws SQLException;
+    void deleteItem(T item, Connection connection) throws SQLException;
 }

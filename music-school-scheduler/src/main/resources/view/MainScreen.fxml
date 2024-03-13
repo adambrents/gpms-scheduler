@@ -11,11 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="496.0" prefWidth="1102.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scheduler.app.controller.MainScreenController">
-   <MenuBar prefHeight="25.0" prefWidth="1089.0">
+<AnchorPane prefHeight="496.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.scheduler.app.controller.MainScreenController">
+   <MenuBar prefHeight="25.0" prefWidth="1102.0" AnchorPane.bottomAnchor="471.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
      <menus>
          <Menu mnemonicParsing="false" text="Tools">
-             <MenuItem mnemonicParsing="false" onAction="#onPropertyManagement" text="Property Management" />
+             <MenuItem mnemonicParsing="false" onAction="#onPropertyManagement" text="Manage Lesson Properties" />
+            <MenuItem mnemonicParsing="false" onAction="#onUserManagement" text="Manage Users" />
+            <MenuItem mnemonicParsing="false" onAction="#onTeacherManagement" text="Manage Teachers" />
+            <MenuItem mnemonicParsing="false" onAction="#onStudentManagement" text="Manage Students" />
              <MenuItem mnemonicParsing="false" onAction="#onReports" text="Reports" />
          </Menu>
          <Menu mnemonicParsing="false" text="Help">
@@ -23,39 +26,19 @@
          </Menu>
      </menus>
    </MenuBar>
-   <SplitPane dividerPositions="0.3891444342226311" layoutY="25.0" prefHeight="470.0" prefWidth="1102.0">
+   <SplitPane layoutY="25.0" prefHeight="471.0" prefWidth="668.0">
       <items>
-         <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <AnchorPane prefHeight="469.0" prefWidth="661.0">
             <children>
-                  <Label layoutX="16.0" layoutY="34.0" text="Students">
-                      <font>
-                          <Font name="System Bold" size="24.0" />
-                      </font>
-                  </Label>
-                  <Button fx:id="addCustomer" layoutX="16.0" layoutY="69.0" mnemonicParsing="false" onAction="#onAddCustomer" prefHeight="25.0" prefWidth="128.0" text="Manage Students" />
-                  <Button fx:id="deleteCustomer" layoutX="162.0" layoutY="69.0" mnemonicParsing="false" onAction="#onDeleteCustomer" text="Delete" />
-                  <TableView fx:id="studentTable" layoutX="16.0" layoutY="108.0" prefHeight="319.0" prefWidth="394.0">
-                      <columns>
-                          <TableColumn fx:id="studentIdColumn" prefWidth="27.0" text="ID" />
-                          <TableColumn fx:id="studentNameColumn" prefWidth="85.0" text="Full Name" />
-                          <TableColumn fx:id="studentAddressColumn" prefWidth="115.0" text="Address Line 1" />
-                     <TableColumn fx:id="studentMstLessonTime" prefWidth="87.0" text="Lesson Time" />
-                     <TableColumn fx:id="studentIsGoldCup" prefWidth="79.0" text="Gold Cup" />
-                      </columns>
-                  </TableView>
-            </children>
-         </AnchorPane>
-         <AnchorPane prefHeight="501.0" prefWidth="673.0">
-            <children>
-                  <Button layoutX="12.0" layoutY="435.0" mnemonicParsing="false" onAction="#onAllAppointments" text="All Lessons" />
-                  <Button fx:id="onDeleteAppointment" layoutX="132.0" layoutY="68.0" mnemonicParsing="false" onAction="#onDeleteAppointment" text="Delete" />
-                  <Button fx:id="onAddAppointment" layoutX="12.0" layoutY="68.0" mnemonicParsing="false" onAction="#onAddAppointment" text="Manage Lessons" />
-                 <Label layoutX="11.0" layoutY="33.0" text="This Week's Lessons">
+                  <Button layoutX="14.0" layoutY="427.0" mnemonicParsing="false" onAction="#onAllLessons" text="All Lessons" />
+                  <Button fx:id="onDeleteAppointment" layoutX="246.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCancelLesson" prefHeight="25.0" prefWidth="162.0" text="Cancel Selected Lesson" />
+                  <Button fx:id="onAddAppointment" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" onAction="#onLessonManagement" text="Manage Lessons" />
+                 <Label layoutX="11.0" layoutY="9.0" text="This Week's Lessons">
                      <font>
                          <Font name="System Bold" size="24.0" />
                      </font>
                  </Label>
-                     <TableView fx:id="weekTable" layoutX="11.0" layoutY="108.0" prefHeight="319.0" prefWidth="644.0">
+                     <TableView fx:id="weekTable" layoutX="11.0" layoutY="75.0" prefHeight="319.0" prefWidth="644.0">
                          <columns>
                              <TableColumn fx:id="idWeek" prefWidth="36.200013160705566" text="ID" />
                              <TableColumn fx:id="studentWeek" minWidth="0.0" prefWidth="67.60003662109375" text="Teacher" />
@@ -68,7 +51,7 @@
                      <TableColumn fx:id="lessonBook" prefWidth="73.39995956420898" text="Book" />
                          </columns>
                      </TableView>
-                  <Button fx:id="exit" layoutX="626.0" layoutY="435.0" mnemonicParsing="false" onAction="#onGoBack" text="Exit" />
+                  <Button fx:id="exit" layoutX="620.0" layoutY="427.0" mnemonicParsing="false" onAction="#onGoBack" text="Exit" />
             </children>
          </AnchorPane>
       </items>

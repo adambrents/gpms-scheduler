@@ -1,44 +1,71 @@
 package org.scheduler.data.dto;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.LessonsRepository;
+import org.scheduler.data.repository.interfaces.IRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class LessonScheduledMstDTO implements ISqlConvertable<LessonScheduledMstDTO> {
-    private int lessonScheduledMstId;
+public final class LessonScheduledMstDTO extends DTOBase<LessonScheduledMstDTO> implements ISqlConvertible<LessonScheduledMstDTO> {
+    private int id;
     private int lessonScheduledId;
 
-    public LessonScheduledMstDTO(int lessonScheduledMstId, int lessonScheduledId) {
-        this.lessonScheduledMstId = lessonScheduledMstId;
+    public LessonScheduledMstDTO(int id, int lessonScheduledId) {
+        this.id = id;
         this.lessonScheduledId = lessonScheduledId;
     }
 
     public LessonScheduledMstDTO(){
         
     }
+
     @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.LESSONS_SCHEDULED_MST);
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.LESSONS_SCHEDULED_MST;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlInsertQuery(LessonScheduledMstDTO item, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.LESSONS_SCHEDULED_MST + " (LESSONS_SCHEDULED_MST_Id, Lesson_Scheduled_Id) VALUES (?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.getId());
+        statement.setInt(2, item.lessonScheduledId());
+
+        return statement;
     }
 
     @Override
-    public String toSqlInsertQuery(LessonScheduledMstDTO item) {
-        return String.format("INSERT INTO %s (LESSONS_SCHEDULED_MST_Id, Lesson_Scheduled_Id) VALUES (%d, %d)",
-                DB_TABLES.LESSONS_SCHEDULED_MST, item.lessonScheduledMstId(), item.lessonScheduledId());
+    public PreparedStatement toSqlUpdateQuery(LessonScheduledMstDTO item, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.LESSONS_SCHEDULED_MST + " SET Lesson_Scheduled_Id = ? WHERE LESSONS_SCHEDULED_MST_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.lessonScheduledId());
+        statement.setInt(2, item.getId());
+
+        return statement;
     }
 
     @Override
-    public String toSqlUpdateQuery(LessonScheduledMstDTO item) {
-        return String.format("UPDATE %s SET Lesson_Scheduled_Id = %d WHERE LESSONS_SCHEDULED_MST_Id = %d",
-                DB_TABLES.LESSONS_SCHEDULED_MST, item.lessonScheduledId(), item.lessonScheduledMstId());
+    public PreparedStatement toSqlDeleteQuery(LessonScheduledMstDTO item, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.LESSONS_SCHEDULED_MST + " WHERE LESSONS_SCHEDULED_MST_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.getId());
+
+        return statement;
     }
 
     @Override
-    public String toSqlDeleteQuery(LessonScheduledMstDTO item) {
-        return String.format("DELETE FROM %s WHERE LESSONS_SCHEDULED_MST_Id = %d", DB_TABLES.LESSONS_SCHEDULED_MST, item.lessonScheduledMstId());
+    public IRepository getRepository() {
+        return new LessonsRepository();
     }
 
     @Override
@@ -51,10 +78,6 @@ public final class LessonScheduledMstDTO implements ISqlConvertable<LessonSchedu
         }
     }
 
-    public int lessonScheduledMstId() {
-        return lessonScheduledMstId;
-    }
-
     public int lessonScheduledId() {
         return lessonScheduledId;
     }
@@ -64,19 +87,19 @@ public final class LessonScheduledMstDTO implements ISqlConvertable<LessonSchedu
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (LessonScheduledMstDTO) obj;
-        return this.lessonScheduledMstId == that.lessonScheduledMstId &&
+        return this.id == that.id &&
                 this.lessonScheduledId == that.lessonScheduledId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lessonScheduledMstId, lessonScheduledId);
+        return Objects.hash(id, lessonScheduledId);
     }
 
     @Override
     public String toString() {
         return "LessonScheduledMstDTO[" +
-                "lessonScheduledMstId=" + lessonScheduledMstId + ", " +
+                "lessonScheduledMstId=" + id + ", " +
                 "lessonScheduledId=" + lessonScheduledId + ']';
     }
 

@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.scheduler.app.constants.Constants.PRIMARY_STAGE;
 import static org.scheduler.app.utilities.GsonHelper.loadConfig;
 
 public class Program extends Application{
@@ -25,6 +26,8 @@ public class Program extends Application{
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        PRIMARY_STAGE = primaryStage;
 //        Image appIcon = new Image(getClass().getResourceAsStream("img/app-icon.png"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Constants.FXML_ROUTES.LOGIN_SCREEN));
@@ -33,13 +36,11 @@ public class Program extends Application{
 //        primaryStage.getIcons().add(appIcon);
         Scene scene = new Scene(root);
 
-        primaryStage.setScene(scene);
+        PRIMARY_STAGE.setScene(scene);
 
-        primaryStage.setTitle(loadConfig(AppConfig.class).getAppName());
+        PRIMARY_STAGE.setTitle(loadConfig(AppConfig.class).getAppName());
 
-        Constants.PRIMARY_STAGE = primaryStage;
-
-        primaryStage.show();
+        PRIMARY_STAGE.show();
     }
 
     /**

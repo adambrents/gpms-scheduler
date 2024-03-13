@@ -1,5 +1,6 @@
 package org.scheduler.data.repository;
 
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.repository.base.BaseRepository;
 import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.configuration.JDBC;
@@ -32,19 +33,18 @@ public class LessonsRepository extends BaseRepository<LessonDTO> {
         return FXCollections.observableArrayList(super.getAllItemsFromType(LessonDTO.class));
     }
     @Override
-    public void updateItem(LessonDTO item) throws SQLException {
-        super.update(item);
+    public void updateItem(LessonDTO item, Connection connection) throws SQLException {
+        super.update(item, connection);
     }
 
     @Override
-    public int insertItem(LessonDTO item) throws SQLException {
-        super.insert(item);
-        return 0;
+    public void insertItem(LessonDTO item, Connection connection) throws SQLException {
+        super.insert(item, connection);
     }
 
     @Override
-    public void deleteItem(LessonDTO item) throws SQLException {
-        super.delete(item);
+    public void deleteItem(LessonDTO item, Connection connection) throws SQLException {
+        super.delete(item, connection);
     }
     /**
      * query returns the latest appointment ID in order to generate an ID in the UI and insert it later
@@ -243,7 +243,7 @@ public class LessonsRepository extends BaseRepository<LessonDTO> {
      * @return
      */
     public boolean isStudentHaveLessons(StudentDTO selectedStudentDTO) {
-        int customerID = selectedStudentDTO.getStudentId();
+        int customerID = selectedStudentDTO.getId();
         _studentLessonExists.clear();
         try(Statement statement = getStatement()) {
             String query = String.format(
@@ -346,5 +346,10 @@ public class LessonsRepository extends BaseRepository<LessonDTO> {
                 resultSet.getInt("User_ID"));
         lessonDTO.setStudentId(resultSet.getInt("Student_ID"));
         return lessonDTO;
+    }
+
+    @Override
+    public <T extends ISqlConvertible> void setKeyOnDTO(int key, T item) {
+
     }
 }

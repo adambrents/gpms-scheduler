@@ -2,11 +2,13 @@ package org.scheduler.data.repository.properties;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.dto.properties.InstrumentDTO;
 import org.scheduler.data.repository.base.BaseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class InstrumentRepository extends BaseRepository<InstrumentDTO> {
@@ -17,21 +19,25 @@ public class InstrumentRepository extends BaseRepository<InstrumentDTO> {
     }
 
     @Override
-    public void updateItem(InstrumentDTO item) throws SQLException {
-        super.update(item);
+    public void updateItem(InstrumentDTO item, Connection connection) throws SQLException {
+        super.update(item, connection);
     }
 
     @Override
-    public int insertItem(InstrumentDTO item) throws SQLException {
-        super.insert(item);
-        return 0;
+    public void insertItem(InstrumentDTO item, Connection connection) throws SQLException {
+        super.insert(item, connection);
     }
 
     @Override
-    public void deleteItem(InstrumentDTO item) throws SQLException {
-        super.delete(item);
+    public void deleteItem(InstrumentDTO item, Connection connection) throws SQLException {
+        super.delete(item, connection);
     }
 
     public void performAction(InstrumentDTO instrumentDTO, String action) {
+    }
+
+    @Override
+    public <T extends ISqlConvertible> void setKeyOnDTO(int key, T item) {
+
     }
 }

@@ -1,11 +1,16 @@
 package org.scheduler.data.dto;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
+import org.scheduler.data.repository.RecitalRepository;
+import org.scheduler.data.repository.interfaces.IRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 
-public class RecitalDTO implements ISqlConvertable<RecitalDTO> {
+public class RecitalDTO extends DTOBase<RecitalDTO> implements ISqlConvertible<RecitalDTO> {
 
     private int recitalId;
     private LocalDateTime eventDate;
@@ -20,29 +25,34 @@ public class RecitalDTO implements ISqlConvertable<RecitalDTO> {
     public RecitalDTO() {
         
     }
-
     @Override
-    public String toSqlSelectQuery() {
+    public PreparedStatement toSqlSelectQuery(Connection connection) {
         return null;
     }
 
     @Override
-    public String toSqlInsertQuery(RecitalDTO item) {
+    public PreparedStatement toSqlInsertQuery(RecitalDTO item, Connection connection) {
         return null;
     }
 
     @Override
-    public String toSqlUpdateQuery(RecitalDTO item) {
+    public PreparedStatement toSqlUpdateQuery(RecitalDTO item, Connection connection) {
         return null;
     }
 
     @Override
-    public String toSqlDeleteQuery(RecitalDTO item) {
+    public PreparedStatement toSqlDeleteQuery(RecitalDTO item, Connection connection) {
+        return null;
+    }
+
+
+    @Override
+    public <T extends ISqlConvertible> T fromResultSet(ResultSet rs) {
         return null;
     }
 
     @Override
-    public <T extends ISqlConvertable> T fromResultSet(ResultSet rs) {
-        return null;
+    public IRepository getRepository() {
+        return new RecitalRepository();
     }
 }

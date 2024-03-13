@@ -12,6 +12,7 @@ import org.scheduler.app.controller.base.LessonControllerBase;
 import org.scheduler.app.controller.interfaces.IController;
 import org.scheduler.app.controller.interfaces.ICreate;
 import org.scheduler.app.models.errors.PossibleError;
+import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.repository.LessonsRepository;
 import org.scheduler.data.dto.LessonDTO;
 import org.scheduler.data.dto.UserDTO;
@@ -167,6 +168,11 @@ public class AddLessonController extends LessonControllerBase implements ICreate
         }
     }
 
+    @Override
+    public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
+
+    }
+
     /**
      * Adding an appointment checks for appointment conflicts again, saves appointment to the db, and loads the main screen
      */
@@ -222,7 +228,7 @@ public class AddLessonController extends LessonControllerBase implements ICreate
                     type.getText(),
                     startDateTime,
                     endDateTime,
-                    userId));
+                    userId), JDBC.getConnection());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -243,7 +249,7 @@ public class AddLessonController extends LessonControllerBase implements ICreate
             _logger.error("Error while waiting! Exception: e", e);
         }
 
-        super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).userId());
+        super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, usersRepository.getUserByName(employee.getValue()).getId());
     }
 
     /**
@@ -273,13 +279,9 @@ public class AddLessonController extends LessonControllerBase implements ICreate
         i = 0;
         userNames.clear();
         ObservableList<UserDTO> allUserDTOS = null;
-        try {
-            allUserDTOS = usersRepository.getAllItems();
-        } catch (SQLException | InstantiationException | IllegalAccessException throwables) {
-            throw new RuntimeException(throwables);
-        }
+        allUserDTOS = usersRepository.getAllItems();
         while(i < allUserDTOS.size()){
-            String userName = allUserDTOS.get(i).username();
+            String userName = allUserDTOS.get(i).getName();
             userNames.add(i,userName);
             i++;
         }

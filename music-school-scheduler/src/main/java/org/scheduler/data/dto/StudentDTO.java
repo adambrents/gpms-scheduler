@@ -1,27 +1,32 @@
 package org.scheduler.data.dto;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISelectableDTO;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.dto.properties.InstrumentDTO;
+import org.scheduler.data.repository.StudentsRepository;
+import org.scheduler.data.repository.TeachersRepository;
+import org.scheduler.data.repository.interfaces.IRepository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 
-public class StudentDTO implements ISqlConvertable<StudentDTO> {
+public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<StudentDTO> {
     private int lastUpdateBy;
     private int createBy;
     private LocalDateTime createDate;
     private LocalDateTime lastUpdate;
-    private int studentId;
     private String firstName;
     private String lastName;
     private String addressLine1;
     private String addressLine2;
     private String postalCode;
     private String phoneNumber;
-    private int currentBookId;
-    private int currentLevelId;
     private boolean isGoldCup;
+    private String city;
+    private String state;
+    private String email;
 
     public StudentDTO(){
         
@@ -29,7 +34,7 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
     /**
      * constructor for customer
      *
-     * @param studentId
+     * @param id
      * @param firstName
      * @param lastName
      * @param addressLine1
@@ -37,38 +42,40 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
      * @param postalCode
      * @param phoneNumber
      */
-    public StudentDTO(int studentId,
+    public StudentDTO(int id,
                       String firstName,
                       String lastName,
                       String addressLine1,
                       String addressLine2,
                       String postalCode,
+                      String city,
+                      String state,
                       String phoneNumber,
+                      String email,
                       LocalDateTime createDate,
                       int createBy,
                       LocalDateTime lastUpdate,
                       int lastUpdateBy,
-                      int currentBookId,
-                      int currentLevelId,
                       boolean isGoldCup) {
-        this.studentId = studentId;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.createDate = createDate;
         this.createBy = createBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
-        this.currentBookId = currentBookId;
-        this.currentLevelId = currentLevelId;
         this.isGoldCup = isGoldCup;
     }
 
     public StudentDTO(String firstName, String lastName, String addressLine1, String addressLine2, String postalCode, String phoneNumber,
-                      LocalDateTime createDate, int createBy, LocalDateTime lastUpdate, int lastUpdateBy, int currentBookId, int currentLevelId,
+                      LocalDateTime createDate, int createBy, LocalDateTime lastUpdate, int lastUpdateBy,
                       boolean isGoldCup) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,8 +87,34 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
         this.createBy = createBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
-        this.currentBookId = currentBookId;
-        this.currentLevelId = currentLevelId;
+        this.isGoldCup = isGoldCup;
+    }
+
+    public StudentDTO(int id,
+                      String firstName,
+                      String lastName,
+                      String addressLine1,
+                      String addressLine2,
+                      String postalCode,
+                      String city,
+                      String state,
+                      String phoneNumber,
+                      String email,
+                      LocalDateTime lastUpdate,
+                      int lastUpdateBy,
+                      boolean isGoldCup) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdateBy = lastUpdateBy;
         this.isGoldCup = isGoldCup;
     }
 
@@ -90,8 +123,15 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
      *
      * @return
      */
-    public int getStudentId() {
-        return studentId;
+
+    @Override
+    public String getName() {
+        return getFullName();
+    }
+
+    @Override
+    public IRepository getRepository() {
+        return new StudentsRepository();
     }
 
     public String getFirstName() {
@@ -116,13 +156,6 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
 
     public String getFullName(){ return String.format("%s %s", getFirstName(), getLastName()); }
 
-    public int getCurrentLevelId() {
-        return currentLevelId;
-    }
-    private int getCurrentBookId() {
-        return this.currentBookId;
-    }
-
     public int getLastUpdateBy() {
         return lastUpdateBy;
     }
@@ -139,49 +172,123 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
         return lastUpdate;
     }
 
-    @Override
-    public String toSqlSelectQuery() {
-        // Assuming the table name for students is STUDENTS as per your DB_TABLES
-        return String.format("SELECT * FROM %s", DB_TABLES.STUDENTS);
+    public String getIsGoldCup() {
+        if(isGoldCup()){
+            return "Yes";
+        }
+        else{
+            return "No";
+        }
     }
 
-    @Override
-    public String toSqlInsertQuery(StudentDTO studentDTO) {
-        return String.format("INSERT INTO %s " +
-                        "(Student_First_Name, Student_Last_Name, Address_Line_1, Address_Line_2, Postal_Code, Phone, Create_Date, " +
-                        "Created_By, Last_Update, Last_Updated_By, Current_Book_Id, Current_Level_Id) " +
-                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', NOW(), '%s', NOW(), '%s', %d, %d)",
-                DB_TABLES.STUDENTS, studentDTO.getFirstName(), studentDTO.getLastName(), studentDTO.getAddressLine1(),
-                studentDTO.getAddressLine2(), studentDTO.getPostalCode(), studentDTO.getPhoneNumber(),
-                studentDTO.getCreateBy(), studentDTO.getLastUpdateBy(), studentDTO.getCurrentBookId(), studentDTO.getCurrentLevelId());
+    public boolean isGoldCup() {
+        return isGoldCup;
     }
 
-    @Override
-    public String toSqlUpdateQuery(StudentDTO studentDTO) {
-        return String.format(
-                        "UPDATE students SET " +
-                        "Student_First_Name = '%s', " +
-                        "Student_Last_Name = '%s', " +
-                        "Address_Line_1 = '%s', " +
-                        "Address_Line_2 = '%s', " +
-                        "Postal_Code = '%s', " +
-                        "Phone = '%s', " +
-                        "Created_By = '%s', " +
-                        "Last_Update = NOW(), " +
-                        "Last_Updated_By = '%s', " +
-                        "Current_Book_Id = %d, " +
-                        "Current_Level_Id = %d " +
-                        "WHERE Student_ID = %d",
-                studentDTO.getFirstName(), studentDTO.getLastName(), studentDTO.getAddressLine1(),
-                studentDTO.getAddressLine2(), studentDTO.getPostalCode(), studentDTO.getPhoneNumber(),
-                studentDTO.getCreateDate(), studentDTO.getCreateBy(), studentDTO.getLastUpdateBy(),
-                studentDTO.getCurrentBookId(), studentDTO.getCurrentLevelId(), studentDTO.getStudentId());
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public String getStudentInstruments(){
+        return (new StudentsRepository()).getStudentInstrumentsAsString(getId());
+    }
+    public String getStudentLevels(){
+        return (new StudentsRepository()).getStudentLevelsAsString(getId());
+    }
+    public String getStudentBooks(){
+        return (new StudentsRepository()).getStudentBooksAsString(getId());
+    }
+    public String getStudentTeachers(){
+        return (new StudentsRepository()).getStudentTeachersAsString(getId());
     }
 
 
     @Override
-    public String toSqlDeleteQuery(StudentDTO studentDTO) {
-        return String.format("DELETE FROM %s WHERE Id = %d", DB_TABLES.STUDENTS, studentDTO.getStudentId());
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.STUDENTS; // Direct concatenation as table name is a constant
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlInsertQuery(StudentDTO studentDTO, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.STUDENTS +
+                " (Student_First_Name, Student_Last_Name, Address_Line_1, Address_Line_2, Postal_Code, City, State, Phone, Email, " +
+                "Create_Date, Created_By, Last_Update, Last_Updated_By, Gold_Cup) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW(), ?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, studentDTO.getFirstName());
+        statement.setString(2, studentDTO.getLastName());
+        statement.setString(3, studentDTO.getAddressLine1());
+        statement.setString(4, studentDTO.getAddressLine2());
+        statement.setString(5, studentDTO.getPostalCode());
+        statement.setString(6, studentDTO.getCity());
+        statement.setString(7, studentDTO.getState());
+        statement.setString(8, studentDTO.getPhoneNumber());
+        statement.setString(9, studentDTO.getEmail());
+        statement.setInt(10, studentDTO.getCreateBy());
+        statement.setInt(11, studentDTO.getLastUpdateBy());
+        statement.setBoolean(12, studentDTO.isGoldCup());
+
+        return statement;
+    }
+
+
+
+    @Override
+    public PreparedStatement toSqlUpdateQuery(StudentDTO studentDTO, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.STUDENTS + " SET " +
+                "Student_First_Name = ?, " +
+                "Student_Last_Name = ?, " +
+                "Address_Line_1 = ?, " +
+                "Address_Line_2 = ?, " +
+                "Postal_Code = ?, " +
+                "City = ?, " +
+                "State = ?, " +
+                "Phone = ?, " +
+                "Email = ?, " +
+                "Created_By = ?, " + // Assuming you might want to update this
+                "Last_Update = NOW(), " +
+                "Last_Updated_By = ?, " +
+                "Gold_Cup = ? " +
+                "WHERE Student_ID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, studentDTO.getFirstName());
+        statement.setString(2, studentDTO.getLastName());
+        statement.setString(3, studentDTO.getAddressLine1());
+        statement.setString(4, studentDTO.getAddressLine2());
+        statement.setString(5, studentDTO.getPostalCode());
+        statement.setString(6, studentDTO.getCity());
+        statement.setString(7, studentDTO.getState());
+        statement.setString(8, studentDTO.getPhoneNumber());
+        statement.setString(9, studentDTO.getEmail());
+        statement.setInt(10, studentDTO.getCreateBy());
+        statement.setInt(11, studentDTO.getLastUpdateBy());
+        statement.setBoolean(12, studentDTO.isGoldCup());
+        statement.setInt(13, studentDTO.getId());
+
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlDeleteQuery(StudentDTO studentDTO, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.STUDENTS + " WHERE Student_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, studentDTO.getId());
+
+        return statement;
     }
 
     @Override
@@ -194,13 +301,14 @@ public class StudentDTO implements ISqlConvertable<StudentDTO> {
                     rs.getString("Address_Line_1"),
                     rs.getString("Address_Line_2"),
                     rs.getString("Postal_Code"),
+                    rs.getString("City"),
+                    rs.getString("State"),
                     rs.getString("Phone"),
+                    rs.getString("Email"),
                     rs.getTimestamp("Create_Date").toLocalDateTime(),
                     rs.getInt("Created_By"),
                     rs.getTimestamp("Last_Update").toLocalDateTime(),
                     rs.getInt("Last_Updated_By"),
-                    rs.getInt("Current_Book_Id"),
-                    rs.getInt("Current_Level_Id"),
                     rs.getBoolean("Gold_Cup"));
         } catch (SQLException e) {
             e.printStackTrace();

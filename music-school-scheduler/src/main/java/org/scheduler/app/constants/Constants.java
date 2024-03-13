@@ -33,11 +33,14 @@ public class Constants {
         public static final String MAIN_SCREEN = "/view/MainScreen.fxml";
         public static final String REPORTS_SCRN = "/view/ReportsScreen.fxml";
         public static final String PROP_MGMT_SCRN = "/view/PropertyManagerScreen.fxml";
+        public static final String TEACHER_MGMT_SCRN = "/view/TeacherManagementScreen.fxml";
+        public static final String USER_MGMT_SCRN = "/view/UserManagementScreen.fxml";
 
     }
-    public class PROPERTIES{
-        public static final String BOOK = "Book";
-        public static final String LEVEL = "Level";
-        public static final String INSTRUMENT = "Instrument";
+    public enum PROPERTIES{
+        Book, Level, Teacher, Instrument
+    }
+    public enum MAPPINGS{
+        StudentBook, StudentLevel, StudentTeacher, StudentInstrument, TeacherInstrument, StudentRecital
     }
 }

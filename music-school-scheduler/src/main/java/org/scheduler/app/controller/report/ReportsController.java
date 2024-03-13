@@ -196,6 +196,11 @@ public class ReportsController extends ControllerBase implements IController {
         }
     }
 
+    @Override
+    public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
+
+    }
+
     /**
      * Enables, disables, or removes fields that are not applicable based on report chosen
      * @param event
@@ -284,4 +289,5 @@ public class ReportsController extends ControllerBase implements IController {
     public void setUserId(int userId) {
 
     }
+
 }

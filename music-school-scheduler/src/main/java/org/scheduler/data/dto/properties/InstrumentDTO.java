@@ -1,45 +1,73 @@
 package org.scheduler.data.dto.properties;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISelectableDTO;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.interfaces.IRepository;
+import org.scheduler.data.repository.properties.InstrumentRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class InstrumentDTO implements ISqlConvertable<InstrumentDTO> {
-    private int id;
-    private String name;
+public final class InstrumentDTO extends DTOBase<InstrumentDTO> implements ISelectableDTO<InstrumentDTO> {
 
     public InstrumentDTO(int Id, String name) {
-        this.id = Id;
-        this.name = name;
+        super.id = Id;
+        super.name = name;
     }
 
     public InstrumentDTO() {
         
     }
 
+    public InstrumentDTO(String name) {
+        super.name = name;
+    }
     @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.INSTRUMENTS);
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.INSTRUMENTS; // Assuming DB_TABLES.INSTRUMENTS is a constant
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlInsertQuery(InstrumentDTO instrumentDTO, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.INSTRUMENTS + " (Instrument_Id, Name) VALUES (?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, instrumentDTO.getId());
+        statement.setString(2, instrumentDTO.getName());
+
+        return statement;
     }
 
     @Override
-    public String toSqlInsertQuery(InstrumentDTO instrumentDTO) {
-        return String.format("INSERT INTO %s (Instrument_Id, Name) VALUES (%d, '%s')",
-                DB_TABLES.INSTRUMENTS, instrumentDTO.instrumentId(), instrumentDTO.instrumentName());
+    public PreparedStatement toSqlUpdateQuery(InstrumentDTO instrumentDTO, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.INSTRUMENTS + " SET Name = ? WHERE Instrument_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, instrumentDTO.getName());
+        statement.setInt(2, instrumentDTO.getId());
+
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlDeleteQuery(InstrumentDTO instrumentDTO, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.INSTRUMENTS + " WHERE Instrument_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, instrumentDTO.getId());
+
+        return statement;
     }
 
-    @Override
-    public String toSqlUpdateQuery(InstrumentDTO instrumentDTO) {
-        return String.format("UPDATE %s SET Name = '%s' WHERE Instrument_Id = %d",
-                DB_TABLES.INSTRUMENTS, instrumentDTO.instrumentName(), instrumentDTO.instrumentId());
-    }
 
     @Override
-    public String toSqlDeleteQuery(InstrumentDTO instrumentDTO) {
-        return String.format("DELETE FROM %s WHERE Instrument_Id = %d", DB_TABLES.INSTRUMENTS, instrumentDTO.instrumentId());
+    public IRepository getRepository() {
+        return new InstrumentRepository();
     }
 
     @Override
@@ -52,14 +80,6 @@ public final class InstrumentDTO implements ISqlConvertable<InstrumentDTO> {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public int instrumentId() {
-        return id;
-    }
-
-    public String instrumentName() {
-        return name;
     }
 
     @Override

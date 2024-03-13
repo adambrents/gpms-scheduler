@@ -1,16 +1,18 @@
 package org.scheduler.data.dto.properties;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.interfaces.IRepository;
+import org.scheduler.data.repository.properties.BookRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class BookDTO implements ISqlConvertable<BookDTO> {
-    private int id;
-    private String name;
-
+public final class BookDTO extends DTOBase<BookDTO> implements ISqlConvertible<BookDTO> {
     public BookDTO() {
         
     }
@@ -19,26 +21,53 @@ public final class BookDTO implements ISqlConvertable<BookDTO> {
         this.name = name;
     }
 
+    public BookDTO(String name) {
+        this.name = name;
+    }
     @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.BOOKS);
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.BOOKS;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlInsertQuery(BookDTO bookDTO, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.BOOKS + " (Book_Id, Name) VALUES (?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, bookDTO.getId());
+        statement.setString(2, bookDTO.getName());
+
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlUpdateQuery(BookDTO bookDTO, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.BOOKS + " SET Name = ? WHERE Book_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, bookDTO.getName());
+        statement.setInt(2, bookDTO.getId());
+
+        return statement;
     }
 
     @Override
-    public String toSqlInsertQuery(BookDTO bookDTO) {
-        return String.format("INSERT INTO %s (Book_Id, Name) VALUES (%d, '%s')",
-                DB_TABLES.BOOKS, bookDTO.bookId(), bookDTO.name());
+    public PreparedStatement toSqlDeleteQuery(BookDTO bookDTO, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.BOOKS + " WHERE Book_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, bookDTO.getId());
+
+        return statement;
     }
 
     @Override
-    public String toSqlUpdateQuery(BookDTO bookDTO) {
-        return String.format("UPDATE %s SET Name = '%s' WHERE Book_Id = %d",
-                DB_TABLES.BOOKS, bookDTO.name(), bookDTO.bookId());
-    }
-
-    @Override
-    public String toSqlDeleteQuery(BookDTO bookDTO) {
-        return String.format("DELETE FROM %s WHERE Book_Id = %d", DB_TABLES.BOOKS, bookDTO.bookId());
+    public IRepository getRepository() {
+        return new BookRepository();
     }
 
     @Override
@@ -50,15 +79,6 @@ public final class BookDTO implements ISqlConvertable<BookDTO> {
             return null;
         }
     }
-
-    public int bookId() {
-        return id;
-    }
-
-    public String name() {
-        return name;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

@@ -6,6 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.scheduler.app.constants.Constants;
 import org.scheduler.app.controller.base.ControllerBase;
@@ -19,11 +21,14 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static org.scheduler.app.constants.Constants.PRIMARY_STAGE;
 
 public class LoginScreenController extends ControllerBase implements IController {
 
@@ -53,7 +58,7 @@ public class LoginScreenController extends ControllerBase implements IController
     public void onSubmit(ActionEvent actionEvent) {
         _logger.debug("Class Path: " + System.getProperty("java.class.path"));
 
-        userDTO = new UserDTO(usernameField.getText(), 0, passwordField.getText());
+        userDTO = new UserDTO(usernameField.getText(), 0, passwordField.getText(), false);
 
         UsersRepository.LoginResult valid = usersRepository.isLoginMatchUser(userDTO);
 
@@ -64,6 +69,9 @@ public class LoginScreenController extends ControllerBase implements IController
         switch (valid) {
             case SUCCESS:
                 handleSuccessfulLogin(actionEvent);
+                break;
+            case INACTIVE:
+                handleLoginError("InactiveUserError", false, false);
                 break;
             case WRONG_PASSWORD:
                 handleLoginError("PasswordError", true, false);
@@ -92,7 +100,7 @@ public class LoginScreenController extends ControllerBase implements IController
 
     private void switchToMainScreen(ActionEvent actionEvent) {
         try {
-            super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, userDTO.userId());
+            super.loadNewScreen(Constants.FXML_ROUTES.MAIN_SCREEN, userDTO.getId());
         } catch (Exception e) {
             showErrorDialog("Error switching to main screen. Please try again.", actionEvent);
             _logger.error("Error switching to main screen", e);
@@ -114,7 +122,7 @@ public class LoginScreenController extends ControllerBase implements IController
     }
 
     private Alert createLessonAlert(LessonDTO lesson) {
-        return new Alert(Alert.AlertType.INFORMATION, "You have the following lesson(s) in the next 15 minutes: \n\nLessonDTO ID: " + lesson.getLessonID()
+        return new Alert(Alert.AlertType.INFORMATION, "You have the following lesson(s) in the next 15 minutes: \n\nLessonDTO ID: " + lesson.getId()
                 + "\nDate: " + lesson.getStart().toLocalDate() + "\nTime: " + lesson.getStart().toLocalTime());
     }
 
@@ -179,9 +187,29 @@ public class LoginScreenController extends ControllerBase implements IController
         password.setText(resourceBundle.getString("Password"));
         submit.setText(resourceBundle.getString("Submit"));
 
+        submit.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.windowProperty().addListener((observable, oldWindow, newWindow) -> {
+                    if (newWindow != null) {
+                        setupKeyListener(newScene);
+                    }
+                });
+            }
+        });
 
         ZoneId zone = ZoneId.systemDefault();
         zoneID.setText(zone.toString());
+    }
+    private void setupKeyListener(Scene scene) {
+        Stage primaryStage = (Stage) scene.getWindow();
+
+        primaryStage.getScene().setOnKeyPressed(this::handleKeyPress);
+    }
+    private void handleKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            _logger.info("Enter key pressed!");
+            onSubmit(new ActionEvent());
+        }
     }
 
     /**

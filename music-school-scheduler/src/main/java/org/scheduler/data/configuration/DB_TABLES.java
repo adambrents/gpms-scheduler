@@ -10,7 +10,8 @@ public class DB_TABLES {
         public static final String RECITALS = "recitals";
         public static final String STUDENT_RECITALS = "student_recitals";
         public static final String STUDENTS = "students";
-        public static final String TEACHER_STUDENT_INSTRUMENTS = "teacher_student_instruments";
+        public static final String TEACHER_INSTRUMENTS = "teacher_instrument";
+        public static final String STUDENT_INSTRUMENTS = "student_instrument";
         public static final String TEACHERS = "teachers";
         public static final String USERS = "users";
 }

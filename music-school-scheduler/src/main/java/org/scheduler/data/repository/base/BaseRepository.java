@@ -1,8 +1,9 @@
 package org.scheduler.data.repository.base;
 
 import org.scheduler.app.constants.Constants;
+import org.scheduler.data.configuration.JDBC;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.repository.interfaces.IRepository;
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,8 +13,10 @@ import java.util.List;
 
 import static org.scheduler.data.configuration.JDBC.getConnection;
 
-public abstract class BaseRepository<T extends ISqlConvertable> implements IRepository<T> {
+public abstract class BaseRepository<T extends ISqlConvertible> implements IRepository<T> {
     public final String _database = Constants.CONNECTION_CONFIG.getDbConnection().getDb();
+
+    public abstract <T extends ISqlConvertible> void setKeyOnDTO(int key, T item);
 
     public static Statement getStatement() throws SQLException {
         return getConnection().createStatement();
@@ -21,9 +24,14 @@ public abstract class BaseRepository<T extends ISqlConvertable> implements IRepo
 
     public List<T> getAllItemsFromType(Class<T> item) throws SQLException, InstantiationException, IllegalAccessException {
         List<T> items = new ArrayList<>();
-        T instance = item.newInstance();
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(instance.toSqlSelectQuery())) {
+        T instance = null;
+        try {
+            instance = item.getDeclaredConstructor().newInstance();
+        } catch (InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        try (
+             PreparedStatement pstmt = instance.toSqlSelectQuery(JDBC.getConnection())) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Method fromResultSetMethod = item.getMethod("fromResultSet", ResultSet.class);
@@ -37,17 +45,23 @@ public abstract class BaseRepository<T extends ISqlConvertable> implements IRepo
         return items;
     }
 
-    public <T extends ISqlConvertable> void update(T item) throws SQLException {
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(item.toSqlUpdateQuery(item))) {
-            pstmt.executeUpdate();
+    public <T extends ISqlConvertible> void update(T item, Connection connection) throws SQLException {
+        try (PreparedStatement pstmt = item.toSqlUpdateQuery(item, connection)) {
+            int count = pstmt.executeUpdate();
+
+            if (count == PreparedStatement.EXECUTE_FAILED) {
+                throw new SQLException("Failed to update record!");
+            }
         }
     }
+    public <T extends ISqlConvertible> int insertReturnGeneratedKey(T item, Connection connection) throws SQLException {
+        try (PreparedStatement pstmt = item.toSqlInsertQuery(item, connection)) {
+            int count = pstmt.executeUpdate();
 
-    public <T extends ISqlConvertable> int insert(T item) throws SQLException {
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(item.toSqlInsertQuery(item), Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.executeUpdate();
+            if (count == PreparedStatement.EXECUTE_FAILED) {
+                throw new SQLException("Failed to insert record!");
+            }
+
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     return generatedKeys.getInt(1);
@@ -58,26 +72,42 @@ public abstract class BaseRepository<T extends ISqlConvertable> implements IRepo
         }
     }
 
-    public <T extends ISqlConvertable> void delete(T item) throws SQLException {
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(item.toSqlDeleteQuery(item))) {
-            pstmt.executeUpdate();
+    public <T extends ISqlConvertible> void insert(T item, Connection connection) throws SQLException {
+        try (PreparedStatement pstmt = item.toSqlInsertQuery(item, connection)) {
+            int count = pstmt.executeUpdate();
+
+            if (count == PreparedStatement.EXECUTE_FAILED) {
+                throw new SQLException("Failed to insert record!");
+            }
+        }
+    }
+    public <T extends ISqlConvertible> void delete(T item, Connection connection) throws SQLException {
+        try (PreparedStatement pstmt = item.toSqlDeleteQuery(item, connection)) {
+            int count = pstmt.executeUpdate();
+
+            if (count == PreparedStatement.EXECUTE_FAILED) {
+                throw new SQLException("Failed to delete record!");
+            }
         }
     }
 
     public void performAction(T item, Constants.CRUD action) throws SQLException {
+        Connection connection = JDBC.getConnection();
         switch (action){
             case CREATE:
-                insertItem(item);
+                insertItem(item, connection);
+                connection.commit();
                 break;
             case READ:
                 //not yet implemented
                 break;
             case UPDATE:
-                updateItem(item);
+                updateItem(item, connection);
+                connection.commit();
                 break;
             case DELETE:
-                delete(item);
+                delete(item, connection);
+                connection.commit();
                 break;
         }
     }

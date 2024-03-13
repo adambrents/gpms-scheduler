@@ -1,16 +1,18 @@
 package org.scheduler.data.dto;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.LessonsRepository;
+import org.scheduler.data.repository.interfaces.IRepository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class LessonDTO implements ISqlConvertable<LessonDTO> {
+public class LessonDTO extends DTOBase<LessonDTO> implements ISqlConvertible<LessonDTO> {
     private int lessonID;
     private String description;
     private String location;
@@ -45,16 +47,6 @@ public class LessonDTO implements ISqlConvertable<LessonDTO> {
         this.end = end;
         this.userID = userID;
     }
-
-    /**
-     * gets appt id
-     *
-     * @return
-     */
-    public int getLessonID() {
-        return lessonID;
-    }
-
 
     /**
      * gets description
@@ -162,32 +154,54 @@ public class LessonDTO implements ISqlConvertable<LessonDTO> {
     public void setStudentId(int customerID) {
         this.studentID = customerID;
     }
-
     @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.LESSONS);
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.LESSONS;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
     }
 
     @Override
-    public String toSqlInsertQuery(LessonDTO lessonDTO) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return String.format("INSERT INTO %s (lessonID, description, location, type, start, end, studentID, userID) " +
-                        "VALUES (%d, '%s', '%s', '%s', '%s', '%s', %d, %d)",
-                DB_TABLES.LESSONS, lessonDTO.lessonID, lessonDTO.description, lessonDTO.location, lessonDTO.type,
-                lessonDTO.start.format(formatter), lessonDTO.end.format(formatter), lessonDTO.studentID, lessonDTO.userID);
+    public PreparedStatement toSqlInsertQuery(LessonDTO lessonDTO, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.LESSONS + " (lessonID, description, location, type, start, end, studentID, userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, lessonDTO.lessonID);
+        statement.setString(2, lessonDTO.description);
+        statement.setString(3, lessonDTO.location);
+        statement.setString(4, lessonDTO.type);
+        statement.setTimestamp(5, Timestamp.valueOf(lessonDTO.start));
+        statement.setTimestamp(6, Timestamp.valueOf(lessonDTO.end));
+        statement.setInt(7, lessonDTO.studentID);
+        statement.setInt(8, lessonDTO.userID);
+
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlUpdateQuery(LessonDTO lessonDTO, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.LESSONS + " SET description = ?, start = ?, end = ? WHERE lessonID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, lessonDTO.description);
+        statement.setTimestamp(2, Timestamp.valueOf(lessonDTO.start));
+        statement.setTimestamp(3, Timestamp.valueOf(lessonDTO.end));
+        statement.setInt(4, lessonDTO.lessonID);
+
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlDeleteQuery(LessonDTO lessonDTO, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.LESSONS + " WHERE lessonID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, lessonDTO.lessonID);
+
+        return statement;
     }
 
     @Override
-    public String toSqlUpdateQuery(LessonDTO lessonDTO) {
-        // This example updates the description, start, and end for a given lessonID. Adjust as necessary.
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return String.format("UPDATE %s SET description = '%s', start = '%s', end = '%s' WHERE lessonID = %d",
-                DB_TABLES.LESSONS, lessonDTO.description, lessonDTO.start.format(formatter), lessonDTO.end.format(formatter), lessonDTO.lessonID);
-    }
-
-    @Override
-    public String toSqlDeleteQuery(LessonDTO lessonDTO) {
-        return String.format("DELETE FROM %s WHERE lessonID = %d", DB_TABLES.LESSONS, lessonDTO.lessonID);
+    public IRepository getRepository() {
+        return new LessonsRepository();
     }
 
     @Override

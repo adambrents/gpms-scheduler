@@ -1,14 +1,15 @@
 package org.scheduler.data.dto;
 
-import org.scheduler.data.dto.interfaces.ISqlConvertable;
+import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.LessonsRepository;
+import org.scheduler.data.repository.interfaces.IRepository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 
-public class LessonScheduledDTO implements ISqlConvertable<LessonScheduledDTO> {
-    private int lessonsScheduledId;
+public class LessonScheduledDTO extends DTOBase<LessonScheduledDTO> implements ISqlConvertible<LessonScheduledDTO> {
     private String description;
     private String type;
     private String location;
@@ -28,8 +29,8 @@ public class LessonScheduledDTO implements ISqlConvertable<LessonScheduledDTO> {
         
     }
 
-    public LessonScheduledDTO(int lessonsScheduledId, String description, String type, String location, LocalDateTime start, LocalDateTime end, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, boolean goldCup, boolean newStudent, int lessonBookId, int lessonLevelId, int lessonInstrumentId) {
-        this.lessonsScheduledId = lessonsScheduledId;
+    public LessonScheduledDTO(int id, String description, String type, String location, LocalDateTime start, LocalDateTime end, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, boolean goldCup, boolean newStudent, int lessonBookId, int lessonLevelId, int lessonInstrumentId) {
+        this.id = id;
         this.description = description;
         this.type = type;
         this.location = location;
@@ -47,29 +48,77 @@ public class LessonScheduledDTO implements ISqlConvertable<LessonScheduledDTO> {
     }
 
     @Override
-    public String toSqlSelectQuery() {
-        return String.format("SELECT * FROM %s", DB_TABLES.LESSONS_SCHEDULED);
+    public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
+        String sql = "SELECT * FROM " + DB_TABLES.LESSONS_SCHEDULED;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlInsertQuery(LessonScheduledDTO item, Connection connection) throws SQLException {
+        String sql = "INSERT INTO " + DB_TABLES.LESSONS_SCHEDULED +
+                " (Lessons_Scheduled_Id, Description, Type, Location, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Gold_Cup, New_Student, Lesson_Book_Id, Lesson_Level_Id, Lesson_Instrument_Id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.id);
+        statement.setString(2, item.description);
+        statement.setString(3, item.type);
+        statement.setString(4, item.location);
+        statement.setTimestamp(5, Timestamp.valueOf(item.start));
+        statement.setTimestamp(6, Timestamp.valueOf(item.end));
+        statement.setTimestamp(7, Timestamp.valueOf(item.createDate));
+        statement.setString(8, item.createdBy);
+        statement.setTimestamp(9, Timestamp.valueOf(item.lastUpdate));
+        statement.setString(10, item.lastUpdatedBy);
+        statement.setBoolean(11, item.goldCup);
+        statement.setBoolean(12, item.newStudent);
+        statement.setInt(13, item.lessonBookId);
+        statement.setInt(14, item.lessonLevelId);
+        statement.setInt(15, item.lessonInstrumentId);
+
+        return statement;
+    }
+
+
+    @Override
+    public PreparedStatement toSqlUpdateQuery(LessonScheduledDTO item, Connection connection) throws SQLException {
+        String sql = "UPDATE " + DB_TABLES.LESSONS_SCHEDULED +
+                " SET Description = ?, Type = ?, Location = ?, Start = ?, End = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ?, Gold_Cup = ?, New_Student = ?, Lesson_Book_Id = ?, Lesson_Level_Id = ?, Lesson_Instrument_Id = ? WHERE Lessons_Scheduled_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, item.description);
+        statement.setString(2, item.type);
+        statement.setString(3, item.location);
+        statement.setTimestamp(4, Timestamp.valueOf(item.start));
+        statement.setTimestamp(5, Timestamp.valueOf(item.end));
+        statement.setTimestamp(6, Timestamp.valueOf(item.createDate));
+        statement.setString(7, item.createdBy);
+        statement.setTimestamp(8, Timestamp.valueOf(item.lastUpdate));
+        statement.setString(9, item.lastUpdatedBy);
+        statement.setBoolean(10, item.goldCup);
+        statement.setBoolean(11, item.newStudent);
+        statement.setInt(12, item.lessonBookId);
+        statement.setInt(13, item.lessonLevelId);
+        statement.setInt(14, item.lessonInstrumentId);
+        statement.setInt(15, item.id);
+
+        return statement;
+    }
+    @Override
+    public PreparedStatement toSqlDeleteQuery(LessonScheduledDTO item, Connection connection) throws SQLException {
+        String sql = "DELETE FROM " + DB_TABLES.LESSONS_SCHEDULED + " WHERE Lessons_Scheduled_Id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, item.id);
+
+        return statement;
     }
 
     @Override
-    public String toSqlInsertQuery(LessonScheduledDTO item) {
-        return String.format(
-                "INSERT INTO %s (Lessons_Scheduled_Id, Description, Type, Location, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Gold_Cup, New_Student, Lesson_Book_Id, Lesson_Level_Id, Lesson_Instrument_Id) VALUES (%d, '%s', '%s', '%s', '%tF %<tT', '%tF %<tT', '%tF %<tT', '%s', '%tF %<tT', '%s', %b, %b, %d, %d, %d)",
-                DB_TABLES.LESSONS_SCHEDULED, item.lessonsScheduledId, item.description, item.type, item.location, item.start, item.end, item.createDate, item.createdBy, item.lastUpdate, item.lastUpdatedBy, item.goldCup, item.newStudent, item.lessonBookId, item.lessonLevelId, item.lessonInstrumentId
-        );
-    }
-
-    @Override
-    public String toSqlUpdateQuery(LessonScheduledDTO item) {
-        return String.format(
-                "UPDATE %s SET Description = '%s', Type = '%s', Location = '%s', Start = '%tF %<tT', End = '%tF %<tT', Create_Date = '%tF %<tT', Created_By = '%s', Last_Update = '%tF %<tT', Last_Updated_By = '%s', Gold_Cup = %b, New_Student = %b, Lesson_Book_Id = %d, Lesson_Level_Id = %d, Lesson_Instrument_Id = %d WHERE Lessons_Scheduled_Id = %d",
-                DB_TABLES.LESSONS_SCHEDULED, item.description, item.type, item.location, item.start, item.end, item.createDate, item.createdBy, item.lastUpdate, item.lastUpdatedBy, item.goldCup, item.newStudent, item.lessonBookId, item.lessonLevelId, item.lessonInstrumentId, item.lessonsScheduledId
-        );
-    }
-
-    @Override
-    public String toSqlDeleteQuery(LessonScheduledDTO item) {
-        return String.format("DELETE FROM %s WHERE Lessons_Scheduled_Id = %d", DB_TABLES.LESSONS_SCHEDULED, item.lessonsScheduledId);
+    public IRepository getRepository() {
+        return new LessonsRepository();
     }
 
     @Override

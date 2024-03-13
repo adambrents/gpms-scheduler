@@ -9,6 +9,7 @@ import org.scheduler.app.constants.Constants;
 import org.scheduler.app.controller.base.LessonControllerBase;
 import org.scheduler.app.controller.interfaces.IController;
 import org.scheduler.app.models.errors.PossibleError;
+import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.repository.LessonsRepository;
 import org.scheduler.data.dto.LessonDTO;
 import org.slf4j.Logger;
@@ -105,11 +106,11 @@ public class AllLessonController extends LessonControllerBase implements IContro
         }
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setHeaderText("Delete");
-        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getLessonID() + ", Type: " + selectedLessonDTO.getType() + "?");
+        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getId() + ", Type: " + selectedLessonDTO.getType() + "?");
         Optional<ButtonType> result = alert1.showAndWait();
         if (result.get() == ButtonType.OK) {
             try {
-                lessonsRepository.deleteItem(selectedLessonDTO);
+                lessonsRepository.deleteItem(selectedLessonDTO, JDBC.getConnection());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -139,6 +140,11 @@ public class AllLessonController extends LessonControllerBase implements IContro
         catch (IOException e){
             _logger.error("Could not load resource!", e);
         }
+    }
+
+    @Override
+    public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
+
     }
 
     /**
