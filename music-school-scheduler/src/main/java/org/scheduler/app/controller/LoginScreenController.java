@@ -21,14 +21,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static org.scheduler.app.constants.Constants.PRIMARY_STAGE;
 
 public class LoginScreenController extends ControllerBase implements IController {
 
@@ -65,6 +62,11 @@ public class LoginScreenController extends ControllerBase implements IController
         handleLoginResult(valid, actionEvent);
     }
 
+    @Override
+    public void reset() {
+        super.reset();
+    }
+
     public void handleLoginResult(UsersRepository.LoginResult valid, ActionEvent actionEvent) {
         switch (valid) {
             case SUCCESS:
@@ -91,7 +93,7 @@ public class LoginScreenController extends ControllerBase implements IController
     private void handleSuccessfulLogin(ActionEvent actionEvent) {
         logSuccess();
         switchToMainScreen(actionEvent);
-        checkForUpcomingLessons();
+//        checkForUpcomingLessons();
     }
 
     private void logSuccess() {
@@ -107,14 +109,14 @@ public class LoginScreenController extends ControllerBase implements IController
         }
     }
 
-    private void checkForUpcomingLessons() {
-        try {
-            LessonDTO upcomingLesson = lessonsRepository.getLessonsNext15Minutes(LocalDateTime.now());
-            showLessonAlert(upcomingLesson);
-        } catch (Exception e) {
-            _logger.error("Error fetching upcoming lessons", e);
-        }
-    }
+//    private void checkForUpcomingLessons() {
+//        try {
+//            LessonDTO upcomingLesson = lessonsRepository.getLessonsNext15Minutes(LocalDateTime.now());
+//            showLessonAlert(upcomingLesson);
+//        } catch (Exception e) {
+//            _logger.error("Error fetching upcoming lessons", e);
+//        }
+//    }
 
     private void showLessonAlert(LessonDTO lesson) {
         Alert alert = lesson != null ? createLessonAlert(lesson) : createNoLessonAlert();
@@ -123,7 +125,7 @@ public class LoginScreenController extends ControllerBase implements IController
 
     private Alert createLessonAlert(LessonDTO lesson) {
         return new Alert(Alert.AlertType.INFORMATION, "You have the following lesson(s) in the next 15 minutes: \n\nLessonDTO ID: " + lesson.getId()
-                + "\nDate: " + lesson.getStart().toLocalDate() + "\nTime: " + lesson.getStart().toLocalTime());
+                + "\nDate: " /*+ lesson.getStart().toLocalDate()*/ + "\nTime: " /*+ lesson.getStart().toLocalTime()*/);
     }
 
     private Alert createNoLessonAlert() {
@@ -224,11 +226,6 @@ public class LoginScreenController extends ControllerBase implements IController
     @Override
     public List<PossibleError> buildPossibleErrors() {
         return null;
-    }
-
-    @Override
-    public String getNameForItem(Object item) {
-        return "";
     }
 
     @Override

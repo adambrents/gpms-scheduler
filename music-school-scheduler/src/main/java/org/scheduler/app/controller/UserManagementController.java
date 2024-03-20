@@ -6,10 +6,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Paint;
 import org.scheduler.app.controller.base.ControllerBase;
-import org.scheduler.app.controller.interfaces.IController;
-import org.scheduler.app.controller.interfaces.ICreate;
-import org.scheduler.app.controller.interfaces.IDelete;
-import org.scheduler.app.controller.interfaces.IUpdate;
+import org.scheduler.app.controller.interfaces.*;
 import org.scheduler.app.models.errors.PossibleError;
 import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.dto.UserDTO;
@@ -20,16 +17,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static org.scheduler.app.constants.Constants.ERROR_RED;
 
-public class UserManagementController extends ControllerBase implements IController, ICreate, IUpdate, IDelete {
+public class UserManagementController extends ControllerBase implements IController, ICreate, IUpdate, IDelete, ITableView<UserDTO> {
     private static final Logger _logger = LoggerFactory.getLogger(UserManagementController.class);
-    public Label errorText;
     public TableView<UserDTO> userTable;
     public TableColumn<UserDTO, String> userNameColumn;
     public TableColumn<UserDTO, Boolean> userActiveColumn;
@@ -40,7 +33,7 @@ public class UserManagementController extends ControllerBase implements IControl
     public TextField passwordTextField;
     public TextField retypePasswordTextField;
     public CheckBox isActiveCheckbox;
-    private int userId;
+    
     private UserDTO userToBeUpdated;
 
     @Override
@@ -53,11 +46,6 @@ public class UserManagementController extends ControllerBase implements IControl
         possibleErrors.add(new PossibleError("Retype Password", retypePasswordTextField.getText(), retypePasswordLabel));
 
         return possibleErrors;
-    }
-
-    @Override
-    public String getNameForItem(Object item) {
-        return null;
     }
 
     @Override
@@ -93,18 +81,15 @@ public class UserManagementController extends ControllerBase implements IControl
         });
     }
 
-    private void handleDoubleClickOnRow(UserDTO item) {
+    @Override
+    public void handleDoubleClickOnRow(UserDTO item) {
         userNameTextField.setText(item.getName());
         isActiveCheckbox.setSelected(!item.getIsActive());
         userToBeUpdated = item;
     }
-
-    private void reset() {
-        userNameTextField.clear();
-        passwordTextField.clear();
-        retypePasswordTextField.clear();
-
-        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+    @Override
+    public void reset() {
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         userActiveColumn.setCellValueFactory(new PropertyValueFactory<>("isActive"));
         userActiveColumn.setCellFactory(column -> new TableCell<UserDTO, Boolean>() {
             @Override
@@ -119,11 +104,19 @@ public class UserManagementController extends ControllerBase implements IControl
             }
         });
         userTable.setItems(usersRepository.getAllItems());
+        labelsToReset.clear();
+        Collections.addAll(
+                labelsToReset,
+                userNameLabel,
+                passwordLabel,
+                retypePasswordLabel
+        );
+        super.reset();
     }
     @Override
     public void onGoBack(ActionEvent event) {
         try{
-            super.goBack(_userId);
+            super.goBack(this.userId);
         }
         catch (IOException e){
             _logger.error("Could not load resource!", e);
@@ -142,7 +135,7 @@ public class UserManagementController extends ControllerBase implements IControl
         String errorMessage = this.getErrorMessage();
         if(!errorMessage.equals("")){
             errorText.setText(errorMessage);
-            errorText.setTextFill(Paint.valueOf(ERROR_RED));
+            errorText.setVisible(true);
         }
         else {
             usersRepository.insertItem(new UserDTO(
@@ -186,7 +179,6 @@ public class UserManagementController extends ControllerBase implements IControl
         String errorMessage = super.getErrorMessage();
         if(!errorMessage.equals("")){
             errorText.setText(errorMessage);
-            errorText.setTextFill(Paint.valueOf(ERROR_RED));
         }
         else {
             UserDTO newUser = new UserDTO(
@@ -201,7 +193,7 @@ public class UserManagementController extends ControllerBase implements IControl
                 usersRepository.updateItem(newUser, JDBC.getConnection());
                 reset();
             }
+            userToBeUpdated = null;
         }
-        userToBeUpdated = null;
     }
 }

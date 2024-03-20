@@ -10,4 +10,6 @@ public interface IController {
 
     void onSubmit(ActionEvent actionEvent)  throws IOException, SQLException;
 
+    void reset();
+
 }

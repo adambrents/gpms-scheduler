@@ -1,28 +1,34 @@
 package org.scheduler.data.repository;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.scheduler.app.constants.Constants;
+import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.configuration.JDBC;
-import org.scheduler.data.dto.*;
+import org.scheduler.data.dto.StudentDTO;
+import org.scheduler.data.dto.TeacherDTO;
 import org.scheduler.data.dto.base.DTOMappingBase;
 import org.scheduler.data.dto.factory.DTOFactory;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
-import org.scheduler.data.dto.mapping.*;
 import org.scheduler.data.dto.properties.BookDTO;
 import org.scheduler.data.dto.properties.InstrumentDTO;
 import org.scheduler.data.dto.properties.LevelDTO;
 import org.scheduler.data.repository.base.BaseRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.repository.properties.BookRepository;
+import org.scheduler.data.repository.properties.InstrumentRepository;
+import org.scheduler.data.repository.properties.LevelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class StudentsRepository extends BaseRepository<StudentDTO> {
@@ -37,8 +43,8 @@ public class StudentsRepository extends BaseRepository<StudentDTO> {
      * @return
      */
     @Override
-    public ObservableList<StudentDTO> getAllItems() throws SQLException, InstantiationException, IllegalAccessException {
-        return FXCollections.observableArrayList(super.getAllItemsFromType(StudentDTO.class));
+    public ObservableList<StudentDTO> getAllItems() {
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new StudentDTO()));
     }
     @Override
     public void updateItem(StudentDTO item, Connection connection) throws SQLException {
@@ -146,51 +152,14 @@ public class StudentsRepository extends BaseRepository<StudentDTO> {
     public <T extends ISqlConvertible> void setKeyOnDTO(int key, T item) {
 
     }
-    public void insertNewStudent(StudentDTO newStudent, List<TeacherDTO> teacherList, List<InstrumentDTO> instrumentList, List<BookDTO> bookList, List<LevelDTO> levelList) {
-        Connection conn = null;
+    public void insertNewStudent(StudentDTO newStudent) {
         try {
-            conn = JDBC.getConnection();
-            conn.setAutoCommit(false);
-
-            int generatedId = insertReturnGeneratedKey(newStudent, conn); // Adjust to pass connection
-
-            for (InstrumentDTO instrument : instrumentList) {
-                insert(new StudentInstrumentDTO(generatedId, instrument.getId()), conn);
-            }
-            for (TeacherDTO teacher : teacherList) {
-                insert(new StudentTeacherDTO(generatedId, teacher.getId()), conn);
-            }
-            for (BookDTO book : bookList) {
-                insert(new StudentBookDTO(generatedId, book.getId()), conn);
-            }
-            for (LevelDTO level : levelList) {
-                insert(new StudentLevelDTO(generatedId, level.getId()), conn);
-            }
-
-            conn.commit(); // Commit transaction
+            insertItem(newStudent, JDBC.getConnection());
         } catch (SQLException e) {
-            if (conn != null) {
-                try {
-                    conn.rollback(); // Rollback on error
-                } catch (SQLException ex) {
-                    // Log rollback error
-                }
-            }
             throw new RuntimeException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close(); // Ensure connection is always closed
-                } catch (SQLException e) {
-                    // Log close connection error
-                }
-            }
         }
     }
-
-
-    public void updateStudent(StudentDTO newStudent, List<TeacherDTO> teacherList, List<InstrumentDTO> instrumentList,
-                              List<BookDTO> bookList, List<LevelDTO> levelList) throws SQLException {
+    public void updateStudent(StudentDTO newStudent) throws SQLException {
         if (newStudent.getId() == 0) {
             throw new RuntimeException("Cannot update a student without a valid Student_ID!");
         }
@@ -202,27 +171,7 @@ public class StudentsRepository extends BaseRepository<StudentDTO> {
 
             super.update(newStudent, connection);
 
-            List<DTOMappingBase> existingMappings = getIdsForStudentProperties(newStudent.getId());
 
-            updateMappingsForPropertyType(
-                    teacherList.stream()
-                            .map(teacher -> DTOFactory.createMappingDTO(Constants.MAPPINGS.StudentTeacher, newStudent.getId(), teacher.getId(), teacher.getSelected()))
-                            .collect(Collectors.toList()), existingMappings, Constants.MAPPINGS.StudentTeacher, connection);
-
-            updateMappingsForPropertyType(
-                    instrumentList.stream()
-                            .map(instrument -> DTOFactory.createMappingDTO(Constants.MAPPINGS.StudentInstrument, newStudent.getId(), instrument.getId(), instrument.getSelected()))
-                            .collect(Collectors.toList()), existingMappings, Constants.MAPPINGS.StudentInstrument, connection);
-
-            updateMappingsForPropertyType(
-                    bookList.stream()
-                            .map(book -> DTOFactory.createMappingDTO(Constants.MAPPINGS.StudentBook, newStudent.getId(), book.getId(), book.getSelected()))
-                            .collect(Collectors.toList()), existingMappings, Constants.MAPPINGS.StudentBook, connection);
-
-            updateMappingsForPropertyType(
-                    levelList.stream()
-                            .map(level -> DTOFactory.createMappingDTO(Constants.MAPPINGS.StudentLevel, newStudent.getId(), level.getId(), level.getSelected()))
-                            .collect(Collectors.toList()), existingMappings, Constants.MAPPINGS.StudentLevel, connection);
 
             connection.commit();
         } catch (SQLException e) {
@@ -283,6 +232,42 @@ public class StudentsRepository extends BaseRepository<StudentDTO> {
                 "'StudentInstrument' AS Type_Value " +
                 "FROM student_instrument " +
                 "WHERE Student_Id = " + studentId ;
+
+        try (Connection conn = JDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String typeValue = rs.getString("Type_Value");
+                int keyValue = rs.getInt("Key_Value");
+                DTOMappingBase<?> dto = DTOFactory.createMappingDTO(Constants.MAPPINGS.valueOf(typeValue), rs.getInt("Student_Id"), rs.getInt("MapToProperty"), new SimpleBooleanProperty());
+                dto.setId(keyValue);
+                dtos.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dtos;
+    }
+
+    public List<DTOMappingBase> getAllMappings(){
+        List<DTOMappingBase> dtos = new ArrayList<>();
+        String query =
+                "SELECT Student_Level_Id AS Key_Value, Student_Id, Level_Id AS MapToProperty, " +
+                        "'StudentLevel' AS Type_Value " +
+                        "FROM student_level " +
+                        " UNION ALL " +
+                        "SELECT Student_Teacher_Id AS Key_Value, Student_Id, Teacher_Id AS MapToProperty, " +
+                        "'StudentTeacher' AS Type_Value " +
+                        "FROM student_teacher " +
+                        " UNION ALL " +
+                        "SELECT Student_Book_Id AS Key_Value, Student_Id, Book_Id AS MapToProperty, " +
+                        "'StudentBook' AS Type_Value " +
+                        "FROM student_book " +
+                        " UNION ALL " +
+                        "SELECT Student_Instrument_Id AS Key_Value, Student_Id, Instrument_Id AS MapToProperty, " +
+                        "'StudentInstrument' AS Type_Value " +
+                        "FROM student_instrument ";
 
         try (Connection conn = JDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -367,6 +352,46 @@ public class StudentsRepository extends BaseRepository<StudentDTO> {
             e.printStackTrace();
         }
         return "";
+    }
+    public ObservableList<StudentDTO> getAllStudentData() {
+        final TeachersRepository teachersRepository = new TeachersRepository();
+        final BookRepository bookRepository = new BookRepository();
+        final InstrumentRepository instrumentRepository = new InstrumentRepository();
+        final LevelRepository levelRepository = new LevelRepository();
+        Map<Integer, TeacherDTO> teacherMap = teachersRepository.getAllItems().stream().collect(Collectors.toMap(TeacherDTO::getId, Function.identity()));
+        Map<Integer, InstrumentDTO> instrumentMap = instrumentRepository.getAllItems().stream().collect(Collectors.toMap(InstrumentDTO::getId, Function.identity()));
+        Map<Integer, LevelDTO> levelMap = levelRepository.getAllItems().stream().collect(Collectors.toMap(LevelDTO::getId, Function.identity()));
+        Map<Integer, BookDTO> bookMap = bookRepository.getAllItems().stream().collect(Collectors.toMap(BookDTO::getId, Function.identity()));
+
+        ObservableList<StudentDTO> allStudents = this.getAllItems();
+
+        List<DTOMappingBase> studentMappings = new ArrayList<>(this.getAllMappings());
+
+        for (StudentDTO student : allStudents) {
+            List<TeacherDTO> studentTeachers = new ArrayList<>();
+            List<InstrumentDTO> studentInstruments = new ArrayList<>();
+            List<LevelDTO> studentLevels = new ArrayList<>();
+            List<BookDTO> studentBooks = new ArrayList<>();
+
+            studentMappings.stream()
+                    .filter(mapping -> mapping.getMappingFromId() == student.getId())
+                    .forEach(mapping -> {
+                        switch (mapping.getMapping()) {
+                            case StudentTeacher -> studentTeachers.add(teacherMap.get(mapping.getMappingToId()));
+                            case StudentInstrument ->
+                                    studentInstruments.add(instrumentMap.get(mapping.getMappingToId()));
+                            case StudentLevel -> studentLevels.add(levelMap.get(mapping.getMappingToId()));
+                            case StudentBook -> studentBooks.add(bookMap.get(mapping.getMappingToId()));
+                        }
+                    });
+
+            // Set the properties on the student DTO
+            student.setTeachers(studentTeachers);
+            student.setInstruments(studentInstruments);
+            student.setLevels(studentLevels);
+            student.setBooks(studentBooks);
+        }
+        return allStudents;
     }
 
     private String toString(ResultSet resultSet) throws SQLException {

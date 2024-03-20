@@ -1,6 +1,7 @@
 package org.scheduler.data.dto.properties;
 
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.repository.interfaces.IRepository;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class LevelDTO extends DTOBase<LevelDTO> implements ISqlConvertible<LevelDTO> {
+public final class LevelDTO extends DTOBase<LevelDTO> implements ISqlConvertible<LevelDTO>, IComboBox {
 
     public LevelDTO(int Id, String name) {
         this.id = Id;
@@ -25,6 +26,10 @@ public final class LevelDTO extends DTOBase<LevelDTO> implements ISqlConvertible
 
     public LevelDTO(String name) {
         this.name = name;
+    }
+
+    public LevelDTO(int levelId) {
+        super.id = levelId;
     }
 
     @Override

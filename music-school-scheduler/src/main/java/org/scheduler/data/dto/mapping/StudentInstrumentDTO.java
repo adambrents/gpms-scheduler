@@ -19,15 +19,19 @@ public class StudentInstrumentDTO extends DTOMappingBase<StudentInstrumentDTO> i
         this.id = id;
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentInstrumentDTO(int mappingFromId, int mappingToId) {
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentInstrumentDTO(int mappingToId) {
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentInstrumentDTO() {
+        setMapping();
     }
 
     public StudentInstrumentDTO(int mappingFromId, int mappingToId, BooleanProperty selected) {

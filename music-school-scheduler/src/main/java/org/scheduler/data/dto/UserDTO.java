@@ -1,6 +1,7 @@
 package org.scheduler.data.dto;
 
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.repository.UsersRepository;
@@ -13,8 +14,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<UserDTO> {
-    private int userId;
+public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<UserDTO>, IComboBox {
+    
     private String password;
     private LocalDateTime createDate;
     private int createdBy;
@@ -31,7 +32,7 @@ public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<U
      */
     public UserDTO(String name, int userId, String password, boolean isActive) {
         super.name = name;
-        this.userId = userId;
+        super.id = userId;
         this.password = password;
         this.isActive = isActive;
     }
@@ -45,7 +46,7 @@ public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<U
         this.isActive = isActive;
     }
     public UserDTO(int userId, String name, String password, LocalDateTime lastUpdate, int lastUpdatedBy, boolean isActive) {
-        this.userId = userId;
+        super.id = userId;
         super.name = name;
         this.password = password;
         this.lastUpdate = lastUpdate;
@@ -62,7 +63,7 @@ public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<U
      * @return
      */
     public void setUserId(int userId){
-        this.userId = userId;
+        super.id = userId;
     }
 
     /**
@@ -141,20 +142,20 @@ public final class UserDTO extends DTOBase<UserDTO> implements ISqlConvertible<U
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (UserDTO) obj;
         return Objects.equals(this.name, that.name) &&
-                this.userId == that.userId &&
+                super.id == that.id &&
                 Objects.equals(this.password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, userId, password);
+        return Objects.hash(name, id, password);
     }
 
     @Override
     public String toString() {
         return "UserDTO[" +
                 "username=" + name + ", " +
-                "userId=" + userId + ", " +
+                "userId=" + id + ", " +
                 "password=" + password + ']';
     }
 

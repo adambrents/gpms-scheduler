@@ -3,14 +3,17 @@ package org.scheduler.app.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.scheduler.app.constants.Constants;
 import org.scheduler.app.controller.base.ControllerBase;
 import org.scheduler.app.controller.interfaces.IController;
+import org.scheduler.app.controller.interfaces.ITableView;
 import org.scheduler.app.models.errors.PossibleError;
 import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.dto.LessonDTO;
 import org.scheduler.data.dto.StudentDTO;
+import org.scheduler.data.dto.properties.BookDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,44 +24,49 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MainScreenController extends ControllerBase implements IController {
+public class MainScreenController extends ControllerBase implements IController, ITableView<LessonDTO>{
     private static final Logger _logger = LoggerFactory.getLogger(MainScreenController.class);
+    private StudentDTO selectedStudentDTO;
     @FXML
-    private TableColumn<StudentDTO, String> studentAddressColumn;
+    private TableColumn<LessonDTO, String> bookColumn;
     @FXML
-    private TableColumn<StudentDTO, String> studentNameColumn;
+    private TableColumn<LessonDTO, String> goldCupColumn;
     @FXML
-    private TableView<StudentDTO> studentTable;
+    private TableColumn<LessonDTO, String> instrumentColumn;
     @FXML
-    private Button exit;
+    private TableColumn<LessonDTO, String> lessonTimeColumn;
     @FXML
-    private TableColumn<StudentDTO, String> studentIdColumn;
+    private TableColumn<LessonDTO, String> levelColumn;
+    @FXML
+    private TableColumn<LessonDTO, String> studentColumn;
+    @FXML
+    private TableColumn<LessonDTO, String> teacherColumn;
+    @FXML
+    private TableColumn<LessonDTO, String> isNewStudentColumn;
     @FXML
     private TableView<LessonDTO> weekTable;
-    private LessonDTO selectedLessonDTO = null;
-    private StudentDTO selectedStudentDTO = null;
-    private int userId;
+
     /**
      * when clicked, user is warned of deleting appointment, then appointment is deleted
      *
      * @param actionEvent
      */
     public void onCancelLesson(ActionEvent actionEvent) {
-        selectedLessonDTO = weekTable.getSelectionModel().getSelectedItem();
+        LessonDTO selectedLessonDTO = weekTable.getSelectionModel().getSelectedItem();
         if (selectedLessonDTO == null) {
             return;
         }
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setHeaderText("Delete");
-        alert1.setContentText("Are you sure you want to delete Appointment_ID: " + selectedLessonDTO.getId() + ", Type: " + selectedLessonDTO.getType() + "?");
+        alert1.setContentText("Are you sure you want to remove lesson with " + selectedLessonDTO.getStudent().getName() + " on " + selectedLessonDTO.getLessonTimeFormatted() + "?");
         Optional<ButtonType> result = alert1.showAndWait();
         if (result.get() == ButtonType.OK) {
             try {
                 lessonsRepository.deleteItem(selectedLessonDTO, JDBC.getConnection());
+                reset();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            weekTable.setItems(lessonsRepository.getWeeklyLessons());
         }
         else {
             alert1.close();
@@ -68,7 +76,7 @@ public class MainScreenController extends ControllerBase implements IController 
      * sets userId
      */
     private void setUserId() {
-        userId = _userId;
+        userId = this.userId;
     }
 
     /**
@@ -78,32 +86,12 @@ public class MainScreenController extends ControllerBase implements IController 
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Get data for Weekly LessonsRepository table
-//        idWeek.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-//        titleWeek.setCellValueFactory(new PropertyValueFactory<>("title"));
-//        descriptionWeek.setCellValueFactory(new PropertyValueFactory<>("description"));
-//        locationWeek.setCellValueFactory(new PropertyValueFactory<>("location"));
-//        studentWeek.setCellValueFactory(new PropertyValueFactory<>("contactName"));
-//        typeWeek.setCellValueFactory(new PropertyValueFactory<>("type"));
-//        startWeek.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-//        endWeek.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-//        startDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-//        customerWeek.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-//        userWeek.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
-        //sets table with weekly appt data
-        weekTable.setItems(lessonsRepository.getWeeklyLessons());
-        this.setUserId();
+        reset();
     }
 
     @Override
     public List<PossibleError> buildPossibleErrors() {
         return null;
-    }
-
-    @Override
-    public String getNameForItem(Object item) {
-        return "";
     }
 
     @Override
@@ -121,9 +109,6 @@ public class MainScreenController extends ControllerBase implements IController 
     public void onReports(ActionEvent actionEvent) throws IOException {
         super.loadNewScreen(Constants.FXML_ROUTES.REPORTS_SCRN, userId);
     }
-    public void onAllLessons(ActionEvent actionEvent) throws IOException {
-        super.loadNewScreen(Constants.FXML_ROUTES.ALL_LESSON_SCRN, userId);
-    }
     public void onPropertyManagement(ActionEvent actionEvent) throws IOException {
         super.loadNewScreen(Constants.FXML_ROUTES.PROP_MGMT_SCRN, userId);
     }
@@ -140,12 +125,35 @@ public class MainScreenController extends ControllerBase implements IController 
         super.loadNewScreen(Constants.FXML_ROUTES.TEACHER_MGMT_SCRN, userId);
     }
     public void onGoBack(ActionEvent actionEvent) {
-        Stage stage = (Stage) exit.getScene().getWindow();
-        stage.close();
+        Constants.PRIMARY_STAGE.close();
     }
 
     @Override
     public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
 
+    }
+
+    @Override
+    public void reset() {
+        studentColumn.setCellValueFactory(new PropertyValueFactory<>("studentFullName"));
+        teacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherFullName"));
+        lessonTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lessonTimeFormatted"));
+        goldCupColumn.setCellValueFactory(new PropertyValueFactory<>("goldCup"));
+        levelColumn.setCellValueFactory(new PropertyValueFactory<>("levelName"));
+        bookColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        instrumentColumn.setCellValueFactory(new PropertyValueFactory<>("instrumentName"));
+        isNewStudentColumn.setCellValueFactory(new PropertyValueFactory<>("newStudent"));
+
+        weekTable.setItems(lessonsRepository.getAllLessonData());
+        this.setUserId();
+    }
+
+    @Override
+    public void handleDoubleClickOnRow(LessonDTO item) throws SQLException, InstantiationException, IllegalAccessException {
+
+    }
+
+    public void onSignOut(ActionEvent actionEvent) throws IOException {
+        super.loadNewScreen(Constants.FXML_ROUTES.LOGIN_SCREEN, 0);
     }
 }

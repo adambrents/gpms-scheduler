@@ -18,12 +18,15 @@ public class StudentBookDTO extends DTOMappingBase<StudentBookDTO> implements IS
         this.id = id;
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentBookDTO(int mappingFromId, int mappingToId) {
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentBookDTO() {
+        setMapping();
     }
 
     public StudentBookDTO(int mappingFromId, int mappingToId, BooleanProperty selected) {

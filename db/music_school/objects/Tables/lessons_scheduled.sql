@@ -6,9 +6,9 @@ CREATE TABLE `lessons_scheduled` (
   `Start` datetime DEFAULT NULL,
   `End` datetime DEFAULT NULL,
   `Create_Date` datetime DEFAULT NULL,
-  `Created_By` varchar(50) DEFAULT NULL,
+  `Created_By` int DEFAULT NULL,
   `Last_Update` timestamp NULL DEFAULT NULL,
-  `Last_Updated_By` varchar(50) DEFAULT NULL,
+  `Last_Updated_By` int DEFAULT NULL,
   `Gold_Cup` bit(1) NOT NULL DEFAULT b'0',
   `New_Student` bit(1) NOT NULL DEFAULT b'0',
   `Lesson_Book_Id` int NOT NULL,
@@ -18,7 +18,11 @@ CREATE TABLE `lessons_scheduled` (
   KEY `fk_book_id_idx` (`Lesson_Book_Id`),
   KEY `fk_level_id_idx` (`Lesson_Level_Id`),
   KEY `fk_instrument_id_idx` (`Lesson_Instrument_Id`),
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
   CONSTRAINT `fk_book_id_lessons` FOREIGN KEY (`Lesson_Book_Id`) REFERENCES `books` (`Book_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_lessons_scheduled` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_instrument_id_lessons` FOREIGN KEY (`Lesson_Instrument_Id`) REFERENCES `instruments` (`Instrument_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_last_updated_by_lessons_scheduled` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_level_id_lessons` FOREIGN KEY (`Lesson_Level_Id`) REFERENCES `levels` (`Level_Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

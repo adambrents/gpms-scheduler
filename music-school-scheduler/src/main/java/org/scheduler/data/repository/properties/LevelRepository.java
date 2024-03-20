@@ -14,8 +14,8 @@ import java.sql.SQLException;
 public class LevelRepository extends BaseRepository<LevelDTO> {
     private final Logger _logger = LoggerFactory.getLogger(LevelRepository.class);
     @Override
-    public ObservableList<LevelDTO> getAllItems() throws SQLException, InstantiationException, IllegalAccessException {
-        return FXCollections.observableArrayList(super.getAllItemsFromType(LevelDTO.class));
+    public ObservableList<LevelDTO> getAllItems() {
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new LevelDTO()));
     }
 
 

@@ -1,10 +1,15 @@
 {
-  "AppName": "Great Performers Scheduler",
+  "appName": "Great Performers Scheduler",
   "dbConnection": {
       "db": "music_school",
       "serverName": "abrents.tplinkdns.com",
       "serverPort": 3306,
       "userName": "svc-musicschedulerapp",
       "password": "V6M=VRwM#*O=63l,TO6P?zX5n&^6ly"
-    }
+    },
+  "businessHours": {
+    "open": "15:00:00",
+    "close": "20:30:00",
+    "days": ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"]
+  }
 }

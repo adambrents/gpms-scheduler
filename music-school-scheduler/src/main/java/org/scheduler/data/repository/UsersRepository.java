@@ -22,11 +22,7 @@ public class UsersRepository extends BaseRepository<UserDTO> {
      */
     @Override
     public ObservableList<UserDTO> getAllItems() {
-        try {
-            return FXCollections.observableArrayList(super.getAllItemsFromType(UserDTO.class));
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new UserDTO()));
     }
 
     @Override

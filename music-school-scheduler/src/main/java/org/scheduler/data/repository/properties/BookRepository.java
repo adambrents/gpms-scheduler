@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public class BookRepository extends BaseRepository<BookDTO> {
     @Override
-    public ObservableList<BookDTO> getAllItems() throws SQLException, InstantiationException, IllegalAccessException {
-        return FXCollections.observableArrayList(super.getAllItemsFromType(BookDTO.class));
+    public ObservableList<BookDTO> getAllItems() {
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new BookDTO()));
     }
 
     @Override

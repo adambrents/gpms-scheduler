@@ -1,6 +1,7 @@
 package org.scheduler.data.dto.properties;
 
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISelectableDTO;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
@@ -13,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class InstrumentDTO extends DTOBase<InstrumentDTO> implements ISelectableDTO<InstrumentDTO> {
+public final class InstrumentDTO extends DTOBase<InstrumentDTO> implements ISelectableDTO<InstrumentDTO>, IComboBox {
 
     public InstrumentDTO(int Id, String name) {
         super.id = Id;
@@ -27,6 +28,11 @@ public final class InstrumentDTO extends DTOBase<InstrumentDTO> implements ISele
     public InstrumentDTO(String name) {
         super.name = name;
     }
+
+    public InstrumentDTO(int instrumentId) {
+        super.id = instrumentId;
+    }
+
     @Override
     public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
         String sql = "SELECT * FROM " + DB_TABLES.INSTRUMENTS; // Assuming DB_TABLES.INSTRUMENTS is a constant

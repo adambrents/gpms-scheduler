@@ -14,8 +14,8 @@ import java.sql.SQLException;
 public class RecitalRepository extends BaseRepository<RecitalDTO> {
     private final Logger _logger = LoggerFactory.getLogger(RecitalRepository.class);
     @Override
-    public ObservableList<RecitalDTO> getAllItems() throws SQLException, InstantiationException, IllegalAccessException {
-        return FXCollections.observableArrayList(super.getAllItemsFromType(RecitalDTO.class));
+    public ObservableList<RecitalDTO> getAllItems() {
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new RecitalDTO()));
     }
 
     @Override

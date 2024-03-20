@@ -6,6 +6,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -32,8 +33,8 @@
                         <TextField fx:id="nameTextField" layoutX="25.0" layoutY="152.0" prefWidth="200.0" />
                         <Button layoutX="98.0" layoutY="288.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
                   <MenuButton fx:id="typeMenu" layoutX="25.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Default Text" />
-                  <Label fx:id="errorText" layoutX="129.0" layoutY="75.0" />
                   <Label fx:id="clearLabel" layoutX="112.0" layoutY="321.0" text="Clear" underline="true" />
+                  <TextArea fx:id="errorText" layoutX="63.0" layoutY="341.0" prefHeight="55.0" prefWidth="128.0" visible="false" />
                     </children>
                 </AnchorPane>
             </items>

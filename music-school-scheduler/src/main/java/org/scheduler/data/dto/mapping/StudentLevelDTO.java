@@ -17,12 +17,15 @@ public class StudentLevelDTO extends DTOMappingBase<StudentLevelDTO> implements 
         this.id = id;
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentLevelDTO(int mappingFromId, int mappingToId) {
         this.mappingFromId = mappingFromId;
         this.mappingToId = mappingToId;
+        setMapping();
     }
     public StudentLevelDTO() {
+        setMapping();
     }
 
     public StudentLevelDTO(int mappingFromId, int mappingToId, BooleanProperty selected) {

@@ -10,7 +10,6 @@ DROP TABLE IF EXISTS teacher_instrument;
 DROP TABLE IF EXISTS lessons_scheduled_mst;
 DROP TABLE IF EXISTS lessons_scheduled;
 DROP TABLE IF EXISTS lessons;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS teachers;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS student_recitals;
@@ -18,6 +17,7 @@ DROP TABLE IF EXISTS recitals;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS levels;
 DROP TABLE IF EXISTS instruments;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS `books` (
   `Book_Id` int NOT NULL AUTO_INCREMENT,
@@ -44,6 +44,23 @@ CREATE TABLE IF NOT EXISTS `recitals` (
   PRIMARY KEY (`Recital_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE IF NOT EXISTS `users` (
+  `User_ID` int NOT NULL AUTO_INCREMENT,
+  `User_Name` varchar(50) DEFAULT NULL,
+  `Password` text,
+  `Create_Date` datetime DEFAULT NULL,
+  `Created_By` int DEFAULT NULL,
+  `Last_Update` timestamp NULL DEFAULT NULL,
+  `Last_Updated_By` int DEFAULT NULL,
+  `Active` bit DEFAULT NULL,
+  PRIMARY KEY (`User_ID`),
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
+  CONSTRAINT `fk_last_updated_by_users` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_users` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  UNIQUE KEY `User_Name_UNIQUE` (`User_Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE IF NOT EXISTS `students` (
   `Student_ID` int NOT NULL AUTO_INCREMENT,
   `Student_First_Name` varchar(50) DEFAULT NULL,
@@ -51,7 +68,10 @@ CREATE TABLE IF NOT EXISTS `students` (
   `Address_Line_1` varchar(100) DEFAULT NULL,
   `Address_Line_2` varchar(100) DEFAULT NULL,
   `Postal_Code` varchar(50) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
   `Phone` varchar(50) DEFAULT NULL,
+  `Email` varchar(50) DEFAULT NULL,
   `Create_Date` datetime DEFAULT NULL,
   `Created_By` int DEFAULT NULL,
   `Last_Update` timestamp NULL DEFAULT NULL,
@@ -62,6 +82,10 @@ CREATE TABLE IF NOT EXISTS `students` (
   PRIMARY KEY (`Student_ID`),
   KEY `fk_book_id_idx` (`Current_Book_Id`),
   KEY `fk_level_id_idx` (`Current_Level_Id`),
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
+  CONSTRAINT `fk_last_updated_by_students` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_students` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_current_book_id_students` FOREIGN KEY (`Current_Book_Id`) REFERENCES `books` (`Book_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_current_level_id_students` FOREIGN KEY (`Current_Level_Id`) REFERENCES `levels` (`Level_Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -78,19 +102,6 @@ CREATE TABLE IF NOT EXISTS `student_recitals` (
   CONSTRAINT `fk_recital_id_student_recitals` FOREIGN KEY (`Recital_Id`) REFERENCES `recitals` (`Recital_Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `User_ID` int NOT NULL AUTO_INCREMENT,
-  `User_Name` varchar(50) DEFAULT NULL,
-  `Password` text,
-  `Create_Date` datetime DEFAULT NULL,
-  `Created_By` varchar(50) DEFAULT NULL,
-  `Last_Update` timestamp NULL DEFAULT NULL,
-  `Last_Updated_By` varchar(50) DEFAULT NULL,
-  `Active` bit DEFAULT NULL,
-  PRIMARY KEY (`User_ID`),
-  UNIQUE KEY `User_Name_UNIQUE` (`User_Name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE IF NOT EXISTS `teachers` (
   `Teacher_Id` int NOT NULL AUTO_INCREMENT,
   `Teacher_First_Name` varchar(50) DEFAULT NULL,
@@ -103,13 +114,17 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `Phone` varchar(50) DEFAULT NULL,
   `Email` varchar(50) DEFAULT NULL,
   `Create_Date` datetime DEFAULT NULL,
-  `Created_By` varchar(50) DEFAULT NULL,
+  `Created_By` int DEFAULT NULL,
   `Last_Update` timestamp NULL DEFAULT NULL,
-  `Last_Updated_By` varchar(50) DEFAULT NULL,
+  `Last_Updated_By` int DEFAULT NULL,
   `User_ID` int DEFAULT NULL,
   PRIMARY KEY (`Teacher_Id`),
   KEY `fk_user_id_idx` (`User_ID`),
-  CONSTRAINT `fk_user_id_teachers` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
+  CONSTRAINT `fk_user_id_teachers` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_last_updated_by_teachers` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_teachers` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `teacher_instrument` (
@@ -148,19 +163,20 @@ CREATE TABLE IF NOT EXISTS `student_teacher` (
 CREATE TABLE IF NOT EXISTS `lessons` (
   `Lesson_ID` int NOT NULL AUTO_INCREMENT,
   `Create_Date` datetime DEFAULT NULL,
-  `Created_By` varchar(50) DEFAULT NULL,
+  `Created_By` int DEFAULT NULL,
   `Last_Update` timestamp NULL DEFAULT NULL,
-  `Last_Updated_By` varchar(50) DEFAULT NULL,
+  `Last_Updated_By` int DEFAULT NULL,
   `Student_ID` int NOT NULL,
-  `User_ID` int NOT NULL,
   `Teacher_ID` int NOT NULL,
   PRIMARY KEY (`Lesson_ID`),
   KEY `fk_student_id_idx` (`Student_ID`),
-  KEY `fk_user_id_idx` (`User_ID`),
   KEY `fk_teacher_id_idx` (`Teacher_ID`),
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
+  CONSTRAINT `fk_last_updated_by_lessons` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_lessons` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_teacher_id` FOREIGN KEY (`Teacher_ID`) REFERENCES `teachers` (`Teacher_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_student_id` FOREIGN KEY (`Student_ID`) REFERENCES `students` (`Student_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_user_id_lessons` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_student_id` FOREIGN KEY (`Student_ID`) REFERENCES `students` (`Student_ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `lessons_scheduled` (
@@ -168,24 +184,33 @@ CREATE TABLE IF NOT EXISTS `lessons_scheduled` (
   `Description` varchar(50) DEFAULT NULL,
   `Type` varchar(50) DEFAULT NULL,
   `Location` varchar(50) DEFAULT NULL,
-  `Start` datetime DEFAULT NULL,
-  `End` datetime DEFAULT NULL,
+  `Start` time DEFAULT NULL,
+  `End` time DEFAULT NULL,
+  `DayOfWeek` varchar(50) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
   `Create_Date` datetime DEFAULT NULL,
-  `Created_By` varchar(50) DEFAULT NULL,
+  `Created_By` int DEFAULT NULL,
   `Last_Update` timestamp NULL DEFAULT NULL,
-  `Last_Updated_By` varchar(50) DEFAULT NULL,
+  `Last_Updated_By` int DEFAULT NULL,
   `Gold_Cup` bit NOT NULL DEFAULT 0,
   `New_Student` bit NOT NULL DEFAULT 0,
   `Lesson_Book_Id` int NOT NULL,
   `Lesson_Level_Id` int NOT NULL,
   `Lesson_Instrument_Id` int NOT NULL,
+  `Lesson_Id` int NOT NULL,
   PRIMARY KEY (`lessons_scheduled_Id`),
   KEY `fk_book_id_idx` (`Lesson_Book_Id`),
   KEY `fk_level_id_idx` (`Lesson_Level_Id`),
   KEY `fk_instrument_id_idx` (`Lesson_Instrument_Id`),
-  CONSTRAINT `fk_book_id_lessons` FOREIGN KEY (`Lesson_Book_Id`) REFERENCES `books` (`Book_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_level_id_lessons` FOREIGN KEY (`Lesson_Level_Id`) REFERENCES `levels` (`Level_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_instrument_id_lessons` FOREIGN KEY (`Lesson_Instrument_Id`) REFERENCES `instruments` (`Instrument_Id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_last_updated_by_idx` (`Last_Updated_By`),
+  KEY `fk_created_by_idx` (`Created_By`),
+  KEY `fk_lesson_id_idx` (`Lesson_Id`),
+  CONSTRAINT `fk_last_updated_by_lessons_scheduled` FOREIGN KEY (`Last_Updated_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_created_by_lessons_scheduled` FOREIGN KEY (`Created_By`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_book_id_lessons_scheduled` FOREIGN KEY (`Lesson_Book_Id`) REFERENCES `books` (`Book_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_level_id_lessons_scheduled` FOREIGN KEY (`Lesson_Level_Id`) REFERENCES `levels` (`Level_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_instrument_id_lessons_scheduled` FOREIGN KEY (`Lesson_Instrument_Id`) REFERENCES `instruments` (`Instrument_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_lesson_id_lessons_scheduled` FOREIGN KEY (`Lesson_Id`) REFERENCES `lessons` (`Lesson_Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `lessons_scheduled_mst` (

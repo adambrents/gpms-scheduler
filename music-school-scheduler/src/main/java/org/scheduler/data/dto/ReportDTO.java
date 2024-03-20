@@ -1,18 +1,20 @@
 package org.scheduler.data.dto;
 
-public class ReportDTO {
+import org.scheduler.data.dto.interfaces.IComboBox;
+
+public class ReportDTO implements IComboBox {
 
     private String reportName;
-    private int reportId;
+    private Reports reportEnum;
 
     /**
      * constructor for ReportDTO
      * @param reportName
      * @param reportId
      */
-    public ReportDTO(String reportName, int reportId) {
+    public ReportDTO(String reportName, Reports reportId) {
         this.reportName = reportName;
-        this.reportId = reportId;
+        this.reportEnum = reportId;
     }
 
     public ReportDTO() {
@@ -23,27 +25,19 @@ public class ReportDTO {
      * getter/setter for ReportDTO
      * @return
      */
-    public String getReportName() {
+    @Override
+    public String getName() {
         return reportName;
     }
 
-    //
-//    /**
-//     * getter/setter for ReportDTO
-//     * @return
-// 
-////     */
-////    public int getReportId() {
-////        return reportId;
-////    }
-//// 
-//
-//    /**
-//     * getter/setter for ReportDTO
-// 
-//     * @param reportId
-//     */
-    public void setReportId(int reportId) {
-        this.reportId = reportId;
+    public Reports getReportEnum() {
+        return reportEnum;
+    }
+
+    public enum Reports{
+        INSTRUMENT_LESSONS_RATIO,
+        NUMBER_STUDENTS_INSTRUMENTS,
+        GOLDCUP,
+        NEW_STUDENTS
     }
 }

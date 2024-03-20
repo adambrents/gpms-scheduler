@@ -34,8 +34,6 @@ import static org.scheduler.app.constants.Constants.PROPERTIES.*;
 
 public class PropertyManagerController<T extends ISqlConvertible> extends ControllerBase implements ICreate, IUpdate, IDelete {
     private static final Logger _logger = LoggerFactory.getLogger(PropertyManagerController.class);
-
-    public Label errorText;
     public MenuButton typeMenu;
     public TextField nameTextField;
     public TableView<ISqlConvertible> propertyTable;
@@ -46,13 +44,13 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
     public Label clearLabel;
     private ISqlConvertible selectedPropertyType;
     private ISqlConvertible propertyToBeUpdated;
-    private int userId;
+    
     private IRepository<ISqlConvertible> repository;
 
     @Override
     public void onGoBack(ActionEvent actionEvent) {
         try{
-            super.goBack(_userId);
+            super.goBack(this.userId);
         }
         catch (IOException e){
             _logger.error("Could not load resource!", e);
@@ -73,7 +71,7 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
         String errorMessage = super.getErrorMessage();
         if(!errorMessage.equals("")){
             errorText.setText(errorMessage);
-            errorText.setTextFill(Paint.valueOf(ERROR_RED));
+            errorText.setVisible(true);
         }
         else {
             buildNewProperty(selectedPropertyType);
@@ -90,7 +88,6 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
         String errorMessage = super.getErrorMessage();
         if(!errorMessage.equals("")){
             errorText.setText(errorMessage);
-            errorText.setTextFill(Paint.valueOf(ERROR_RED));
         }
         else {
             if(propertyToBeUpdated != null && propertyToBeUpdated.getId() != 0){
@@ -149,14 +146,15 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
         typeMenu.setDisable(true);
         propertyToBeUpdated = item;
     }
-
-    private void reset(){
+    @Override
+    public void reset() {
         populateTypeMenu();
-        clearAllTextFields(PRIMARY_STAGE.getScene().getRoot());
-        typeMenu.setDisable(false);
         propertyNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         propertyTypeNameColumn.setCellValueFactory(cellData -> determineTypeName(cellData.getValue()));
         propertyTable.setItems(getAllProperties());
+        labelsToReset.clear();
+        Collections.addAll(labelsToReset, nameTextLabel, propertyTypeLabel);
+        super.reset();
     }
     private SimpleStringProperty determineTypeName(ISqlConvertible item){
         String typeName = "";
@@ -172,14 +170,10 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
 
     private ObservableList<ISqlConvertible> getAllProperties() {
         ObservableList<ISqlConvertible> propertyList = FXCollections.observableArrayList();
-        try {
-            propertyList.addAll(levelRepository.getAllItems());
-            propertyList.addAll(bookRepository.getAllItems());
-            propertyList.addAll(instrumentRepository.getAllItems());
+        propertyList.addAll(levelRepository.getAllItems());
+        propertyList.addAll(bookRepository.getAllItems());
+        propertyList.addAll(instrumentRepository.getAllItems());
 
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
         return propertyList;
     }
 
@@ -204,15 +198,12 @@ public class PropertyManagerController<T extends ISqlConvertible> extends Contro
     public List<PossibleError> buildPossibleErrors(){
         List<PossibleError> possibleErrors = new ArrayList<>();
 
+        String typeMenuValue = typeMenu.getText() == Constants.PLACEHOLDER_TEXT.MENU_ITEM ? "" : typeMenu.getText();
+
         possibleErrors.add(new PossibleError("Name", nameTextField.getText(), nameTextLabel));
-        possibleErrors.add(new PossibleError("Type", selectedPropertyType.getName(), propertyTypeLabel));
+        possibleErrors.add(new PossibleError("Type", typeMenuValue, propertyTypeLabel));
 
         return possibleErrors;
-    }
-
-    @Override
-    public String getNameForItem(Object item) {
-        return null;
     }
 
     @Override

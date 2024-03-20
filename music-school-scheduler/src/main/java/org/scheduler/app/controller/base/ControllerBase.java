@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -20,10 +22,9 @@ import org.scheduler.app.controller.handlers.TeacherActionHandler;
 import org.scheduler.app.controller.handlers.base.IActionHandler;
 import org.scheduler.app.controller.interfaces.IController;
 import org.scheduler.app.models.errors.PossibleError;
-import org.scheduler.data.dto.base.DTOMappingBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.repository.*;
-import org.scheduler.data.repository.base.BaseRepository;
 import org.scheduler.data.repository.interfaces.IRepository;
 import org.scheduler.data.repository.properties.BookRepository;
 import org.scheduler.data.repository.properties.InstrumentRepository;
@@ -32,14 +33,15 @@ import org.scheduler.data.repository.properties.LevelRepository;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.scheduler.app.constants.Constants.ERROR_RED;
-import static org.scheduler.app.constants.Constants.NAVIGATION_HISTORY;
+import static org.scheduler.app.constants.Constants.*;
 
 public abstract  class ControllerBase implements Initializable, IController {
-    public int _userId;
+    public int userId;
     public final StudentsRepository studentsRepository = new StudentsRepository();
     public final LessonsRepository lessonsRepository = new LessonsRepository();
     public final UsersRepository usersRepository = new UsersRepository();
@@ -52,11 +54,40 @@ public abstract  class ControllerBase implements Initializable, IController {
     public LevelActionHandler levelActionHandler = new LevelActionHandler();
     public TeacherActionHandler teacherActionHandler = new TeacherActionHandler();
     public BookActionHandler bookActionHandler = new BookActionHandler();
-    private CheckBox checkBox = new CheckBox();
+    public final List<Label> labelsToReset = new ArrayList<>();
 
+    public TextArea errorText;
+    @Override
+    public void reset() {
+        resetAllFieldsOnScreen(PRIMARY_STAGE.getScene().getRoot());
+    }
 
-    public abstract List<PossibleError> buildPossibleErrors();
-    public abstract String getNameForItem(Object item);
+    private void resetAllFieldsOnScreen(Node node) {
+        if (node instanceof TextField) {
+            ((TextField) node).clear();
+        } else if (node instanceof TextArea) {
+            ((TextArea) node).clear();
+        }else if (node instanceof ComboBox) {
+            ((ComboBox<?>) node).setValue(null);
+        }
+        if (node instanceof Parent) {
+            for (Node child : ((Parent) node).getChildrenUnmodifiable()) {
+                resetAllFieldsOnScreen(child);
+            }
+        }
+        if (node instanceof CheckBox) {
+            ((CheckBox) node).setSelected(false);
+        }
+
+        if (node instanceof Control) {
+            node.setDisable(false);
+        }
+        for (Label label : labelsToReset) {
+            label.setTextFill(Color.BLACK);
+        }
+        errorText.setVisible(false);
+        errorText.setText("");
+    }
 
     public void goBack(int userId) throws IOException {
             loadNewScreen(NAVIGATION_HISTORY.pop(), userId);
@@ -87,26 +118,71 @@ public abstract  class ControllerBase implements Initializable, IController {
         primaryStage.show();
     }
     public void setControllerProperties(int userId){
-        this._userId = userId;
+        setUserId(userId);
     }
     public abstract void setUserId(int userId);
-    public void populateComboBox(ComboBox comboBox, List items) {
+    public <T extends IComboBox> void populateComboBox(ComboBox<T> comboBox, List<T> items) {
+        comboBox.getItems().clear();
+        comboBox.getItems().addAll(items);
+
+        comboBox.setCellFactory(lv -> new ListCell<T>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        });
+
+        comboBox.setButtonCell(new ListCell<T>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        });
+
+        comboBox.setConverter(new StringConverter<T>() {
+            @Override
+            public String toString(T item) {
+                return item == null ? "" : item.getName();
+            }
+
+            @Override
+            public T fromString(String string) {
+                return null;
+            }
+        });
+    }
+
+    public void populateComboBoxTimes(ComboBox<LocalTime> comboBox, List<LocalTime> items) {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
+
         comboBox.getItems().clear();
         comboBox.getItems().addAll(items);
 
         comboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
-            protected void updateItem(Object item, boolean empty) {
+            protected void updateItem(LocalTime item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? "" : getNameForItem(item));
+                setText(empty ? "" : item.format(timeFormatter));
             }
         });
-
         comboBox.setButtonCell(new ListCell<>() {
             @Override
-            protected void updateItem(Object item, boolean empty) {
+            protected void updateItem(LocalTime item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? "" : getNameForItem(item));
+                setText(empty ? "" : item.format(timeFormatter));
+            }
+        });
+        comboBox.setConverter(new StringConverter<LocalTime>() {
+            @Override
+            public String toString(LocalTime item) {
+                return item == null ? "" : item.format(timeFormatter);
+            }
+
+            @Override
+            public LocalTime fromString(String string) {
+                return null;
             }
         });
     }
@@ -118,7 +194,8 @@ public abstract  class ControllerBase implements Initializable, IController {
         List<String> errorMsgs = new ArrayList<>();
 
         for (PossibleError possibleError : possibleErrors) {
-            if(possibleError.getPropertyValue() != null && possibleError.getPropertyValue().equals("")){
+            String propertyValue = possibleError.getPropertyValue();
+            if (propertyValue != null && ("null".equals(propertyValue) || propertyValue.isEmpty())) {
                 errorMsgs.add(getErrorString(possibleError.getPropertyName()));
                 setErroredLabel(possibleError.getPropertyLabel());
             }
@@ -136,6 +213,8 @@ public abstract  class ControllerBase implements Initializable, IController {
         }
     }
 
+    public abstract List<PossibleError> buildPossibleErrors();
+
     private String getErrorString(String propertyName){
         return propertyName + " field MUST be filled out";
     }
@@ -143,17 +222,6 @@ public abstract  class ControllerBase implements Initializable, IController {
         label.setTextFill(Paint.valueOf(ERROR_RED));
     }
 
-    public void clearAllTextFields(Node node) {
-        if (node instanceof TextField) {
-            ((TextField) node).clear();
-        }
-
-        if (node instanceof Parent) {
-            for (Node child : ((Parent) node).getChildrenUnmodifiable()) {
-                clearAllTextFields(child);
-            }
-        }
-    }
 
 //    public <repo extends BaseRepository, listDto extends ISqlConvertible, dto extends ISqlConvertible, mappings extends DTOMappingBase> void setCheckboxValues(ListView<listDto> selectedItems, dto dtoItem, repo repository, mappings map){
 //        List<mappings> mappings = null;
@@ -180,39 +248,35 @@ public abstract  class ControllerBase implements Initializable, IController {
 //        });
 //    }
     public <repo extends IRepository, dto extends ISqlConvertible, handler extends IActionHandler> void populateListView(ListView<dto> listView, repo item) {
-        try {
-            listView.getItems().clear();
+        listView.getItems().clear();
 
-            listView.setItems(item.getAllItems());
+        listView.setItems(item.getAllItems());
 
-            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            listView.setCellFactory(param -> new ListCell<dto>() {
-                private final CheckBox checkBox = new CheckBox();
+        listView.setCellFactory(param -> new ListCell<dto>() {
+            private final CheckBox checkBox = new CheckBox();
 
-                @Override
-                protected void updateItem(dto item, boolean empty) {
-                    super.updateItem(item, empty);
+            @Override
+            protected void updateItem(dto item, boolean empty) {
+                super.updateItem(item, empty);
 
-                    if (empty || item == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        setText(item.getName());
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.getName());
 
-                        checkBox.setSelected(item.getSelected().get());
+                    checkBox.setSelected(item.getSelected().get());
 
-                        checkBox.setOnAction(e -> {
-                            item.setSelected(checkBox.isSelected());
-                        });
+                    checkBox.setOnAction(e -> {
+                        item.setSelected(checkBox.isSelected());
+                    });
 
-                        setGraphic(checkBox);
-                    }
+                    setGraphic(checkBox);
                 }
-            });
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+            }
+        });
     }
     public <repo extends IRepository, dto extends ISqlConvertible, handler extends IActionHandler>  void setUpListener(ListView<dto> listView, handler actionHandler){
         listView.setCellFactory(CheckBoxListCell.forListView(item -> {

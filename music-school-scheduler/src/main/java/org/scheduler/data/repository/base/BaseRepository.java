@@ -3,7 +3,11 @@ package org.scheduler.data.repository.base;
 import org.scheduler.app.constants.Constants;
 import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
+import org.scheduler.data.repository.TeachersRepository;
 import org.scheduler.data.repository.interfaces.IRepository;
+import org.scheduler.data.repository.properties.BookRepository;
+import org.scheduler.data.repository.properties.InstrumentRepository;
+import org.scheduler.data.repository.properties.LevelRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,24 +26,16 @@ public abstract class BaseRepository<T extends ISqlConvertible> implements IRepo
         return getConnection().createStatement();
     }
 
-    public List<T> getAllItemsFromType(Class<T> item) throws SQLException, InstantiationException, IllegalAccessException {
+    public <T extends ISqlConvertible> List<T> getAllItemsFromType(T item) {
         List<T> items = new ArrayList<>();
-        T instance = null;
-        try {
-            instance = item.getDeclaredConstructor().newInstance();
-        } catch (InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
         try (
-             PreparedStatement pstmt = instance.toSqlSelectQuery(JDBC.getConnection())) {
+             PreparedStatement pstmt = item.toSqlSelectQuery(JDBC.getConnection())) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Method fromResultSetMethod = item.getMethod("fromResultSet", ResultSet.class);
-                fromResultSetMethod.setAccessible(true);
-                T result = (T) fromResultSetMethod.invoke(instance, rs);
+                T result = (T) item.fromResultSet(rs);
                 items.add(result);
             }
-        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return items;
@@ -54,31 +50,41 @@ public abstract class BaseRepository<T extends ISqlConvertible> implements IRepo
             }
         }
     }
-    public <T extends ISqlConvertible> int insertReturnGeneratedKey(T item, Connection connection) throws SQLException {
+    public <T extends ISqlConvertible> int insertReturnGeneratedKey(T item, Connection connection){
         try (PreparedStatement pstmt = item.toSqlInsertQuery(item, connection)) {
-            int count = pstmt.executeUpdate();
+            try {
+                int count = pstmt.executeUpdate();
 
-            if (count == PreparedStatement.EXECUTE_FAILED) {
-                throw new SQLException("Failed to insert record!");
-            }
-
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                } else {
-                    throw new SQLException("Creating item failed, no ID obtained.");
+                if (count == PreparedStatement.EXECUTE_FAILED) {
+                    throw new SQLException("Failed to insert record!");
                 }
+
+                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Creating item failed, no ID obtained.");
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public <T extends ISqlConvertible> void insert(T item, Connection connection) throws SQLException {
+    public <T extends ISqlConvertible> void insert(T item, Connection connection) {
         try (PreparedStatement pstmt = item.toSqlInsertQuery(item, connection)) {
             int count = pstmt.executeUpdate();
 
             if (count == PreparedStatement.EXECUTE_FAILED) {
                 throw new SQLException("Failed to insert record!");
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     public <T extends ISqlConvertible> void delete(T item, Connection connection) throws SQLException {

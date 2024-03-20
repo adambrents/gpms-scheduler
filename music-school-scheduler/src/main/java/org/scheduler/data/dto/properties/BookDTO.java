@@ -1,6 +1,7 @@
 package org.scheduler.data.dto.properties;
 
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.repository.interfaces.IRepository;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class BookDTO extends DTOBase<BookDTO> implements ISqlConvertible<BookDTO> {
+public final class BookDTO extends DTOBase<BookDTO> implements ISqlConvertible<BookDTO>, IComboBox {
     public BookDTO() {
         
     }
@@ -24,6 +25,11 @@ public final class BookDTO extends DTOBase<BookDTO> implements ISqlConvertible<B
     public BookDTO(String name) {
         this.name = name;
     }
+
+    public BookDTO(int bookId) {
+        super.id = bookId;
+    }
+
     @Override
     public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
         String sql = "SELECT * FROM " + DB_TABLES.BOOKS;

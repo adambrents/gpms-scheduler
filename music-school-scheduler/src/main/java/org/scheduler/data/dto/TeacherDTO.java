@@ -2,6 +2,7 @@ package org.scheduler.data.dto;
 
 import org.scheduler.data.configuration.DB_TABLES;
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.repository.TeachersRepository;
 import org.scheduler.data.repository.interfaces.IRepository;
@@ -9,7 +10,7 @@ import org.scheduler.data.repository.interfaces.IRepository;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<TeacherDTO> {
+public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<TeacherDTO>, IComboBox {
     private String firstName;
     private String lastName;
     private String addressLine1;
@@ -19,11 +20,7 @@ public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<T
     private String state;
     private String phoneNumber;
     private String email;
-    private LocalDateTime createDate;
-    private int createdBy;
-    private LocalDateTime lastUpdate;
-    private int lastUpdatedBy;
-    private int userId;
+    
 
     public TeacherDTO(){
         
@@ -51,8 +48,8 @@ public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<T
         this.state = state;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
+        super.updateDate = lastUpdate;
+        super.updatedBy = lastUpdatedBy;
     }
 
     public TeacherDTO(int id,
@@ -100,8 +97,12 @@ public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<T
         this.email = email;
         this.createDate = createDate;
         this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
+        super.updateDate = lastUpdate;
+        super.updatedBy = lastUpdatedBy;
+    }
+
+    public TeacherDTO(int teacherId) {
+        super.id = teacherId;
     }
 
     public String getFullName(){ return String.format("%s %s", getFirstName(), getLastName()); }
@@ -143,11 +144,11 @@ public class TeacherDTO extends DTOBase<TeacherDTO> implements ISqlConvertible<T
     }
 
     public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+        return updateDate;
     }
 
     public int getLastUpdatedBy() {
-        return lastUpdatedBy;
+        return updatedBy;
     }
 
     public String getTeacherInstruments(){

@@ -2,6 +2,8 @@ package org.scheduler.app.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -12,7 +14,6 @@ import org.scheduler.app.controller.base.ControllerBase;
 import org.scheduler.app.controller.interfaces.*;
 import org.scheduler.app.models.errors.PossibleError;
 import org.scheduler.data.configuration.JDBC;
-import org.scheduler.data.dto.TeacherDTO;
 import org.scheduler.data.dto.base.DTOMappingBase;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.dto.mapping.*;
@@ -28,33 +29,31 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.scheduler.app.constants.Constants.PRIMARY_STAGE;
-
-public class StudentManagementController extends ControllerBase implements ICreate, IUpdate, IDelete, IController, IExport {
+public class StudentManagementController extends ControllerBase implements ICreate, IUpdate, IDelete, IController, IExport, ITableView<StudentDTO> {
     private static final Logger _logger = LoggerFactory.getLogger(StudentManagementController.class);
     public TableColumn<StudentDTO, String> studentNameColumn = new TableColumn<>();
     public TableColumn<StudentDTO, String> studentAddressColumn = new TableColumn<>();
     public TableColumn<StudentDTO, String> studentPhoneColumn = new TableColumn<>();
-    public TableView<StudentDTO> studentsTable = new TableView<>();
-    public TextField firstNameTxt;
-    public TextField addressLine1Txt;
-    public TextField postalTxt;
-    public TextField phoneTxt;
-
-    public TextArea errorText;
-    public TextField lastNameTxt;
-    public TextField addressLine2Txt;
-    public CheckBox goldCupCheckBox;
     public TableColumn<StudentDTO, String> studentBooksColumn;
     public TableColumn<StudentDTO, String> studentLevelsColumn;
     public TableColumn<StudentDTO, String> studentIsGoldCupColumn;
     public TableColumn<StudentDTO, String> studentInstrumentsColumn;
     public TableColumn<StudentDTO, String> studentTeachersColumn;
+    public TableView<StudentDTO> studentsTable = new TableView<>();
+    public TextField firstNameTxt;
+    public TextField addressLine1Txt;
+    public TextField postalTxt;
+    public TextField phoneTxt;
+    public TextField lastNameTxt;
+    public TextField addressLine2Txt;
+    public TextField cityTxt;
+    public TextField emailTxt;
+    public TextField stateTxt;
+    public TextField studentSearch;
+    public CheckBox goldCupCheckBox;
     public Label lastNameLabel;
     public Label addressLine2Label;
     public Label postalCodeLabel;
@@ -62,21 +61,11 @@ public class StudentManagementController extends ControllerBase implements ICrea
     public Label addressLine1Label;
     public Label firstNameLabel;
     public Label cityLabel;
-    public TextField cityTxt;
     public Label emailLabel;
-    public TextField emailTxt;
     public Label stateLabel;
-    public TextField stateTxt;
-    private int userId;
+
     private StudentDTO studentToBeUpdated;
-    public ListView<BookDTO> bookListView;
-    private final List<BookDTO> selectedBooks = new ArrayList<>();
-    public ListView<InstrumentDTO> instrumentListView;
-    private final List<InstrumentDTO> selectedInstruments = new ArrayList<>();
-    public ListView<LevelDTO> levelListView;
-    private final List<LevelDTO> selectedLevels = new ArrayList<>();
-    public ListView<TeacherDTO> teacherListView;
-    private final List<TeacherDTO> selectedTeachers = new ArrayList<>();
+    private ObservableList<StudentDTO> allStudents;
 
 
     /**
@@ -129,8 +118,7 @@ public class StudentManagementController extends ControllerBase implements ICrea
                                 userId,
                                 goldCupCheckBox.isSelected());
 
-                studentsRepository.insertNewStudent(newStudent, teacherActionHandler.getTeacherList(), instrumentActionHandler.getInstrumentList(),
-                                                    bookActionHandler.getBookList(), levelActionHandler.getLevelList());
+                studentsRepository.insertNewStudent(newStudent);
                 reset();
                 studentsTable.setItems(studentsRepository.getAllItems());
             }
@@ -175,12 +163,8 @@ public class StudentManagementController extends ControllerBase implements ICrea
                     goldCupCheckBox.isSelected());
 
             if (newStudent.getId() != 0) {
-                List<InstrumentDTO> instruments = instrumentListView.getItems().stream().toList();
-                List<TeacherDTO> teachers = teacherListView.getItems().stream().toList();
-                List<BookDTO> books = bookListView.getItems().stream().toList();
-                List<LevelDTO> levels = levelListView.getItems().stream().toList();
                 try {
-                    studentsRepository.updateStudent(newStudent,teachers, instruments, books, levels);
+                    studentsRepository.updateStudent(newStudent);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -196,18 +180,6 @@ public class StudentManagementController extends ControllerBase implements ICrea
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         reset();
-        super.populateListView(bookListView, bookRepository);
-        super.setUpListener(bookListView, bookActionHandler);
-
-        super.populateListView(levelListView, levelRepository);
-        super.setUpListener(levelListView, levelActionHandler);
-
-        super.populateListView(teacherListView, teachersRepository);
-        super.setUpListener(teacherListView, teacherActionHandler);
-
-        super.populateListView(instrumentListView, instrumentRepository);
-        super.setUpListener(instrumentListView, instrumentActionHandler);
-
         studentsTable.setRowFactory(tv -> {
             TableRow<StudentDTO> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -231,28 +203,15 @@ public class StudentManagementController extends ControllerBase implements ICrea
 
     @Override
     public List<PossibleError> buildPossibleErrors() {
+        List<PossibleError> possibleErrors = new ArrayList<>();
+        possibleErrors.add(new PossibleError("firstName", firstNameTxt.getText(), firstNameLabel));
+        possibleErrors.add(new PossibleError("lastName", lastNameTxt.getText(), lastNameLabel));
+        possibleErrors.add(new PossibleError("addressLine1", addressLine1Txt.getText(), addressLine1Label));
+        possibleErrors.add(new PossibleError("city", cityTxt.getText(), cityLabel));
+        possibleErrors.add(new PossibleError("postalCode", postalTxt.getText(), postalCodeLabel));
+        possibleErrors.add(new PossibleError("phoneNumber", phoneTxt.getText(), phoneNumberLabel));
 
-//        possibleErrors.add(new PossibleError("firstName", firstNameTxt.getText(), firstNameLabel));
-//        possibleErrors.add(new PossibleError("lastName", lastNameTxt.getText(), lastNameLabel));
-//        possibleErrors.add(new PossibleError("addressLine1", addressLine1Txt.getText(), addressLine1Label));
-//        possibleErrors.add(new PossibleError("city", cityTxt.getText(), cityLabel));
-//        possibleErrors.add(new PossibleError("postalCode", postalTxt.getText(), postalCodeLabel));
-//        possibleErrors.add(new PossibleError("phoneNumber", phoneTxt.getText(), phoneNumberLabel));
-
-        return new ArrayList<>();
-    }
-
-    @Override
-    public String getNameForItem(Object item) {
-        if (item instanceof BookDTO) {
-            return ((BookDTO)item).getName();
-        } else if (item instanceof InstrumentDTO) {
-            return ((InstrumentDTO)item).getName();
-        } else if (item instanceof LevelDTO) {
-            return ((LevelDTO)item).getName();
-        } else {
-            return "";
-        }
+        return possibleErrors;
     }
 
     @Override
@@ -261,24 +220,31 @@ public class StudentManagementController extends ControllerBase implements ICrea
     }
 
     //region private methods
-    private void reset() {
-        clearAllTextFields(PRIMARY_STAGE.getScene().getRoot());
-        goldCupCheckBox.setSelected(false);
+    @Override
+    public void reset() {
         studentToBeUpdated = null;
-        studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        allStudents = studentsRepository.getAllStudentData();
+        configureTableColumns();
+        loadTableData();
+
+        studentSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            handleSearch();
+        });
+        labelsToReset.clear();
+        Collections.addAll(labelsToReset, firstNameLabel, lastNameLabel, addressLine1Label, cityLabel, postalCodeLabel, phoneNumberLabel);
+        super.reset();
+    }
+
+    private void configureTableColumns(){
+        studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         studentAddressColumn.setCellValueFactory(new PropertyValueFactory<>("addressLine1"));
         studentPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        studentBooksColumn.setCellValueFactory(new PropertyValueFactory<>("studentBooks"));
-        studentLevelsColumn.setCellValueFactory(new PropertyValueFactory<>("studentLevels"));
-        studentInstrumentsColumn.setCellValueFactory(new PropertyValueFactory<>("studentInstruments"));
-        studentTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("studentTeachers"));
+        studentBooksColumn.setCellValueFactory(new PropertyValueFactory<>("studentBookNames"));
+        studentLevelsColumn.setCellValueFactory(new PropertyValueFactory<>("studentLevelNames"));
+        studentInstrumentsColumn.setCellValueFactory(new PropertyValueFactory<>("studentInstrumentNames"));
+        studentTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("studentTeacherNames"));
         studentIsGoldCupColumn.setCellValueFactory(new PropertyValueFactory<>("isGoldCup"));
 
-        try {
-            studentsTable.setItems(studentsRepository.getAllItems());
-        } catch (SQLException | InstantiationException | IllegalAccessException throwables) {
-            throw new RuntimeException(throwables);
-        }
 
         studentsTable.setRowFactory(tv -> {
             TableRow<StudentDTO> row = new TableRow<>();
@@ -293,48 +259,28 @@ public class StudentManagementController extends ControllerBase implements ICrea
             });
             return row;
         });
-        setupListViewListener(instrumentListView, selectedInstruments);
-        setupListViewListener(bookListView, selectedBooks);
-        setupListViewListener(levelListView, selectedLevels);
-        setupListViewListener(teacherListView, selectedTeachers);
-        populateListView(instrumentListView, instrumentRepository);
-        populateListView(bookListView, bookRepository);
-        populateListView(levelListView, levelRepository);
-        populateListView(teacherListView, teachersRepository);
     }
 
-    private <T extends ISqlConvertible> void setupListViewListener(ListView<T> instrumentListView, List<T> selectionList){
-        instrumentListView.setCellFactory(CheckBoxListCell.forListView(item -> {
-            BooleanProperty property = new SimpleBooleanProperty();
-            property.addListener((obs, wasSelected, isNowSelected) -> {
-                if(isNowSelected){
-                    item.setSelected(true);
-//                    instrumentActionHandler.performConcreteListAction(true, item);
-                    selectionList.add(item);
+    private void loadTableData(){
+        studentsTable.setItems(allStudents);
+    }
+    private void handleSearch() {
+        String searchText = studentSearch.getText().toLowerCase().trim();
+        List<String> searchWords = new ArrayList<>();
+        if (searchText.startsWith("\"") && searchText.endsWith("\"") && searchText.length() > 2) {
+            searchWords.add(searchText.substring(1, searchText.length() - 1));
+        } else if (!searchText.equals("\"\"")) {
+            searchWords.addAll(Arrays.asList(searchText.split("\\s+")));
+        }
+        List<StudentDTO> filteredList = allStudents.stream()
+                .filter(student -> matchesSearchTerms(student, searchWords))
+                .collect(Collectors.toList());
 
-                }
-                if(wasSelected){
-                    item.setSelected(false);
-//                    instrumentActionHandler.performConcreteListAction(false, item);
-                    selectionList.remove(item);
-                }
-            });
-
-            return property;
-        }, new StringConverter<T>() {
-            @Override
-            public String toString(T object) {
-                return object.getName();
-            }
-
-            @Override
-            public T fromString(String string) {
-                return null;
-            }
-        }));
+        studentsTable.setItems(FXCollections.observableArrayList(filteredList));
     }
 
-    private void handleDoubleClickOnRow(StudentDTO item) throws SQLException, InstantiationException, IllegalAccessException {
+    @Override
+    public void handleDoubleClickOnRow(StudentDTO item) throws SQLException, InstantiationException, IllegalAccessException {
         reset();
         firstNameTxt.setText(item.getFirstName());
         lastNameTxt.setText(item.getLastName());
@@ -347,76 +293,74 @@ public class StudentManagementController extends ControllerBase implements ICrea
         emailTxt.setText(item.getEmail());
         goldCupCheckBox.setSelected(item.isGoldCup());
         studentToBeUpdated = item;
-
-        List<DTOMappingBase> studentInstruments = studentsRepository.getIdsForStudentProperties(item.getId());
-
-        instrumentListView.getItems().forEach(instrument -> {
-            for (DTOMappingBase studentMapping : studentInstruments) {
-                if (studentMapping instanceof StudentInstrumentDTO && instrument.getId() == studentMapping.getMappingToId()) {
-                    instrument.setSelected(true);
-                }
-            }
-        });
-        bookListView.getItems().forEach(book -> {
-            for (DTOMappingBase studentMapping : studentInstruments) {
-                if (studentMapping instanceof StudentBookDTO && book.getId() == studentMapping.getMappingToId()) {
-                    book.setSelected(true);
-                }
-            }
-        });
-
-        levelListView.getItems().forEach(level -> {
-            for (DTOMappingBase studentMapping : studentInstruments) {
-                if (studentMapping instanceof StudentLevelDTO && level.getId() == studentMapping.getMappingToId()) {
-                    level.setSelected(true);
-                }
-            }
-        });
-
-        teacherListView.getItems().forEach(teacher -> {
-            for (DTOMappingBase studentMapping : studentInstruments) {
-                if (studentMapping instanceof StudentTeacherDTO && teacher.getId() == studentMapping.getMappingToId()) {
-                    teacher.setSelected(true);
-                }
-            }
-        });
+    }
+    private boolean matchesSearchTerms(StudentDTO student, List<String> searchWords) {
+        String studentText = student.toString().toLowerCase();
+        return searchWords.stream().allMatch(studentText::contains);
     }
 
-    private <T extends ISqlConvertible, E extends BaseRepository> void populateListView(ListView<T> listView, E repo) {
-        try {
-            listView.getItems().clear();
 
-            listView.setItems(repo.getAllItems());
+//    private <T extends ISqlConvertible> void setupListViewListener(ListView<T> instrumentListView, List<T> selectionList){
+//        instrumentListView.setCellFactory(CheckBoxListCell.forListView(item -> {
+//            BooleanProperty property = new SimpleBooleanProperty();
+//            property.addListener((obs, wasSelected, isNowSelected) -> {
+//                if(isNowSelected){
+//                    item.setSelected(true);
+//                    selectionList.add(item);
+//
+//                }
+//                if(wasSelected){
+//                    item.setSelected(false);
+//                    selectionList.remove(item);
+//                }
+//            });
+//
+//            return property;
+//        }, new StringConverter<T>() {
+//            @Override
+//            public String toString(T object) {
+//                return object.getName();
+//            }
+//
+//            @Override
+//            public T fromString(String string) {
+//                return null;
+//            }
+//        }));
+//    }
 
-            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            listView.setCellFactory(param -> new ListCell<T>() {
-                private final CheckBox checkBox = new CheckBox();
-
-                @Override
-                protected void updateItem(T item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (empty || item == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        setText(item.getName());
-
-                        checkBox.setSelected(item.getSelected().get());
-
-                        checkBox.setOnAction(e -> {
-                            item.setSelected(checkBox.isSelected());
-                        });
-
-                        setGraphic(checkBox);
-                    }
-                }
-            });
-
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private <T extends ISqlConvertible, E extends BaseRepository> void populateListView(ListView<T> listView, E repo) {
+//        listView.getItems().clear();
+//
+//        listView.setItems(repo.getAllItems());
+//
+//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//
+//        listView.setCellFactory(param -> new ListCell<T>() {
+//            private final CheckBox checkBox = new CheckBox();
+//
+//            @Override
+//            protected void updateItem(T item, boolean empty) {
+//                super.updateItem(item, empty);
+//
+//                if (empty || item == null) {
+//                    setText(null);
+//                    setGraphic(null);
+//                } else {
+//                    setText(item.getName());
+//
+//                    checkBox.setSelected(item.getSelected().get());
+//
+//                    checkBox.setOnAction(e -> {
+//                        item.setSelected(checkBox.isSelected());
+//                    });
+//
+//                    setGraphic(checkBox);
+//                }
+//            }
+//        });
+//
+//    }
     //endregion
 }

@@ -13,11 +13,13 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public final class LessonScheduledMstDTO extends DTOBase<LessonScheduledMstDTO> implements ISqlConvertible<LessonScheduledMstDTO> {
-    private int id;
     private int lessonScheduledId;
 
     public LessonScheduledMstDTO(int id, int lessonScheduledId) {
         this.id = id;
+        this.lessonScheduledId = lessonScheduledId;
+    }
+    public LessonScheduledMstDTO(int lessonScheduledId) {
         this.lessonScheduledId = lessonScheduledId;
     }
 
@@ -33,7 +35,7 @@ public final class LessonScheduledMstDTO extends DTOBase<LessonScheduledMstDTO> 
     }
     @Override
     public PreparedStatement toSqlInsertQuery(LessonScheduledMstDTO item, Connection connection) throws SQLException {
-        String sql = "INSERT INTO " + DB_TABLES.LESSONS_SCHEDULED_MST + " (LESSONS_SCHEDULED_MST_Id, Lesson_Scheduled_Id) VALUES (?, ?)";
+        String sql = "INSERT INTO " + DB_TABLES.LESSONS_SCHEDULED_MST + " (lessons_scheduled_mst_Id, lessons_scheduled_Id) VALUES (?, ?)";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, item.getId());

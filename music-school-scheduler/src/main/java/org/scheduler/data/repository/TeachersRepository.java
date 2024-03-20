@@ -4,19 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.dto.TeacherDTO;
+import org.scheduler.data.dto.interfaces.IReportable;
 import org.scheduler.data.dto.mapping.TeacherInstrumentDTO;
 import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.dto.properties.InstrumentDTO;
+import org.scheduler.data.dto.reports.InstrumentLessonsRatioDTO;
 import org.scheduler.data.repository.base.BaseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class TeachersRepository extends BaseRepository<TeacherDTO> {
     private final Logger _logger = LoggerFactory.getLogger(TeachersRepository.class);
     private static final ObservableList<TeacherDTO> ALL_TEACHER_DTOS = FXCollections.observableArrayList();
-
 
     /**
      * returns a user object in response to a username
@@ -66,8 +65,8 @@ public class TeachersRepository extends BaseRepository<TeacherDTO> {
     }
 
     @Override
-    public ObservableList<TeacherDTO> getAllItems() throws SQLException, InstantiationException, IllegalAccessException {
-        return FXCollections.observableArrayList(super.getAllItemsFromType(TeacherDTO.class));
+    public ObservableList<TeacherDTO> getAllItems() {
+        return FXCollections.observableArrayList(super.getAllItemsFromType(new TeacherDTO()));
     }
 
     @Override
@@ -288,5 +287,56 @@ public class TeachersRepository extends BaseRepository<TeacherDTO> {
             }
         }
     }
+
+    public List<InstrumentLessonsRatioDTO> getTeacherInstrumentToLessonsRatio() {
+        List<InstrumentLessonsRatioDTO> instrumentLessonsRatioItems = new ArrayList<>();
+        try(Statement statement = getStatement()) {
+            String sql = "SELECT " +
+                    "COUNT(1) NumberOfLessons, " +
+                    "i.Name, " +
+                    "t.Teacher_First_Name, " +
+                    "t.Teacher_Last_Name " +
+                    "FROM teachers AS t " +
+                    "INNER JOIN lessons AS l ON l.Teacher_Id = t.Teacher_id " +
+                    "INNER JOIN lessons_scheduled AS ls ON ls.Lesson_Id = l.Lesson_Id " +
+                    "INNER JOIN instruments AS i ON i.Instrument_Id = ls.Lesson_Instrument_ID " +
+                    " GROUP BY i.Name, " +
+                    "t.Teacher_First_Name, " +
+                    "t.Teacher_Last_Name;";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                instrumentLessonsRatioItems.add(new InstrumentLessonsRatioDTO().fromResultSet(resultSet));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return instrumentLessonsRatioItems;
+        }
+        return instrumentLessonsRatioItems;
+    }
+
+//    public List<TeacherDTO> getPossibleStudentInstrumentTeachers(int studentId) {
+//        List<TeacherDTO> teachersMatchingStudentInstruments = new ArrayList<>();
+//        String sql = "SELECT " +
+//                "t.* " +
+//                "FROM student_instrument " +
+//                "INNER JOIN teacher_instrument ON teacher_instrument.Instrument_Id = student_instrument.Instrument_Id " +
+//                "INNER JOIN teachers t ON t.Teacher_Id = teacher_instrument.Teacher_Id " +
+//                "WHERE student_instrument.Student_Id = ?";
+//        try (Connection conn = getConnection();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//            pstmt.setInt(1, studentId);
+//
+//            try (ResultSet resultSet = pstmt.executeQuery()) {
+//                while (resultSet.next()) {
+//                    teachersMatchingStudentInstruments.add(new TeacherDTO().fromResultSet(resultSet));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return teachersMatchingStudentInstruments;
+//    }
+
 
 }

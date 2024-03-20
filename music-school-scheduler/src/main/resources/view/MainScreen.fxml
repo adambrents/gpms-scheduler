@@ -23,6 +23,7 @@
          </Menu>
          <Menu mnemonicParsing="false" text="Help">
              <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#onSignOut" text="Sign Out" />
          </Menu>
      </menus>
    </MenuBar>
@@ -30,7 +31,6 @@
       <items>
          <AnchorPane prefHeight="469.0" prefWidth="661.0">
             <children>
-                  <Button layoutX="14.0" layoutY="427.0" mnemonicParsing="false" onAction="#onAllLessons" text="All Lessons" />
                   <Button fx:id="onDeleteAppointment" layoutX="246.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCancelLesson" prefHeight="25.0" prefWidth="162.0" text="Cancel Selected Lesson" />
                   <Button fx:id="onAddAppointment" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" onAction="#onLessonManagement" text="Manage Lessons" />
                  <Label layoutX="11.0" layoutY="9.0" text="This Week's Lessons">
@@ -38,20 +38,19 @@
                          <Font name="System Bold" size="24.0" />
                      </font>
                  </Label>
-                     <TableView fx:id="weekTable" layoutX="11.0" layoutY="75.0" prefHeight="319.0" prefWidth="644.0">
+                     <TableView fx:id="weekTable" layoutX="14.0" layoutY="75.0" prefHeight="319.0" prefWidth="643.0">
                          <columns>
-                             <TableColumn fx:id="idWeek" prefWidth="36.200013160705566" text="ID" />
-                             <TableColumn fx:id="studentWeek" minWidth="0.0" prefWidth="67.60003662109375" text="Teacher" />
-                             <TableColumn fx:id="typeWeek" prefWidth="71.39996337890625" text="Type" />
-                             <TableColumn fx:id="customerWeek" prefWidth="76.79998779296875" text="Student" />
-                             <TableColumn fx:id="startWeek" prefWidth="90.60009765625" text="Date" />
-                             <TableColumn fx:id="titleWeek" prefWidth="73.39995956420898" text="Description" />
-                     <TableColumn fx:id="lessonIsGoldCup" prefWidth="73.39995956420898" text="Gold Cup" />
-                     <TableColumn fx:id="lessonLevel" prefWidth="73.39995956420898" text="Level" />
-                     <TableColumn fx:id="lessonBook" prefWidth="73.39995956420898" text="Book" />
+                             <TableColumn fx:id="studentColumn" prefWidth="76.79998779296875" text="Student" />
+                             <TableColumn fx:id="teacherColumn" minWidth="0.0" prefWidth="67.60003662109375" text="Teacher" />
+                             <TableColumn fx:id="lessonTimeColumn" prefWidth="90.60009765625" text="Lesson Time" />
+                     <TableColumn fx:id="goldCupColumn" prefWidth="73.39995956420898" text="Gold Cup" />
+                     <TableColumn fx:id="levelColumn" prefWidth="73.39995956420898" text="Level" />
+                     <TableColumn fx:id="bookColumn" prefWidth="73.39995956420898" text="Book" />
+                     <TableColumn fx:id="instrumentColumn" prefWidth="103.0" text="Instrument" />
+                     <TableColumn fx:id="isNewStudentColumn" text="New Student" />
                          </columns>
                      </TableView>
-                  <Button fx:id="exit" layoutX="620.0" layoutY="427.0" mnemonicParsing="false" onAction="#onGoBack" text="Exit" />
+                  <Button layoutX="620.0" layoutY="427.0" mnemonicParsing="false" onAction="#onGoBack" text="Exit" />
             </children>
          </AnchorPane>
       </items>

@@ -2,6 +2,7 @@ package org.scheduler.app.constants;
 
 import javafx.stage.Stage;
 import org.scheduler.app.configuration.ConfigurationReaderHelper;
+import org.scheduler.app.configuration.model.AppConfig;
 import org.scheduler.data.configuration.ConnectionConfig;
 import org.scheduler.app.utilities.navmanagement.NavigationHistory;
 
@@ -9,6 +10,7 @@ public class Constants {
     public static final String CONFIG_FILE_PATH = "config.json";
     public static final String CONFIGURATION_STRING = ConfigurationReaderHelper.getConfigAsString();
     public static final ConnectionConfig CONNECTION_CONFIG = new ConnectionConfig();
+    public static final AppConfig APP_CONFIG = new AppConfig();
     public static final NavigationHistory NAVIGATION_HISTORY = new NavigationHistory();
     public static final String ERROR_RED = "f80202";
     public static Stage PRIMARY_STAGE;
@@ -25,7 +27,7 @@ public class Constants {
     }
 
     public class FXML_ROUTES {
-        public static final String ADD_LESSON_SCRN = "/view/AddLessonsScreen.fxml";
+        public static final String ADD_LESSON_SCRN = "/view/LessonManagementScreen.fxml";
         public static final String MOD_LESSON_SCRN = "/view/ModifyLessonsScreen.fxml";
         public static final String ALL_LESSON_SCRN = "/view/AllLessonsScreen.fxml";
         public static final String STUDENT_MGMT_SCRN = "/view/StudentManagementScreen.fxml";

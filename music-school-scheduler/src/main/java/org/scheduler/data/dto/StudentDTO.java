@@ -1,22 +1,21 @@
 package org.scheduler.data.dto;
 
 import org.scheduler.data.dto.base.DTOBase;
+import org.scheduler.data.dto.interfaces.IComboBox;
 import org.scheduler.data.dto.interfaces.ISelectableDTO;
-import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.configuration.DB_TABLES;
+import org.scheduler.data.dto.properties.BookDTO;
 import org.scheduler.data.dto.properties.InstrumentDTO;
+import org.scheduler.data.dto.properties.LevelDTO;
 import org.scheduler.data.repository.StudentsRepository;
-import org.scheduler.data.repository.TeachersRepository;
 import org.scheduler.data.repository.interfaces.IRepository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.logging.Level;
 
-public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<StudentDTO> {
-    private int lastUpdateBy;
-    private int createBy;
-    private LocalDateTime createDate;
-    private LocalDateTime lastUpdate;
+public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<StudentDTO>, IComboBox {
     private String firstName;
     private String lastName;
     private String addressLine1;
@@ -27,6 +26,10 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
     private String city;
     private String state;
     private String email;
+    private List<TeacherDTO> teachers;
+    private List<InstrumentDTO> instruments;
+    private List<BookDTO> books;
+    private List<LevelDTO> levels;
 
     public StudentDTO(){
         
@@ -68,9 +71,9 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.createDate = createDate;
-        this.createBy = createBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        super.createdBy = createBy;
+        super.updateDate = lastUpdate;
+        super.updatedBy = lastUpdateBy;
         this.isGoldCup = isGoldCup;
     }
 
@@ -84,9 +87,9 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
         this.createDate = createDate;
-        this.createBy = createBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        super.createdBy = createBy;
+        super.updateDate = lastUpdate;
+        super.updatedBy = lastUpdateBy;
         this.isGoldCup = isGoldCup;
     }
 
@@ -113,9 +116,13 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
         this.state = state;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        super.updateDate = lastUpdate;
+        super.updatedBy = lastUpdateBy;
         this.isGoldCup = isGoldCup;
+    }
+
+    public StudentDTO(int studentId) {
+        super.id = studentId;
     }
 
     /**
@@ -157,11 +164,11 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
     public String getFullName(){ return String.format("%s %s", getFirstName(), getLastName()); }
 
     public int getLastUpdateBy() {
-        return lastUpdateBy;
+        return super.updatedBy;
     }
 
     public int getCreateBy() {
-        return createBy;
+        return super.createdBy;
     }
 
     public LocalDateTime getCreateDate() {
@@ -169,7 +176,7 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
     }
 
     public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+        return super.updateDate;
     }
 
     public String getIsGoldCup() {
@@ -196,19 +203,22 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
     public String getEmail() {
         return email;
     }
-    public String getStudentInstruments(){
-        return (new StudentsRepository()).getStudentInstrumentsAsString(getId());
-    }
-    public String getStudentLevels(){
-        return (new StudentsRepository()).getStudentLevelsAsString(getId());
-    }
-    public String getStudentBooks(){
-        return (new StudentsRepository()).getStudentBooksAsString(getId());
-    }
-    public String getStudentTeachers(){
-        return (new StudentsRepository()).getStudentTeachersAsString(getId());
+
+    public List<InstrumentDTO> getInstruments() {
+        return instruments;
     }
 
+    public List<BookDTO> getBooks() {
+        return books;
+    }
+
+    public List<LevelDTO> getLevels() {
+        return levels;
+    }
+
+    public List<TeacherDTO> getTeachers() {
+        return teachers;
+    }
 
     @Override
     public PreparedStatement toSqlSelectQuery(Connection connection) throws SQLException {
@@ -256,7 +266,6 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
                 "State = ?, " +
                 "Phone = ?, " +
                 "Email = ?, " +
-                "Created_By = ?, " + // Assuming you might want to update this
                 "Last_Update = NOW(), " +
                 "Last_Updated_By = ?, " +
                 "Gold_Cup = ? " +
@@ -272,10 +281,9 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
         statement.setString(7, studentDTO.getState());
         statement.setString(8, studentDTO.getPhoneNumber());
         statement.setString(9, studentDTO.getEmail());
-        statement.setInt(10, studentDTO.getCreateBy());
-        statement.setInt(11, studentDTO.getLastUpdateBy());
-        statement.setBoolean(12, studentDTO.isGoldCup());
-        statement.setInt(13, studentDTO.getId());
+        statement.setInt(10, studentDTO.getLastUpdateBy());
+        statement.setBoolean(11, studentDTO.isGoldCup());
+        statement.setInt(12, studentDTO.getId());
 
         return statement;
     }
@@ -314,5 +322,94 @@ public class StudentDTO extends DTOBase<StudentDTO> implements ISelectableDTO<St
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "StudentDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fullName='" + getFullName() + '\'' +
+                ", addressLine1='" + addressLine1 + '\'' +
+                ", addressLine2='" + addressLine2 + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", isGoldCup=" + isGoldCup +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                ", isSelected=" + isSelected +
+                ", createdBy=" + createdBy +
+                ", updatedBy=" + updatedBy +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", instruments=" + getStudentInstrumentNames() +
+                ", books=" + getStudentBookNames() +
+                ", levels=" + getStudentLevelNames() +
+                ", teachers=" + getStudentTeacherNames() +
+                '}';
+    }
+
+    public String getStudentTeacherNames() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (TeacherDTO teacher : this.getTeachers()) {
+            stringBuilder.append(teacher.getFullName()).append(", ");
+        }
+        if (stringBuilder.length() > 0) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+
+    public String getStudentLevelNames() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LevelDTO level : this.getLevels()) {
+            stringBuilder.append(level.getName()).append(", ");
+        }
+        if (stringBuilder.length() > 0) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+    public String getStudentBookNames() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (BookDTO book : this.getBooks()) {
+            stringBuilder.append(book.getName()).append(", ");
+        }
+        if (stringBuilder.length() > 0) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+    public String getStudentInstrumentNames() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (InstrumentDTO instrument : this.getInstruments()) {
+            stringBuilder.append(instrument.getName()).append(", ");
+        }
+        if (stringBuilder.length() > 0) {
+            stringBuilder.setLength(stringBuilder.length() - 2);
+        }
+        return stringBuilder.toString();
+    }
+
+    public void setTeachers(List<TeacherDTO> studentTeachers) {
+        this.teachers = studentTeachers;
+    }
+
+    public void setInstruments(List<InstrumentDTO> instruments) {
+        this.instruments = instruments;
+    }
+
+    public void setBooks(List<BookDTO> books) {
+        this.books = books;
+    }
+
+    public void setLevels(List<LevelDTO> levels) {
+        this.levels = levels;
     }
 }

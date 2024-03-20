@@ -9,13 +9,12 @@ module music.school.scheduler {
     requires ch.qos.logback.classic;
     requires java.sql;
     requires com.google.gson;
+    requires java.base;
     requires java.naming;
     requires mysql.connector.j;
 
     opens org.scheduler.app.program to javafx.fxml;
     opens org.scheduler.app.controller to javafx.fxml;
-    opens org.scheduler.app.controller.report to javafx.fxml;
-    opens org.scheduler.app.controller.lesson to javafx.fxml;
     opens org.scheduler.app.controller.base to javafx.fxml;
 
     opens org.scheduler.app.configuration.model to com.google.gson;
@@ -24,6 +23,7 @@ module music.school.scheduler {
     opens org.scheduler.data.repository.interfaces to javafx.base;
     opens org.scheduler.data.dto.interfaces to javafx.base;
     opens org.scheduler.data.dto.properties to javafx.base;
+    opens org.scheduler.data.dto.reports to javafx.base;
     opens org.scheduler.data.dto to javafx.base;
     opens org.scheduler.data.dto.base to javafx.base;
     opens org.scheduler.data.dto.mapping to javafx.base;

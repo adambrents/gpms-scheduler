@@ -2,7 +2,6 @@ package org.scheduler.app.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -10,15 +9,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
 import org.scheduler.app.controller.base.ControllerBase;
-import org.scheduler.app.controller.handlers.base.IActionHandler;
 import org.scheduler.app.controller.interfaces.*;
 import org.scheduler.app.models.errors.PossibleError;
 import org.scheduler.data.configuration.JDBC;
 import org.scheduler.data.dto.TeacherDTO;
-import org.scheduler.data.dto.interfaces.ISqlConvertible;
 import org.scheduler.data.dto.mapping.TeacherInstrumentDTO;
 import org.scheduler.data.dto.properties.InstrumentDTO;
-import org.scheduler.data.repository.interfaces.IRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,12 +23,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static org.scheduler.app.constants.Constants.PRIMARY_STAGE;
 
-public class TeacherManagementController extends ControllerBase implements IController, ICreate, IDelete, IUpdate, IExport {
+public class TeacherManagementController extends ControllerBase implements IController, ICreate, IDelete, IUpdate, IExport, ITableView<TeacherDTO> {
     private static final Logger _logger = LoggerFactory.getLogger(TeacherManagementController.class);
     public Label lastNameLabel;
     public Label addressLine2Label;
@@ -49,7 +46,6 @@ public class TeacherManagementController extends ControllerBase implements ICont
     public TextField cityTxt;
     public TextField postalTxt;
     public TextField phoneTxt;
-    public TextArea errorText;
     public TextField emailTxt;
     public TableView<TeacherDTO> teachersTable;
     public TableColumn<TeacherDTO, String> teacherNameColumn;
@@ -63,7 +59,7 @@ public class TeacherManagementController extends ControllerBase implements ICont
     public List<InstrumentDTO> selectedInstruments = new ArrayList<>();
     public Label stateLabel;
     public TextField stateTxt;
-    private int userId;
+    
     private TeacherDTO teacherToBeUpdated;
 
     @Override
@@ -78,16 +74,6 @@ public class TeacherManagementController extends ControllerBase implements ICont
     }
 
     @Override
-    public String getNameForItem(Object item) {
-        if (item instanceof InstrumentDTO) {
-            return ((InstrumentDTO)item).getName();
-        }
-        else {
-            return "";
-        }
-    }
-
-    @Override
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -95,11 +81,8 @@ public class TeacherManagementController extends ControllerBase implements ICont
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            reset();
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        reset();
+        super.reset();
     }
     public void onSubmit(ActionEvent actionEvent) throws IOException, SQLException {
         if(teacherToBeUpdated != null){
@@ -157,9 +140,8 @@ public class TeacherManagementController extends ControllerBase implements ICont
             }
         }
     }
-
-    private void reset() throws SQLException, InstantiationException, IllegalAccessException {
-        clearAllTextFields(PRIMARY_STAGE.getScene().getRoot());
+    @Override
+    public void reset() {
         teacherToBeUpdated = null;
         teacherNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         teacherAddressColumn.setCellValueFactory(new PropertyValueFactory<>("addressLine1"));
@@ -189,42 +171,48 @@ public class TeacherManagementController extends ControllerBase implements ICont
         });
         setUpInstrumentListener(instrumentListView);
         populateListView(instrumentListView);
+
+        labelsToReset.clear();
+        Collections.addAll(
+                labelsToReset,
+                firstNameLabel,
+                lastNameLabel,
+                phoneNumberLabel,
+                emailLabel
+        );
+        super.reset();
     }
     public void populateListView(ListView<InstrumentDTO> listView) {
-        try {
-            listView.getItems().clear();
+        listView.getItems().clear();
 
-            listView.setItems(instrumentRepository.getAllItems());
+        listView.setItems(instrumentRepository.getAllItems());
 
-            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            listView.setCellFactory(param -> new ListCell<InstrumentDTO>() {
-                private final CheckBox checkBox = new CheckBox();
+        listView.setCellFactory(param -> new ListCell<InstrumentDTO>() {
+            private final CheckBox checkBox = new CheckBox();
 
-                @Override
-                protected void updateItem(InstrumentDTO item, boolean empty) {
-                    super.updateItem(item, empty);
+            @Override
+            protected void updateItem(InstrumentDTO item, boolean empty) {
+                super.updateItem(item, empty);
 
-                    if (empty || item == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        setText(item.getName());
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.getName());
 
-                        checkBox.setSelected(item.getSelected().get());
+                    checkBox.setSelected(item.getSelected().get());
 
-                        checkBox.setOnAction(e -> {
-                            item.setSelected(checkBox.isSelected());
-                        });
+                    checkBox.setOnAction(e -> {
+                        item.setSelected(checkBox.isSelected());
+                    });
 
-                        setGraphic(checkBox);
-                    }
+                    setGraphic(checkBox);
                 }
-            });
+            }
+        });
 
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
     }
     private void setUpInstrumentListener(ListView<InstrumentDTO> instrumentListView){
         instrumentListView.setCellFactory(CheckBoxListCell.forListView(item -> {
@@ -256,7 +244,8 @@ public class TeacherManagementController extends ControllerBase implements ICont
             }
         }));
     }
-    private void handleDoubleClickOnRow(TeacherDTO item) throws SQLException, InstantiationException, IllegalAccessException {
+    @Override
+    public void handleDoubleClickOnRow(TeacherDTO item) throws SQLException, InstantiationException, IllegalAccessException {
         firstNameTxt.setText(item.getFirstName());
         lastNameTxt.setText(item.getLastName());
         addressLine1Txt.setText(item.getAddressLine1());
@@ -285,7 +274,7 @@ public class TeacherManagementController extends ControllerBase implements ICont
         try {
             teachersRepository.deleteItem(teacherDTO, JDBC.getConnection());
             reset();
-        } catch (SQLException | InstantiationException | IllegalAccessException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -323,7 +312,7 @@ public class TeacherManagementController extends ControllerBase implements ICont
 //                    teachersRepository.updateTeacher(newTeacher, instrumentListView.getItems());
                     teachersRepository.updateTeacher(newTeacher, selectedItems);
                     reset();
-                } catch (SQLException | InstantiationException | IllegalAccessException e) {
+                } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
