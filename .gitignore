@@ -59,3 +59,4 @@ hs_err_pid*
 
 /src/main/resources/logs/login_acitivity.txt
 **/logs/**
+**/out/**

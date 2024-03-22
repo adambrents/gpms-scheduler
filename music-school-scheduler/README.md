@@ -1,24 +1,22 @@
-
 # Project C868 Adam_Brents 
-- This project is an app to schedule and maintain lessons between teachers and studentDTOS
-- 3rd report from A.3.f of requirements is a Customer Schedule by Division option in reports dropdown
-
+- This project is an app to schedule and maintain lessons between teachers and students
 ## Authors
-
 - [@adambrents](https://www.github.com/adambrents)
-
-
 ## 🚀 Contact Information
 [adam.brents1@gmail.com](mailto:adam.brents1@gmail.com)
 ## Application Version  
 v1.0
 ## Date
 02-2024
+## Prerequisites
+1. MySQL Server 8.0 and MySQL Workbench 8.0 must be installed prior to running the application
+2. All migration scripts under *\db\music_school\migration_scripts\C868_MigrationScripts must be executed
+3. JDK 21 must be installed - preferably the Liberica JDK, which is what this was tested with: https://bell-sw.com/pages/downloads/#jdk-21-lts
+4. Ensure IntelliJ is recognizing pom.xml files in a project as a Maven project
 ## IDE
 IntelliJ Community 2023.1
 ## IDE Run Instructions
-1. Ensure maven has downloaded all needed dependencies to ./lib/dependencies for the application
-2. Run configuration "org.scheduler.app.program.Program" in IntelliJ
+1. Run configuration "music-school-scheduler [clean, javafx:run]" in IntelliJ
 
 ## Build Instructions
 1. Using the maven utility in Intellij, run the package utility
